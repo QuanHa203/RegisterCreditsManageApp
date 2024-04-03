@@ -109,11 +109,11 @@
 
         <!-- Navigation -->
         <Grid Grid.Row="0" Background="{DynamicResource PrimaryBackgroundColor}" Margin="24 0 24 0">
-            <Button Style="{DynamicResource ThemeModeBtn}">
-                
+            <Button Width="50"  Style="{DynamicResource ThemeModeBtn}">
+                <Path Style="{DynamicResource AddFileSvg}"></Path>
             </Button>
         </Grid>
-
+        
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="142*"/>
