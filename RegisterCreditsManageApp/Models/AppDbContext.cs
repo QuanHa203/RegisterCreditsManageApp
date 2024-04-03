@@ -8,7 +8,6 @@ public partial class AppDbContext : DbContext
 {
     public AppDbContext()
     {
-        
     }
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
@@ -24,6 +23,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<RegisterCredit> RegisterCredits { get; set; }
 
+    public virtual DbSet<Role> Roles { get; set; }
+
     public virtual DbSet<Semester> Semesters { get; set; }
 
     public virtual DbSet<Student> Students { get; set; }
@@ -32,8 +33,9 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Teacher> Teachers { get; set; }
 
+    public virtual DbSet<User> Users { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server = DESKTOP-KQN4I3C; UID = sa; Password = 270603; Database = RegisterCreditsManageApp; TrustServerCertificate = true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -65,13 +67,27 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.IdRegisterCredits);
 
-            entity.Property(e => e.ClassName).HasMaxLength(100);
+            entity.Property(e => e.ClassRoom).HasMaxLength(100);
             entity.Property(e => e.Schedule).HasMaxLength(255);
+            entity.Property(e => e.StartRegisterDate)
+                .HasMaxLength(10)
+                .IsFixedLength();
 
             entity.HasOne(d => d.IdTeacherNavigation).WithMany(p => p.RegisterCredits)
                 .HasForeignKey(d => d.IdTeacher)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RegisterCredits_Teacher");
+        });
+
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.IdRole);
+
+            entity.ToTable("Role");
+
+            entity.Property(e => e.RoleName)
+                .HasMaxLength(100)
+                .IsFixedLength();
         });
 
         modelBuilder.Entity<Semester>(entity =>
@@ -102,17 +118,13 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<Student>(entity =>
         {
+            entity.HasKey(e => e.IdStudent);
+
             entity.ToTable("Student");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.IdStudent).ValueGeneratedNever();
             entity.Property(e => e.Address).HasMaxLength(255);
-            entity.Property(e => e.EmailAddress)
-                .HasMaxLength(100)
-                .IsUnicode(false);
             entity.Property(e => e.Name).HasMaxLength(100);
-            entity.Property(e => e.Password)
-                .HasMaxLength(100)
-                .IsUnicode(false);
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(15)
                 .IsFixedLength();
@@ -131,6 +143,11 @@ public partial class AppDbContext : DbContext
                 .HasForeignKey(d => d.IdMajors)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Student_Majors");
+
+            entity.HasOne(d => d.IdStudentNavigation).WithOne(p => p.Student)
+                .HasForeignKey<Student>(d => d.IdStudent)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Student_User");
         });
 
         modelBuilder.Entity<Subject>(entity =>
@@ -161,6 +178,25 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(15)
                 .IsFixedLength();
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.IdUser);
+
+            entity.ToTable("User");
+
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .IsFixedLength();
+            entity.Property(e => e.Password)
+                .HasMaxLength(50)
+                .IsFixedLength();
+
+            entity.HasOne(d => d.IdRoleNavigation).WithMany(p => p.Users)
+                .HasForeignKey(d => d.IdRole)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_User_Role");
         });
 
         OnModelCreatingPartial(modelBuilder);

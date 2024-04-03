@@ -5,7 +5,7 @@ namespace RegisterCreditsManageApp.Models;
 
 public partial class Student
 {
-    public int Id { get; set; }
+    public int IdStudent { get; set; }
 
     public int IdCourseYear { get; set; }
 
@@ -23,13 +23,13 @@ public partial class Student
 
     public bool Gender { get; set; }
 
-    public string EmailAddress { get; set; } = null!;
-
-    public string Password { get; set; } = null!;
+    public byte[]? Avatar { get; set; }
 
     public virtual Class IdClassNavigation { get; set; } = null!;
 
     public virtual CourseYear IdCourseYearNavigation { get; set; } = null!;
 
     public virtual Major IdMajorsNavigation { get; set; } = null!;
+
+    public virtual User IdStudentNavigation { get; set; } = null!;
 }

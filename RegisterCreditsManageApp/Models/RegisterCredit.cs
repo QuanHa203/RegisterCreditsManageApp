@@ -17,7 +17,9 @@ public partial class RegisterCredit
 
     public string Schedule { get; set; } = null!;
 
-    public string ClassName { get; set; } = null!;
+    public string ClassRoom { get; set; } = null!;
+
+    public string StartRegisterDate { get; set; } = null!;
 
     public virtual Teacher IdTeacherNavigation { get; set; } = null!;
 

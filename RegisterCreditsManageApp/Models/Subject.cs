@@ -15,6 +15,8 @@ public partial class Subject
 
     public int NumberOfCredits { get; set; }
 
+    public bool? IsPass { get; set; }
+
     public virtual RegisterCredit? IdRegisterCreditsNavigation { get; set; }
 
     public virtual Semester IdSemesterNavigation { get; set; } = null!;
