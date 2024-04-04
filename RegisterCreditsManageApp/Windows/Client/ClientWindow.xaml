@@ -24,7 +24,7 @@
 
             <!-- LeftMenu -->
             <StackPanel Grid.Column="0" Background="{DynamicResource LeftMenuBackground}">
-
+                
             </StackPanel>
 
             <!-- Main -->

@@ -5,16 +5,102 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server"
         mc:Ignorable="d"
-        Title="ServerWindow" Height="450" Width="800">
+        Title="ServerWindow" Width="800" Height="450">
 
     <Window.Resources>
         <Style x:Key="ThemeModeBtn" TargetType="Button">
-            <Setter Property="Width" Value="50"/>
+            <Setter Property="Width" Value="46"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="{DynamicResource SecondaryBackgroundColor}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+
+                        <Grid>
+                            <Ellipse Width="17" Height="17" Fill="{DynamicResource PrimaryBackgroundColor}" Panel.ZIndex="1" HorizontalAlignment="Right" Margin="0 0 2 0"/>
+                            <Viewbox Width="14" Height="14" HorizontalAlignment="Right" Margin="0 0 4 0"  Panel.ZIndex="10">
+                                
+                                
+                            </Viewbox>
+                            <Border CornerRadius="10" Background="{TemplateBinding Background}"/>
+                        </Grid>
+                            
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="True">
+                                <Trigger.EnterActions>
+
+                                </Trigger.EnterActions>
+
+
+                                <Trigger.ExitActions>
+
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+        <Style x:Key="LeftMenuBtn" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="buttonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Viewbox></Viewbox>
+                                    <TextBlock x:Name="text" Text="{TemplateBinding Content}" VerticalAlignment="Center" Margin="5,0,0,0" Grid.Column="1"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="buttonBorder" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="LightGray" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="buttonBorder" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="Transparent" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -23,26 +109,32 @@
 
         <!-- Navigation -->
         <Grid Grid.Row="0" Background="{DynamicResource PrimaryBackgroundColor}" Margin="24 0 24 0">
-            <Button Style="{DynamicResource ThemeModeBtn}">
-                <Viewbox Width="10">
-                    <ContentControl ContentTemplate="{DynamicResource BellSvg}"></ContentControl>
-                </Viewbox>
+            <Button Width="50"  Style="{DynamicResource ThemeModeBtn}">
+                <Path Style="{DynamicResource AddFileSvg}"></Path>
             </Button>
         </Grid>
         
         <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="142*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="180"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- LeftMenu -->
-            <StackPanel Grid.Column="0" Background="{DynamicResource LeftMenuBackground}">
-                
-            </StackPanel>
+            <Grid Grid.Column="0" Background="{DynamicResource LeftMenuBackground}">
+                <StackPanel  Margin="0 48 0 48" Grid.RowSpan="2">
+                    <Button Style="{DynamicResource LeftMenuBtn}">Text</Button>
+                    <Button Style="{DynamicResource LeftMenuBtn}">Text</Button>
+                    <Button Style="{DynamicResource LeftMenuBtn}">Text</Button>
+                </StackPanel>
+            </Grid>
 
             <!-- Main -->
-            <Frame Grid.Column="1" NavigationUIVisibility="Hidden" Background="{DynamicResource SecondaryBackgroundColor}"></Frame>
+            <Frame Grid.Column="1" NavigationUIVisibility="Hidden" Background="{DynamicResource SecondaryBackgroundColor}" Grid.RowSpan="2"></Frame>
         </Grid>
     </Grid>
 </Window>

@@ -22,6 +22,12 @@ namespace RegisterCreditsManageApp.Windows.Server
         public ServerWindow()
         {
             InitializeComponent();
+           
+        }
+
+        private void ContentControl_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+
         }
     }
 }
