@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegisterCreditsManageApp.Windows.Server;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
+using RegisterCreditsManageApp.Models;
+using System.Data;
 
 namespace RegisterCreditsManageApp.Windows
 {
@@ -23,44 +27,23 @@ namespace RegisterCreditsManageApp.Windows
         {
             InitializeComponent();
         }
-
-        private void AccountTextbox_GotFocus(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            TextBox textValue = (TextBox)sender;
-            if (textValue.Text == "Your account")
-            {
-                textValue.Text = "";
-                textValue.Foreground = Brushes.White;
-            }
-        }
-        private void AccountTextbox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox textValue = (TextBox)sender;
-            if (string.IsNullOrWhiteSpace(textValue.Text))
-            {
-                textValue.Text = "Your account";
-                textValue.Foreground = Brushes.Gray;
-            }
+                
         }
 
-        private void PasswordTextbox_GotFocus(object sender, RoutedEventArgs e)
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-            TextBox textValue = (TextBox)sender;
-            if (textValue.Text == "Password")
-            {
-                textValue.Text = "";
-                textValue.Foreground = Brushes.White;
-            }
+           
+
+            ServerWindow server = new ServerWindow();
+            server.Show();
+            this.Close();
         }
 
-        private void PasswordTextbox_LostFocus(object sender, RoutedEventArgs e)
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            TextBox textValue = (TextBox)sender;
-            if (string.IsNullOrWhiteSpace(textValue.Text))
-            {
-                textValue.Text = "Password";
-                textValue.Foreground = Brushes.Gray;
-            }
+            Application.Current.Shutdown();
         }
 
     }
