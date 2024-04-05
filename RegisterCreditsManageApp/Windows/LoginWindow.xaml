@@ -150,7 +150,7 @@
                             <Grid Grid.Column="0">
                                 <Viewbox Width="30" Height="30">
                                     <ContentControl>
-                                        <Path Style="{DynamicResource UserSvg}"/>
+                                        <Path Style="{DynamicResource UserSvg}" Fill="#3259e0"/>
                                     </ContentControl>
                                 </Viewbox>
                             </Grid>
@@ -170,12 +170,12 @@
                             <Grid Grid.Column="0">
                                 <Viewbox Width="30" Height="30">
                                     <ContentControl>
-                                        <Path Style="{DynamicResource KeySvg}"/>
+                                        <Path Style="{DynamicResource KeySvg}" Fill="#3259e0"/>
                                     </ContentControl>
                                 </Viewbox>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <PasswordBox x:Name="Password"
+                                <PasswordBox x:Name="PasswordTextbox"
                                              FontFamily="Montserrat Medium"
                                              FontSize="20"
                                              Foreground="#fff"
