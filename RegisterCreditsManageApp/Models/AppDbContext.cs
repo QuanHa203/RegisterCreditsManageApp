@@ -6,11 +6,25 @@ namespace RegisterCreditsManageApp.Models;
 
 public partial class AppDbContext : DbContext
 {
-    public AppDbContext()
+    private static AppDbContext context = null;
+    public static AppDbContext _Context
     {
+        get
+        {
+            if(context == null)
+            {
+                context = new AppDbContext();
+            }
+
+            return context;
+        }
+    }
+    private AppDbContext()
+    {
+           
     }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options)
+    private AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
     }

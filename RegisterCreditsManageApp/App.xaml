@@ -5,10 +5,11 @@
 
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.MergedDictionaries>                
                 <ResourceDictionary Source="/Resources/LightMode.xaml"/>
                 <ResourceDictionary Source="Resources/SvgImage.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
