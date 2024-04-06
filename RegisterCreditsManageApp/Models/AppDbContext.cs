@@ -50,7 +50,7 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server = DESKTOP-KQN4I3C; UID = sa; Password = 270603; Database = RegisterCreditsManageApp; TrustServerCertificate = true;");
+        => optionsBuilder.UseSqlServer("Server = DINHQUAN1243\\SQLEXPRESS; UID = sa; Password = 87895424; Database = RegisterCreditsManageApp; TrustServerCertificate = true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
