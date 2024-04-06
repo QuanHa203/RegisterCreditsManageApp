@@ -1,9 +1,10 @@
-﻿<Window x:Class="RegisterCreditsManageApp.Windows.Server.ServerWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
+﻿<local:MainWindow x:Class="RegisterCreditsManageApp.Windows.Server.ServerWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows"
+                  mc:Ignorable="d"        
         Title="ServerWindow" Width="800" Height="450">
 
     <Window.Resources>
@@ -18,7 +19,7 @@
 
                 <ContentPresenter>
                     <ContentPresenter.Content>
-                        <Grid x:Name="IconThemeMode" HorizontalAlignment="Right" Margin="2" RenderTransformOrigin="0.5,0.5" Cursor="Hand">
+                        <Grid x:Name="IconThemeMode" HorizontalAlignment="Right" Margin="2" Cursor="Hand">
                             <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{DynamicResource PrimaryBackgroundColor}"/>
                             <Viewbox  Margin="2">
                                 <Path x:Name="Icon" Style="{DynamicResource IconThemeMode}"/>
@@ -147,7 +148,7 @@
                                 </StackPanel>
                             </Border>
                         </Button>
-                        
+
                         <Button x:Name="ManagementBtn" 
                                 Click="ManagementBtn_Click"
                                 MouseEnter="LeftMenuBtn_MouseEnter"
@@ -259,4 +260,4 @@
             <Frame Grid.Column="1" NavigationUIVisibility="Hidden" Background="{DynamicResource SecondaryBackgroundColor}" Grid.RowSpan="2"/>
         </Grid>
     </Grid>
-</Window>
+</local:MainWindow>
