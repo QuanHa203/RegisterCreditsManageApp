@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--Commom -->
-    <SolidColorBrush x:Key="SvgLeftMenuColor">#ffae00</SolidColorBrush>
     <SolidColorBrush x:Key="PrimaryForegroundColor">#ccd7e3</SolidColorBrush>
     <SolidColorBrush x:Key="SecondForegroundColor">#99acc2</SolidColorBrush>
     
@@ -19,7 +18,9 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <SolidColorBrush x:Key="SvgLeftMenuColor">#ffae00</SolidColorBrush>
     <SolidColorBrush x:Key="LeftMenuBackground" Color="#1c2340"/>
+    <SolidColorBrush x:Key="SvgLeftMenuColorHover" Color="#3663fe"/>
     <Color x:Key="LeftMenuBtnGradientStop0">#FF3867FF</Color>
     <Color x:Key="LeftMenuBtnGradientStop1">#FF1C2340</Color>
 
