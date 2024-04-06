@@ -31,7 +31,7 @@ namespace RegisterCreditsManageApp.Windows
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            userList =  AppDbContext._Context.Users.ToList();
+            userList = AppDbContext._Context.Users.ToList();
         }
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
@@ -59,7 +59,7 @@ namespace RegisterCreditsManageApp.Windows
                 User user = userList.FirstOrDefault(u =>
                 {
                     if (u.Email.Trim() == userInput) return true;
-                    
+
                     return false;
                 });
                 //Neu user k co 
@@ -85,7 +85,7 @@ namespace RegisterCreditsManageApp.Windows
                         else
                         {
                             ClientWindow cl = new ClientWindow();
-                           cl.Show();
+                            cl.Show();
                             this.Close();
                         }
                     }
@@ -109,5 +109,31 @@ namespace RegisterCreditsManageApp.Windows
             this.Close();
         }
 
+        private void ForgotPassWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void RememberCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EyeHiddenToggleBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            if(EyeHiddenToggleBtn.IsChecked == true)
+            {
+                PasswordTextbox.PasswordChar = '●';
+            }
+        }
+
+        private void EyeShowedToggleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(EyeHiddenToggleBtn.IsChecked == true)
+            {
+                PasswordTextbox.PasswordChar = '\0';
+
+            }
+        }
     }
 }
