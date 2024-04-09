@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows"
+                  
+        WindowStartupLocation="CenterScreen"
         Title="ClientWindow" Width="800" Height="450">
 
     <Window.Resources>
@@ -257,7 +259,7 @@
             </Grid>
 
             <!-- Main -->
-            <Frame Grid.Column="1" NavigationUIVisibility="Hidden" Background="{DynamicResource SecondaryBackgroundColor}" Grid.RowSpan="2"/>
+            <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Background="{DynamicResource SecondaryBackgroundColor}" Grid.RowSpan="2"/>
         </Grid>
     </Grid>
 </local:MainWindow>

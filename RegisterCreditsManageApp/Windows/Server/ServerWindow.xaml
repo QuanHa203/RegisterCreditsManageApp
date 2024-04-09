@@ -4,7 +4,9 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                   xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows"
-                  mc:Ignorable="d"        
+                  mc:Ignorable="d"                    
+                  
+                  WindowStartupLocation="CenterScreen"
         Title="ServerWindow" Width="800" Height="450">
 
     <Window.Resources>
@@ -95,14 +97,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <!-- Navigation -->
         <Grid Grid.Row="0" Background="{DynamicResource PrimaryBackgroundColor}">
             <Grid Margin="24 0 24 0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="NotifyBtn" Style="{DynamicResource NotifyBtn}"/>
+                    <Button x:Name="NotifyBtn" Style="{DynamicResource NotifyBtn}" Click="NotifyBtn_Click"/>
                     <CheckBox x:Name="ThemeModeCheckBox" 
                           Template="{DynamicResource ThemeModeCheckBox}"
                           Checked="ThemeModeCheckBox_Checked" 
@@ -257,7 +259,8 @@
             </Grid>
 
             <!-- Main -->
-            <Frame Grid.Column="1" NavigationUIVisibility="Hidden" Background="{DynamicResource SecondaryBackgroundColor}" Grid.RowSpan="2"/>
+            <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Background="{DynamicResource SecondaryBackgroundColor}" Grid.RowSpan="2"/>
+            
         </Grid>
     </Grid>
 </local:MainWindow>

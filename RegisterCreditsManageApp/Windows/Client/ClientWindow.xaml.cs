@@ -14,7 +14,7 @@ namespace RegisterCreditsManageApp.Windows.Client
 
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/HomePage.xaml", UriKind.Relative));
         }
 
         private void StudyProgramBtn_Click(object sender, RoutedEventArgs e)

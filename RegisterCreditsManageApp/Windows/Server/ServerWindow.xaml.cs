@@ -1,11 +1,7 @@
-﻿using RegisterCreditsManageApp.Resources;
-using System;
+﻿using RegisterCreditsManageApp.Windows.Client.Pages;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace RegisterCreditsManageApp.Windows.Server
 {
@@ -17,42 +13,37 @@ namespace RegisterCreditsManageApp.Windows.Server
         public ServerWindow() : base()
         {
             InitializeComponent();
-
-        }
-
-        protected override void ThemeModeCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            base.ThemeModeCheckBox_Checked(sender, e);
-        }
-
-        protected override void ThemeModeCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            base.ThemeModeCheckBox_Unchecked(sender, e);
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/HomePage.xaml", UriKind.Relative));
+        }
+
+        private void ManagementBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/ManagementPage.xaml", UriKind.Relative));
         }
 
         private void AnalysisBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/AnalysisPage.xaml", UriKind.Relative));
         }
 
-        private void ManagementBtn_Click(object sender, RoutedEventArgs e)
+        private void AccountBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/AccountPage.xaml", UriKind.Relative));
+        }
+
+        private void NotifyBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void AccountBtn_Click(object sender, RoutedEventArgs e)
-        {
-
+            Application.Current.Shutdown();
         }
     }
 }
