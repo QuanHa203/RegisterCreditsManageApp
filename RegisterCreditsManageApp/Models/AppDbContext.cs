@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace RegisterCreditsManageApp.Models;
 
 public partial class AppDbContext : DbContext
 {
+    private readonly IConfiguration _configuration;
     private static AppDbContext context = null;
     public static AppDbContext _Context
     {
         get
         {
-            if(context == null)
+            if (context == null)
             {
                 context = new AppDbContext();
             }
@@ -21,7 +22,9 @@ public partial class AppDbContext : DbContext
     }
     private AppDbContext()
     {
-           
+        ConfigurationBuilder builder = new ConfigurationBuilder();
+        builder.AddJsonFile($"{Directory.GetCurrentDirectory()}/appsettings.json");
+        _configuration = builder.Build();
     }
 
     private AppDbContext(DbContextOptions<AppDbContext> options)
@@ -50,7 +53,10 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server = DINHQUAN1243\\SQLEXPRESS; UID = sa; Password = 87895424; Database = RegisterCreditsManageApp; TrustServerCertificate = true;");
+    {
+        string connectionString = _configuration.GetConnectionString("ServerDb_01");
+        optionsBuilder.UseSqlServer(connectionString);
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
