@@ -19,22 +19,22 @@ namespace RegisterCreditsManageApp.Windows.Client
 
         private void StudyProgramBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/StudyProgramPage.xaml", UriKind.Relative));
         }
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/RegisterPage.xaml", UriKind.Relative));
         }
 
         private void AccountBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/AccountPage.xaml", UriKind.Relative));
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.Shutdown();
         }
     }
 }

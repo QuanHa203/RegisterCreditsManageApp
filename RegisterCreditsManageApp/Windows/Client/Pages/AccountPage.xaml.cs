@@ -1,5 +1,4 @@
-﻿using RegisterCreditsManageApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,13 @@ using System.Windows.Shapes;
 namespace RegisterCreditsManageApp.Windows.Client.Pages
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for AccountPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class AccountPage : Page
     {
-        public HomePage()
+        public AccountPage()
         {
             InitializeComponent();
-            
-        }        
+        }
     }
 }

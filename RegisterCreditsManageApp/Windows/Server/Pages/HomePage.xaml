@@ -8,7 +8,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePage">
 
-    <Grid>
-        <TextBlock Background="{DynamicResource PrimaryBackgroundColor}" Foreground="{DynamicResource PrimaryForegroundColor}">This is Home Page</TextBlock>
+    <Grid Background="#ddd">
+        <ScrollViewer x:Name="ScrollView" Width="80" Height="40">
+            <StackPanel >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="4 0 4 0">Id</TextBlock>
+                    <TextBlock Margin="4 0 4 0">Name</TextBlock>
+                    <TextBlock Margin="4 0 4 0">Address</TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

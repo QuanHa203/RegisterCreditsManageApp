@@ -361,4 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/RegisterCreditsManageApp/App.xaml
+/RegisterCreditsManageApp/bin
+/RegisterCreditsManageApp/AssemblyInfo.cs

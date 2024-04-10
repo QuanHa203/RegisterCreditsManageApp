@@ -9,6 +9,6 @@
       Title="StudyProgramPage">
 
     <Grid>
-        
+        <TextBlock Background="#ccc">This is ProgramStudyPage</TextBlock>
     </Grid>
 </Page>
