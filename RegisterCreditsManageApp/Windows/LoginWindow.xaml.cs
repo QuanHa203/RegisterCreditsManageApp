@@ -16,6 +16,7 @@ using MaterialDesignThemes.Wpf;
 using RegisterCreditsManageApp.Models;
 using System.Data;
 using RegisterCreditsManageApp.Windows.Client;
+using System.IO;
 
 namespace RegisterCreditsManageApp.Windows
 {
@@ -25,19 +26,76 @@ namespace RegisterCreditsManageApp.Windows
     public partial class LoginWindow : Window
     {
         private List<User> userList;
+        private string password = "";
+        private string filePath = "";
         public LoginWindow()
         {
             InitializeComponent();
+            RememberCheckbox.Checked += RememberCheckbox_Checked1;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             userList = AppDbContext._Context.Users.ToList();
+            EyeShowedToggle.Visibility = Visibility.Collapsed;
+            UserTextbox.Focus();
+            LoadUserFromFile();
+            LoadPassFromFile();
         }
+        private void RememberCheckbox_Checked1(object sender, RoutedEventArgs e)
+        {
+            //User and pass file path
+            string userFilePath = "user_account.txt";
+            string passFilePath = "pass_account.txt";
 
+            //Check
+            if(RememberCheckbox.IsChecked == true)
+            {
+                //Save data to file
+                File.WriteAllText(userFilePath, UserTextbox.Text);
+                File.WriteAllText(passFilePath, PasswordText.Password);
+            }
+            else
+            {
+                //Delete data in file
+                File.WriteAllText(userFilePath, string.Empty);
+                File.WriteAllText(passFilePath, string.Empty);
+            }
+
+        }
+        //Load user data to textbox
+        private void LoadUserFromFile()
+        {
+            string userFilePath = "user_account.txt";
+
+            if (File.Exists(userFilePath))
+            {
+                using(StreamReader reader = new StreamReader(userFilePath))
+                {
+                    string fileContent = reader.ReadToEnd();
+                    UserTextbox.Text = fileContent;
+                }
+            }
+        }
+        //Load pass data to textbox
+        private void LoadPassFromFile()
+        {
+            string passFilePath = "pass_account.txt";
+
+            if (File.Exists(passFilePath))
+            {
+                using (StreamReader reader = new StreamReader(passFilePath))
+                {
+                    string fileContent = reader.ReadToEnd();
+                    PasswordText.Password = fileContent;
+                }
+            }
+        }
+       
+        //Login button
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
             string userInput = UserTextbox.Text;
-            string passwordInput = PasswordTextbox.Password;
+            string passwordInput = PasswordText.Password;
 
             //Check cac textbox
             if (userInput.Trim().Length == 0)
@@ -116,24 +174,121 @@ namespace RegisterCreditsManageApp.Windows
 
         private void RememberCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-
+            SaveUserToFile();
+            SavePassToFile();
         }
-
-        private void EyeHiddenToggleBtn_Click_1(object sender, RoutedEventArgs e)
+        //save user to file
+        private void SaveUserToFile()
         {
-            if(EyeHiddenToggleBtn.IsChecked == true)
+            string user = UserTextbox.Text;
+
+            filePath = "user_account.txt";
+            //Create new file
+            using (FileStream f = new FileStream(filePath, FileMode.Create))
             {
-                PasswordTextbox.PasswordChar = '●';
+                //Create a streamWriter to write data to file
+                using(StreamWriter sw = new StreamWriter(f))
+                {
+                    sw.Write($"{user}");
+                }
+            }
+        }
+        //Save pass to file
+        private void SavePassToFile()
+        {
+            string pass = PasswordText.Password;
+
+            filePath = "pass_account.txt";
+            //Create new file
+            using (FileStream f = new FileStream(filePath, FileMode.Create))
+            {
+                //Create a streamWriter to write data to file
+                using (StreamWriter sw = new StreamWriter(f))
+                {
+                    sw.Write($"{pass}");
+                }
             }
         }
 
-        private void EyeShowedToggleBtn_Click(object sender, RoutedEventArgs e)
+        private void ButtonToggle_Click(object sender, RoutedEventArgs e)
         {
-            if(EyeHiddenToggleBtn.IsChecked == true)
+            if(ButtonToggle.IsChecked == true)
             {
-                PasswordTextbox.PasswordChar = '\0';
+                EyeHiddenToggle.Visibility = Visibility.Collapsed;
+                EyeShowedToggle.Visibility = Visibility.Visible;
 
+                PasswordText.Visibility = Visibility.Collapsed ;
+                PasswordTextbox.Visibility = Visibility.Visible;
+
+                PasswordTextbox.Text = PasswordText.Password;
             }
+            else
+            {
+                EyeHiddenToggle.Visibility = Visibility.Visible;
+                EyeShowedToggle.Visibility = Visibility.Collapsed;
+
+                PasswordText.Visibility = Visibility.Visible;
+                PasswordTextbox.Visibility = Visibility.Collapsed;
+
+                PasswordText.Password = PasswordTextbox.Text;
+            }
+        }
+
+        private void PasswordTextbox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+            password = PasswordText.Password;
+
+        }
+
+        private void PasswordText_PasswordChanged_1(object sender, RoutedEventArgs e)
+        {
+            password = PasswordTextbox.Text;
+
+        }
+
+        private void UserTextbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Down)
+            {
+                PasswordText.Focus();
+            }
+            if(e.Key == Key.Up)
+            {
+                UserTextbox.Focus();
+            }
+        }
+
+        private void PasswordText_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up)
+            {
+                UserTextbox.Focus();
+            }
+            if (e.Key == Key.Down)
+            {
+                LoginBtn.Focus();
+            }
+        }
+
+        private void LoginBtn_KeyUp(object sender, KeyEventArgs e)
+        {
+            if( e.Key == Key.Up)
+            {
+                PasswordText.Focus();
+            }
+            if (e.Key == Key.Down)
+            {
+                ExitBtn.Focus();
+            }
+        }
+
+        private void ExitBtn_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Up)
+            {
+                LoginBtn.Focus();
+            }
+           
         }
     }
 }

@@ -43,7 +43,7 @@
             <Setter Property="Height" Value="65"></Setter>
         </Style>
 
-        <!--TextBlock hover and style-->
+        <!--TextBlock hover and style forgot pass-->
         <Style x:Key="TextblockHover" TargetType="TextBlock">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontFamily" Value="Montserrat SemiBold"/>
@@ -68,6 +68,23 @@
                     </Trigger.ExitActions>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+       
+        <!--Toggle eye btn-->
+        <Style x:Key="ToggleBtn" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <!-- Xóa hiệu ứng hover -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         
         <!--Eye toggle btn-->
@@ -158,9 +175,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" Background="#1c2340">
-
+        <Border Background="#1c2340" BorderThickness="3" BorderBrush="blue"  CornerRadius="30">
+            <Grid Grid.Row="0" Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="187*"></RowDefinition>
                     <RowDefinition Height="397*"></RowDefinition>
@@ -173,12 +189,12 @@
                         </ContentControl>
                     </Viewbox>
                     <Label Content="Welcome," 
-                Style="{DynamicResource HeadForeground}"
-                FontSize="30"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Center"
-                Margin="0 0 0 10"
-                ></Label>
+                     Style="{DynamicResource HeadForeground}"
+                     FontSize="30"
+                     VerticalAlignment="Bottom"
+                     HorizontalAlignment="Center"
+                     Margin="0 0 0 10"
+                     ></Label>
 
                 </Grid>
 
@@ -198,16 +214,17 @@
                                     <ColumnDefinition Width="167*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                    <Viewbox Width="30" Height="30">
-                                        <ContentControl>
-                                            <Path Style="{DynamicResource UserSvg}" Fill="#3259e0"/>
-                                        </ContentControl>
-                                    </Viewbox>
+                                <Viewbox Width="30" Height="30">
+                                    <ContentControl>
+                                        <Path Style="{DynamicResource UserSvg}" Fill="#3259e0"/>
+                                    </ContentControl>
+                                </Viewbox>
                                 <Grid Grid.Column="1">
                                     <TextBox x:Name="UserTextbox" 
-                                             Style="{DynamicResource LoginTextbox}"
-                                             />
-                            </Grid>
+                              Style="{DynamicResource LoginTextbox}"
+                              KeyUp="UserTextbox_KeyUp"
+                              />
+                                </Grid>
                             </Grid>
 
                             <!--Password section-->
@@ -233,33 +250,57 @@
 
                                     <!--Password column-->
                                     <Grid Grid.Column="0">
-                                        
+                                        <TextBox x:Name="PasswordTextbox"
+                                   FontFamily="Montserrat Medium"
+                                   FontSize="20"
+                                   Foreground="#fff"
+                                   VerticalContentAlignment="Bottom"
+                                   BorderThickness="0 0 0 0.5"
+                                   Background="#1c2340"
+                                   Margin="0,0,-90,15" 
+                                   TextChanged="PasswordTextbox_TextChanged_1"
+                                                     
+                              />
 
-                                    <PasswordBox x:Name="PasswordTextbox"
-                                      FontFamily="Montserrat Medium"
-                                      FontSize="20"
-                                      Foreground="#fff"
-                                      VerticalContentAlignment="Bottom"
-                                      BorderThickness="0 0 0 0.5"
-                                      Background="#1c2340"
-                                      Margin="0,0,-90,15"
-                                                 />
-                                </Grid>
+                                        <PasswordBox x:Name="PasswordText"
+                       FontFamily="Montserrat Medium"
+                       FontSize="20"
+                       Foreground="#fff"
+                       VerticalContentAlignment="Bottom"
+                       BorderThickness="0 0 0 0.5"
+                       Background="#1c2340"
+                       Margin="0,0,-90,15" 
+                       PasswordChanged="PasswordText_PasswordChanged_1" 
+                       KeyUp="PasswordText_KeyUp"
+                                  />
+                                    </Grid>
 
                                     <!--Hide or show password column-->
-                                    <!--Hide password-->
-                                    <Grid Grid.Column="1" Margin="111,0,0,0">
-                                        <ToggleButton x:Name="EyeHiddenToggleBtn" Style="{DynamicResource EyeToggleBtn}" Cursor="Hand" Click="EyeHiddenToggleBtn_Click_1">
-                                            <Viewbox Width="35" Height="35">
-                                                <ContentControl RenderTransformOrigin="0.034,0.034">
-                                                    <Path Style="{DynamicResource EyeHideSvg}" Fill="DimGray"/>
-                                                </ContentControl>
-                                            </Viewbox>
+                                    <!--Hide and show password button-->
+                                    <Grid Grid.Column="1" Margin="100,0,0,0">
+                                        <ToggleButton Style="{DynamicResource EyeToggleBtn}" x:Name="ButtonToggle" 
+                             BorderThickness="0"
+                             Width="40"
+                             Height="40"
+                             Cursor="Hand"
+                             HorizontalContentAlignment="Center" 
+                             Click="ButtonToggle_Click">
+                                            <Grid>
+                                                <Viewbox x:Name="EyeHiddenToggle"  Width="35" Height="35">
+                                                    <ContentControl RenderTransformOrigin="0.034,0.034">
+                                                        <Path Style="{DynamicResource EyeHideSvg}" Fill="DimGray"/>
+                                                    </ContentControl>
+                                                </Viewbox>
+
+                                                <Viewbox x:Name="EyeShowedToggle" Width="35" Height="35">
+                                                    <ContentControl RenderTransformOrigin="0.034,0.034">
+                                                        <Path Style="{DynamicResource EyeSvg}" Fill="#3259e0"/>
+                                                    </ContentControl>
+                                                </Viewbox>
+
+                                            </Grid>
                                         </ToggleButton>
-                                        
-                                    <!--Show passord-->
-                                    
-                                </Grid>
+                                    </Grid>
 
                                 </Grid>
                             </Grid>
@@ -277,59 +318,56 @@
                                 <!--Checkbox for remembering-->
                                 <Grid Grid.Column="0" Height="30">
                                     <CheckBox x:Name="RememberCheckbox" Margin="30 0 0 0"
-                                      VerticalAlignment="Center"
-                                      FontSize="30" 
-                                      Cursor="Hand"
-                                      Checked="RememberCheckbox_Checked"/>
+                       VerticalAlignment="Center"
+                       FontSize="30" 
+                       Cursor="Hand"
+                       Checked="RememberCheckbox_Checked"/>
                                     <TextBlock Text="Remember me"
-                                       FontSize="15"
-                                       FontFamily="Montserrat Medium"
-                                       Foreground="#fff"
-                                       Margin="55 0 0 0"
-                                       VerticalAlignment="Center"/>
+                        FontSize="15"
+                        FontFamily="Montserrat Medium"
+                        Foreground="#fff"
+                        Margin="55 0 0 0"
+                        VerticalAlignment="Center"/>
                                 </Grid>
 
                                 <!--forgot password section-->
                                 <Grid Grid.Column="1">
                                     <TextBlock x:Name="ForgotPassWindow" 
-                                       Style="{DynamicResource TextblockHover}"
-                                       Text="Forgot password?"
-                                       Margin="0 0 10 0" 
-                                       Cursor="Hand"
-                                       MouseLeftButtonDown="ForgotPassWindow_MouseLeftButtonDown"
-                                       />
+                        Style="{DynamicResource TextblockHover}"
+                        Text="Forgot password?"
+                        Margin="0 0 2 0" 
+                        Cursor="Hand"
+                        MouseLeftButtonDown="ForgotPassWindow_MouseLeftButtonDown"
+                        />
                                 </Grid>
                             </Grid>
 
-                        <ToggleButton x:Name="EyeShowedToggleBtn" 
-              Style="{DynamicResource EyeToggleBtn}" 
-              Cursor="Hand"
-              Margin="0 0 100 0"
-              Click="EyeShowedToggleBtn_Click">
-                            <Viewbox Width="35" Height="35">
-                                <ContentControl RenderTransformOrigin="0.034,0.034">
-                                    <Path Style="{DynamicResource EyeSvg}" Fill="#3259e0"/>
-                                </ContentControl>
-                            </Viewbox>
-                        </ToggleButton>
-                        <!--Login button-->
+
+                            <!--Login button-->
                             <Button Name="LoginBtn" 
-                         Style="{DynamicResource LoginWindowBtn}" 
-                         Content="Login"
-                          Foreground="#fff" 
-                         Click="LoginBtn_Click">
+          Style="{DynamicResource LoginWindowBtn}" 
+          Content="Login"
+          Foreground="#fff" 
+          IsDefault="True"
+          Click="LoginBtn_Click"
+           KeyUp="LoginBtn_KeyUp"         
+                     >
+
                             </Button>
 
                             <!--Exit button-->
                             <Button Name="ExitBtn" 
-                         Style="{DynamicResource ExitWindowBtn}"
-                         Content="Exit"
-                         Click="ExitBtn_Click"
-                         >
+          Style="{DynamicResource ExitWindowBtn}"
+          Content="Exit"
+          Click="ExitBtn_Click"
+          KeyUp="ExitBtn_KeyUp"
+          >
                             </Button>
                         </StackPanel>
                     </Grid>
                 </Grid>
+
             </Grid>
-        </Grid>
+        </Border>
+    </Grid>
 </Window>
