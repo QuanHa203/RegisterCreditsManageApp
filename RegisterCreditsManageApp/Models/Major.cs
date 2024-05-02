@@ -7,9 +7,11 @@ public partial class Major
 {
     public int IdMajors { get; set; }
 
-    public string MajorsName { get; set; } = null!;
+    public string Name { get; set; } = null!;
+
+    public virtual ICollection<MainClass> MainClasses { get; set; } = new List<MainClass>();
 
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 
-    public virtual ICollection<Semester> IdSemesters { get; set; } = new List<Semester>();
+    public virtual ICollection<Subject> Subjects { get; set; } = new List<Subject>();
 }

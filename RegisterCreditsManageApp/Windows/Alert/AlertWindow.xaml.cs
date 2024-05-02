@@ -35,15 +35,7 @@ namespace RegisterCreditsManageApp.Windows.Alert
         public AlertWindow(string alertText, string caption, AlertButton button)
         {
             InitializeComponent();
-            switch (button)
-            {
-                case AlertButton.OK:
-                    {
-                        
-                        break;
-                    }
-                case AlertButton.YesNo:
-                    {
+        }
 
                         break;
                     }

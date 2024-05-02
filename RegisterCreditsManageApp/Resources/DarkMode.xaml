@@ -2,11 +2,20 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--Commom -->
-    <SolidColorBrush x:Key="PrimaryForegroundColor">#ccd7e3</SolidColorBrush>
-    <SolidColorBrush x:Key="SecondForegroundColor">#99acc2</SolidColorBrush>
-
+    <SolidColorBrush x:Key="PrimaryForegroundColor">#99acc2</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondForegroundColor">#ccd7e3</SolidColorBrush>
+    <SolidColorBrush x:Key="ThirdForegroundColor">#99acc2</SolidColorBrush>
+    
     <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#1c2340" />
     <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#151934"/>
+
+
+    <SolidColorBrush x:Key="SearchIconFill" Color="#9b69ea"/>
+    <FontFamily x:Key="DefaultFontFamily">Montserrat</FontFamily>
+    <CornerRadius x:Key="DefaultPrimaryCornerRadius">12</CornerRadius>
+    <CornerRadius x:Key="DefaultSecondaryCornerRadius">6</CornerRadius>
+    <SolidColorBrush x:Key="DefaultFocusForeground" Color="#3663fe"/>
+    <SolidColorBrush x:Key="DefaultBackgroundDataGridColumnHeader" Color="#252d4c"/>
     <!-- End Commom -->
 
     <!-- MainWindow -->
@@ -24,4 +33,59 @@
     <Color x:Key="LeftMenuBtnGradientStop0">#FF3867FF</Color>
     <Color x:Key="LeftMenuBtnGradientStop1">#FF1C2340</Color>
     <!-- End MainWindow -->
+
+    <!-- Alert Window -->
+    <Style x:Key="AlertDangerBtn" TargetType="Button">
+        <Setter Property="Foreground" Value="#f03537"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border CornerRadius="4" Background="Transparent" Width="auto" Height="30" HorizontalAlignment="Center" BorderBrush="#f03537" BorderThickness="1">
+                        <TextBlock Padding="12 0 12 0" HorizontalAlignment="Center" VerticalAlignment="Center">Ok</TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AlertInfoBtn" TargetType="Button">
+        <Setter Property="Foreground" Value="#3663fd"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border CornerRadius="4" Background="Transparent" Width="auto" Height="30" HorizontalAlignment="Center" BorderBrush="#3663fd">
+                        <TextBlock Padding="12 0 12 0" HorizontalAlignment="Center" VerticalAlignment="Center">Ok</TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AlertWarningBtn" TargetType="Button">
+        <Setter Property="Foreground" Value="#ffae00"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border CornerRadius="4" Background="Transparent" Width="auto" Height="30" HorizontalAlignment="Center" BorderBrush="#ffae00">
+                        <TextBlock Padding="12 0 12 0" HorizontalAlignment="Center" VerticalAlignment="Center">Ok</TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AlertSuccessBtn" TargetType="Button">
+        <Setter Property="Foreground" Value="#1eff0f"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border CornerRadius="4" Background="Transparent" Width="auto" Height="30" HorizontalAlignment="Center" BorderBrush="#1eff0f">
+                        <TextBlock Padding="12 0 12 0" HorizontalAlignment="Center" VerticalAlignment="Center">Ok</TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Alert Window -->
 </ResourceDictionary>
+    

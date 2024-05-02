@@ -1,4 +1,6 @@
-﻿namespace RegisterCreditsManageApp.Windows.Alert
+﻿using System.Windows;
+
+namespace RegisterCreditsManageApp.Windows.Alert
 {
     public enum AlertResult
     {
@@ -35,7 +37,7 @@
 
         public static AlertResult Show(string alertText, string caption)
         {
-            return AlertResult.Cancel;
+            return AlertResult.None;
         }
 
         public static AlertResult Show(string alertText, string caption, AlertButton button)
@@ -46,11 +48,6 @@
         }
 
         public static AlertResult Show(string alertText, string caption, AlertButton button, AlertIcon icon)
-        {
-            return AlertResult.Cancel;
-        }
-
-        public static AlertResult Show(string alertText, string caption, AlertButton button, AlertIcon icon, AlertResult defaultResult)
         {
             return AlertResult.Cancel;
         }
