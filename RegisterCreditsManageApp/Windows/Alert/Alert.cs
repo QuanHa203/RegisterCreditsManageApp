@@ -2,11 +2,11 @@
 {
     public enum AlertResult
     {
-        None,
-        OK,
-        Cancel,
-        Yes,
-        No
+        None = 0,
+        OK = 1,
+        Cancel = 2,
+        Yes = 3,
+        No = 4
     }
 
     public enum AlertButton
@@ -30,7 +30,6 @@
     {
         public static AlertResult Show(string alertText)
         {
-            
             return AlertResult.Cancel;
         }
 
