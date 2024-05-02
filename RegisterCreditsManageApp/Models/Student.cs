@@ -7,11 +7,9 @@ public partial class Student
 {
     public int IdStudent { get; set; }
 
-    public int IdCourseYear { get; set; }
-
     public int IdMajors { get; set; }
 
-    public int IdClass { get; set; }
+    public int IdMainClass { get; set; }
 
     public string Name { get; set; } = null!;
 
@@ -25,9 +23,7 @@ public partial class Student
 
     public byte[]? Avatar { get; set; }
 
-    public virtual Class IdClassNavigation { get; set; } = null!;
-
-    public virtual CourseYear IdCourseYearNavigation { get; set; } = null!;
+    public virtual MainClass IdMainClassNavigation { get; set; } = null!;
 
     public virtual Major IdMajorsNavigation { get; set; } = null!;
 

@@ -1,6 +1,6 @@
-﻿using RegisterCreditsManageApp.Windows.Client.Pages;
+﻿using Microsoft.Data.SqlClient;
+using RegisterCreditsManageApp.Windows.Alert;
 using System.Windows;
-using System.Windows.Controls;
 
 
 namespace RegisterCreditsManageApp.Windows.Server
@@ -12,23 +12,22 @@ namespace RegisterCreditsManageApp.Windows.Server
     {
         public ServerWindow() : base()
         {
-            InitializeComponent();
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            InitializeComponent();            
         }
 
         private void HomeBtn_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/HomePage.xaml", UriKind.Relative));
         }
 
-        private void ManagementBtn_Click(object sender, RoutedEventArgs e)
+        private void StudyProgramBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/ManagementPage.xaml", UriKind.Relative));
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/StudyProgramPage.xaml", UriKind.Relative));
         }
 
-        private void AnalysisBtn_Click(object sender, RoutedEventArgs e)
+        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/AnalysisPage.xaml", UriKind.Relative));
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/RegisterPage.xaml", UriKind.Relative));
         }
 
         private void AccountBtn_Click(object sender, RoutedEventArgs e)
@@ -38,12 +37,12 @@ namespace RegisterCreditsManageApp.Windows.Server
 
         private void NotifyBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Notify is click");
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }
+        }        
     }
 }

@@ -9,14 +9,6 @@
       Title="HomePage">
 
     <Grid Background="#ddd">
-        <ScrollViewer x:Name="ScrollView" Width="80" Height="40">
-            <StackPanel >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="4 0 4 0">Id</TextBlock>
-                    <TextBlock Margin="4 0 4 0">Name</TextBlock>
-                    <TextBlock Margin="4 0 4 0">Address</TextBlock>
-                </StackPanel>
-            </StackPanel>
-        </ScrollViewer>
+        
     </Grid>
 </Page>

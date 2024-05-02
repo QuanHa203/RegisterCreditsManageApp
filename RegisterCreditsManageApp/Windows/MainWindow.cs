@@ -10,7 +10,10 @@ namespace RegisterCreditsManageApp.Windows
 {
     public abstract class MainWindow : System.Windows.Window
     {
-        public MainWindow() : base() { }
+        public MainWindow() : base() 
+        {
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
 
         /// <summary>
         /// Handle event when user click on the ThemeModeCheckbox.
