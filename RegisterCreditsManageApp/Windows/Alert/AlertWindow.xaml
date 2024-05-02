@@ -7,9 +7,8 @@
         mc:Ignorable="d"
         Title="AlertWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel VerticalAlignment="Center" Width="50">
-            <Button x:Name="YesBtn">Yes</Button>
-            <Button x:Name="NoBtn"> No</Button>
+        <StackPanel x:Name="MainStackPanel" VerticalAlignment="Center" Width="50">
+            
         </StackPanel>
     </Grid>
 </Window>

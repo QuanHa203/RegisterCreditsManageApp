@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace RegisterCreditsManageApp.Windows.Server.Pages
 {
     /// <summary>
-    /// Interaction logic for AnalysisPage.xaml
+    /// Interaction logic for ManagementPage.xaml
     /// </summary>
-    public partial class AnalysisPage : Page
+    public partial class StudyProgramPage : Page
     {
-        public AnalysisPage()
+        public StudyProgramPage()
         {
             InitializeComponent();
         }

@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace RegisterCreditsManageApp.Models;
 
@@ -32,13 +34,21 @@ public partial class AppDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Class> Classes { get; set; }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        string connectionString = _configuration.GetConnectionString("ServerDb_01");
+        optionsBuilder.UseSqlServer(connectionString);
+    }
 
-    public virtual DbSet<CourseYear> CourseYears { get; set; }
+    public virtual DbSet<ClassRoom> ClassRooms { get; set; }
+
+    public virtual DbSet<MainClass> MainClasses { get; set; }
 
     public virtual DbSet<Major> Majors { get; set; }
 
     public virtual DbSet<RegisterCredit> RegisterCredits { get; set; }
+
+    public virtual DbSet<RegisterSubject> RegisterSubjects { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
@@ -50,53 +60,69 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Teacher> Teachers { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        string connectionString = _configuration.GetConnectionString("ServerDb_01");
-        optionsBuilder.UseSqlServer(connectionString);
-    }
+    public virtual DbSet<User> Users { get; set; }    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Class>(entity =>
+        modelBuilder.Entity<ClassRoom>(entity =>
         {
-            entity.HasKey(e => e.IdClass);
+            entity.HasKey(e => e.IdClassRoom);
 
-            entity.ToTable("Class");
+            entity.ToTable("ClassRoom");
 
-            entity.Property(e => e.ClassName).HasMaxLength(100);
+            entity.Property(e => e.IdClassRoom).ValueGeneratedNever();
+            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Schedule).HasMaxLength(255);
         });
 
-        modelBuilder.Entity<CourseYear>(entity =>
+        modelBuilder.Entity<MainClass>(entity =>
         {
-            entity.HasKey(e => e.IdCourseYear);
+            entity.HasKey(e => e.IdMainClass).HasName("PK_Class");
 
-            entity.ToTable("CourseYear");
+            entity.ToTable("MainClass");
+
+            entity.Property(e => e.Name).HasMaxLength(100);
+
+            entity.HasOne(d => d.IdCurrentRegisterSemesterNavigation).WithMany(p => p.MainClasses)
+                .HasForeignKey(d => d.IdCurrentRegisterSemester)
+                .HasConstraintName("FK_MainClass_Semester");
+
+            entity.HasOne(d => d.IdMajorsNavigation).WithMany(p => p.MainClasses)
+                .HasForeignKey(d => d.IdMajors)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ClassName_Majors");
         });
 
         modelBuilder.Entity<Major>(entity =>
         {
             entity.HasKey(e => e.IdMajors);
 
-            entity.Property(e => e.MajorsName).HasMaxLength(100);
+            entity.Property(e => e.Name).HasMaxLength(100);
         });
 
         modelBuilder.Entity<RegisterCredit>(entity =>
         {
             entity.HasKey(e => e.IdRegisterCredits);
 
-            entity.Property(e => e.ClassRoom).HasMaxLength(100);
-            entity.Property(e => e.Schedule).HasMaxLength(255);
-            entity.Property(e => e.StartRegisterDate)
-                .HasMaxLength(10)
-                .IsFixedLength();
-
-            entity.HasOne(d => d.IdTeacherNavigation).WithMany(p => p.RegisterCredits)
-                .HasForeignKey(d => d.IdTeacher)
+            entity.HasOne(d => d.IdClassRoomNavigation).WithMany(p => p.RegisterCredits)
+                .HasForeignKey(d => d.IdClassRoom)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_RegisterCredits_Teacher");
+                .HasConstraintName("FK_RegisterCredits_ClassRoom");
+
+            entity.HasOne(d => d.IdRegisterSubjectNavigation).WithMany(p => p.RegisterCredits)
+                .HasForeignKey(d => d.IdRegisterSubject)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RegisterCredits_RegisterSubject");
+        });
+
+        modelBuilder.Entity<RegisterSubject>(entity =>
+        {
+            entity.HasKey(e => e.IdRegisterSubject);
+
+            entity.ToTable("RegisterSubject");
+
+            entity.Property(e => e.IdRegisterSubject).ValueGeneratedNever();
+            entity.Property(e => e.Name).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -105,7 +131,7 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("Role");
 
-            entity.Property(e => e.RoleName)
+            entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsFixedLength();
         });
@@ -116,24 +142,7 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("Semester");
 
-            entity.Property(e => e.SemesterName).HasMaxLength(50);
-
-            entity.HasMany(d => d.IdMajors).WithMany(p => p.IdSemesters)
-                .UsingEntity<Dictionary<string, object>>(
-                    "SemesterOfMajor",
-                    r => r.HasOne<Major>().WithMany()
-                        .HasForeignKey("IdMajors")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_SemesterOfMajors_Majors"),
-                    l => l.HasOne<Semester>().WithMany()
-                        .HasForeignKey("IdSemester")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_SemesterOfMajors_Semester"),
-                    j =>
-                    {
-                        j.HasKey("IdSemester", "IdMajors");
-                        j.ToTable("SemesterOfMajors");
-                    });
+            entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Student>(entity =>
@@ -149,15 +158,10 @@ public partial class AppDbContext : DbContext
                 .HasMaxLength(15)
                 .IsFixedLength();
 
-            entity.HasOne(d => d.IdClassNavigation).WithMany(p => p.Students)
-                .HasForeignKey(d => d.IdClass)
+            entity.HasOne(d => d.IdMainClassNavigation).WithMany(p => p.Students)
+                .HasForeignKey(d => d.IdMainClass)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Student_Class");
-
-            entity.HasOne(d => d.IdCourseYearNavigation).WithMany(p => p.Students)
-                .HasForeignKey(d => d.IdCourseYear)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Student_CourseYear");
+                .HasConstraintName("FK_Student_ClassName");
 
             entity.HasOne(d => d.IdMajorsNavigation).WithMany(p => p.Students)
                 .HasForeignKey(d => d.IdMajors)
@@ -176,11 +180,12 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("Subject");
 
-            entity.Property(e => e.SubjectName).HasMaxLength(100);
+            entity.Property(e => e.Name).HasMaxLength(100);
 
-            entity.HasOne(d => d.IdRegisterCreditsNavigation).WithMany(p => p.Subjects)
-                .HasForeignKey(d => d.IdRegisterCredits)
-                .HasConstraintName("FK_Subject_RegisterCredits");
+            entity.HasOne(d => d.IdMajorsNavigation).WithMany(p => p.Subjects)
+                .HasForeignKey(d => d.IdMajors)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Subject_Majors");
 
             entity.HasOne(d => d.IdSemesterNavigation).WithMany(p => p.Subjects)
                 .HasForeignKey(d => d.IdSemester)
@@ -194,7 +199,7 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("Teacher");
 
-            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(15)
                 .IsFixedLength();
