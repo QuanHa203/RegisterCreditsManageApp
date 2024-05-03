@@ -9,15 +9,13 @@ public partial class Subject
 
     public int IdSemester { get; set; }
 
-    public int? IdRegisterCredits { get; set; }
+    public int IdMajors { get; set; }
 
-    public string SubjectName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
     public int NumberOfCredits { get; set; }
 
-    public bool? IsPass { get; set; }
-
-    public virtual RegisterCredit? IdRegisterCreditsNavigation { get; set; }
+    public virtual Major IdMajorsNavigation { get; set; } = null!;
 
     public virtual Semester IdSemesterNavigation { get; set; } = null!;
 }

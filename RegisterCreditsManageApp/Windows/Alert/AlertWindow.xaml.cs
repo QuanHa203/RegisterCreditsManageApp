@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace RegisterCreditsManageApp.Windows.Alert
         public AlertWindow()
         {
             InitializeComponent();
+            string connectionString = "Server =192.168.240.225,1433; UID = sa; Password = 270603; Database = RegisterCreditsManageApp; TrustServerCertificate = true;";
+            var sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();   //Mở kết nối
+            Console.Write(sqlConnection.State.ToString());
+            MessageBox.Show(sqlConnection.State.ToString());
+            //...Code truy vấn, cập nhật dữ dữ liệu ở đây
+            sqlConnection.Close();  //Đóng kết nối sau khi sử dụng
         }
 
 

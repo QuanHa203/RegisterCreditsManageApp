@@ -3,10 +3,9 @@
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                  xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows"
-                  mc:Ignorable="d"                    
-                  
-                  WindowStartupLocation="CenterScreen"
+                  xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows"                  
+                  mc:Ignorable="d"
+                                    
         Title="ServerWindow" Width="800" Height="450">
 
     <Window.Resources>
@@ -41,17 +40,12 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Viewbox Cursor="Hand">
-                            <Path Style="{DynamicResource BellSvg}"/>
-                        </Viewbox>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Trigger.Setters>
-                                    <Setter Property="Cursor" Value="Hand"/>
-                                </Trigger.Setters>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
+                    <ControlTemplate>
+                        <Grid Cursor="Hand" Background="Transparent">
+                            <Viewbox>
+                                <Path Style="{DynamicResource BellSvg}"/>
+                            </Viewbox>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -151,8 +145,8 @@
                             </Border>
                         </Button>
 
-                        <Button x:Name="ManagementBtn" 
-                                Click="ManagementBtn_Click"
+                        <Button x:Name="StudyProgramBtn" 
+                                Click="StudyProgramBtn_Click"
                                 MouseEnter="LeftMenuBtn_MouseEnter"
                                 MouseLeave="LeftMenuBtn_MouseLeave"
                                 Style="{DynamicResource LeftMenuBtn}" 
@@ -172,13 +166,13 @@
                                     <Viewbox Style="{DynamicResource LeftMenuIcon}" HorizontalAlignment="Left">
                                         <Path Style="{DynamicResource ManagementSvg}"/>
                                     </Viewbox>
-                                    <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Quản lý</TextBlock>
+                                    <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Chương trình học</TextBlock>
                                 </StackPanel>
                             </Border>
                         </Button>
 
-                        <Button x:Name="AnalysisBtn" 
-                                Click="AnalysisBtn_Click"
+                        <Button x:Name="RegisterBtn" 
+                                Click="RegisterBtn_Click"
                                 MouseEnter="LeftMenuBtn_MouseEnter"
                                 MouseLeave="LeftMenuBtn_MouseLeave"
                                 Style="{DynamicResource LeftMenuBtn}" 
@@ -196,9 +190,9 @@
 
                                 <StackPanel Orientation="Horizontal" >
                                     <Viewbox Style="{DynamicResource LeftMenuIcon}" HorizontalAlignment="Left">
-                                        <Path Style="{DynamicResource AnalysisSvg}"/>
+                                        <Path Style="{DynamicResource ClipboardPenSvg}"/>
                                     </Viewbox>
-                                    <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Thống kê</TextBlock>
+                                    <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Đăng ký tín chỉ</TextBlock>
                                 </StackPanel>
                             </Border>
                         </Button>
@@ -260,7 +254,7 @@
 
             <!-- Main -->
             <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Background="{DynamicResource SecondaryBackgroundColor}" Grid.RowSpan="2"/>
-            
+
         </Grid>
     </Grid>
 </local:MainWindow>

@@ -221,9 +221,9 @@
                                 </Viewbox>
                                 <Grid Grid.Column="1">
                                     <TextBox x:Name="UserTextbox" 
-                              Style="{DynamicResource LoginTextbox}"
-                              KeyUp="UserTextbox_KeyUp"
-                              />
+                                              Style="{DynamicResource LoginTextbox}"
+                                              KeyUp="UserTextbox_KeyUp"
+                                     />
                                 </Grid>
                             </Grid>
 
@@ -263,28 +263,28 @@
                               />
 
                                         <PasswordBox x:Name="PasswordText"
-                       FontFamily="Montserrat Medium"
-                       FontSize="20"
-                       Foreground="#fff"
-                       VerticalContentAlignment="Bottom"
-                       BorderThickness="0 0 0 0.5"
-                       Background="#1c2340"
-                       Margin="0,0,-90,15" 
-                       PasswordChanged="PasswordText_PasswordChanged_1" 
-                       KeyUp="PasswordText_KeyUp"
-                                  />
+                                                   FontFamily="Montserrat Medium"
+                                                   FontSize="20"
+                                                   Foreground="#fff"
+                                                   VerticalContentAlignment="Bottom"
+                                                   BorderThickness="0 0 0 0.5"
+                                                   Background="#1c2340"
+                                                   Margin="0,0,-90,15" 
+                                                   PasswordChanged="PasswordText_PasswordChanged_1" 
+                                                   KeyUp="PasswordText_KeyUp"
+                                                              />
                                     </Grid>
 
                                     <!--Hide or show password column-->
                                     <!--Hide and show password button-->
                                     <Grid Grid.Column="1" Margin="100,0,0,0">
                                         <ToggleButton Style="{DynamicResource EyeToggleBtn}" x:Name="ButtonToggle" 
-                             BorderThickness="0"
-                             Width="40"
-                             Height="40"
-                             Cursor="Hand"
-                             HorizontalContentAlignment="Center" 
-                             Click="ButtonToggle_Click">
+                                                 BorderThickness="0"
+                                                 Width="40"
+                                                 Height="40"
+                                                 Cursor="Hand"
+                                                 HorizontalContentAlignment="Center" 
+                                                 Click="ButtonToggle_Click">
                                             <Grid>
                                                 <Viewbox x:Name="EyeHiddenToggle"  Width="35" Height="35">
                                                     <ContentControl RenderTransformOrigin="0.034,0.034">
@@ -333,35 +333,35 @@
                                 <!--forgot password section-->
                                 <Grid Grid.Column="1">
                                     <TextBlock x:Name="ForgotPassWindow" 
-                        Style="{DynamicResource TextblockHover}"
-                        Text="Forgot password?"
-                        Margin="0 0 2 0" 
-                        Cursor="Hand"
-                        MouseLeftButtonDown="ForgotPassWindow_MouseLeftButtonDown"
-                        />
+                                            Style="{DynamicResource TextblockHover}"
+                                            Text="Forgot password?"
+                                            Margin="0 0 2 0" 
+                                            Cursor="Hand"
+                                            MouseLeftButtonDown="ForgotPassWindow_MouseLeftButtonDown"
+                                    />
                                 </Grid>
                             </Grid>
 
 
                             <!--Login button-->
                             <Button Name="LoginBtn" 
-          Style="{DynamicResource LoginWindowBtn}" 
-          Content="Login"
-          Foreground="#fff" 
-          IsDefault="True"
-          Click="LoginBtn_Click"
-           KeyUp="LoginBtn_KeyUp"         
-                     >
+                                    Style="{DynamicResource LoginWindowBtn}" 
+                                    Content="Login"
+                                    Foreground="#fff" 
+                                    IsDefault="True"
+                                    Click="LoginBtn_Click"
+                                    KeyUp="LoginBtn_KeyUp"         
+                                             >
 
                             </Button>
 
                             <!--Exit button-->
                             <Button Name="ExitBtn" 
-          Style="{DynamicResource ExitWindowBtn}"
-          Content="Exit"
-          Click="ExitBtn_Click"
-          KeyUp="ExitBtn_KeyUp"
-          >
+                                    Style="{DynamicResource ExitWindowBtn}"
+                                    Content="Exit"
+                                    Click="ExitBtn_Click"
+                                    KeyUp="ExitBtn_KeyUp"
+                                    >
                             </Button>
                         </StackPanel>
                     </Grid>

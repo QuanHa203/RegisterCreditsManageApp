@@ -2,11 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--Commom -->
-    <SolidColorBrush x:Key="PrimaryForegroundColor">#ccd7e3</SolidColorBrush>
-    <SolidColorBrush x:Key="SecondForegroundColor">#99acc2</SolidColorBrush>
-
+    <SolidColorBrush x:Key="PrimaryForegroundColor">#99acc2</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondForegroundColor">#ccd7e3</SolidColorBrush>
+    <SolidColorBrush x:Key="ThirdForegroundColor">#99acc2</SolidColorBrush>
+    
     <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#1c2340" />
     <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#151934"/>
+
+
+    <SolidColorBrush x:Key="SearchIconFill" Color="#9b69ea"/>
+    <FontFamily x:Key="DefaultFontFamily">Montserrat</FontFamily>
+    <CornerRadius x:Key="DefaultPrimaryCornerRadius">12</CornerRadius>
+    <CornerRadius x:Key="DefaultSecondaryCornerRadius">6</CornerRadius>
+    <SolidColorBrush x:Key="DefaultFocusForeground" Color="#3663fe"/>
+    <SolidColorBrush x:Key="DefaultBackgroundDataGridColumnHeader" Color="#2f3756"/>
+    <SolidColorBrush x:Key="DefaultBackgroundDataGridRowHover" Color="#252d4c"/>
     <!-- End Commom -->
 
     <!-- MainWindow -->

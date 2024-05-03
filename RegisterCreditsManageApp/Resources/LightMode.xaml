@@ -4,11 +4,22 @@
     <!-- Commom -->
     <SolidColorBrush x:Key="PrimaryForegroundColor">#333333</SolidColorBrush>
     <SolidColorBrush x:Key="SecondForegroundColor">#beccdb</SolidColorBrush>
-    
-    <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#f1f1f1"/>
+    <SolidColorBrush x:Key="ThirdForegroundColor">#99acc2</SolidColorBrush>
+
     <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#ffffff" />
+    <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#f1f1f1"/>
+
+
+    <SolidColorBrush x:Key="SearchIconFill" Color="#3663fe"/>
+    <FontFamily x:Key="DefaultFontFamily">Montserrat</FontFamily>
+    <CornerRadius x:Key="DefaultPrimaryCornerRadius">12</CornerRadius>
+    <CornerRadius x:Key="DefaultSecondaryCornerRadius">6</CornerRadius>
+    <SolidColorBrush x:Key="DefaultFocusForeground" Color="#3663fe"/>
+    <SolidColorBrush x:Key="DefaultBackgroundDataGridColumnHeader" Color="#e6e6e6"/>
+    <SolidColorBrush x:Key="DefaultBackgroundDataGridRowHover" Color="#f0f0f0"/>
+
     <!-- End Commom -->
-    
+
     <!-- MainWindow -->
     <Style x:Key="IconThemeMode" TargetType="Path">
         <Setter Property="Fill" Value="#3663fe"/>

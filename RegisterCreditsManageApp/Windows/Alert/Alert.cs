@@ -1,12 +1,14 @@
-﻿namespace RegisterCreditsManageApp.Windows.Alert
+﻿using System.Windows;
+
+namespace RegisterCreditsManageApp.Windows.Alert
 {
     public enum AlertResult
     {
-        None,
-        OK,
-        Cancel,
-        Yes,
-        No
+        None = 0,
+        OK = 1,
+        Cancel = 2,
+        Yes = 3,
+        No = 4
     }
 
     public enum AlertButton
