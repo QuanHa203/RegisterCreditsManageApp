@@ -1,16 +1,20 @@
-﻿<Page x:Class="RegisterCreditsManageApp.Windows.Server.Pages.StudyProgramPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ManagementPage"
-      Background="#151934"
-      
+﻿<Window x:Class="RegisterCreditsManageApp.Windows.Server.Pages.SubWindow.AddMajor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages.SubWindow"
+        mc:Ignorable="d"
+        Title="AddMajor" Height="400" Width="600"
+        WindowStartupLocation="CenterOwner"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
-    <Page.Resources>
-        <!--Row data grid-->
+    <Window.Resources>
+        <!--Row style-->
         <Style x:Key="DataGridRowStyle1" TargetType="{x:Type DataGridRow}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
             <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -49,6 +53,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--Column header style-->
         <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
             <Setter Property="Width" Value="8"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -61,13 +66,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <!--Column data grid-->
+        
         <Style x:Key="DataGridColumnHeaderStyle1" TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="#252d4c"/>
-            <Setter Property="FontFamily" Value="Montserrat"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="0 25 0 0"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -83,8 +84,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
         <SolidColorBrush x:Key="{x:Static DataGrid.FocusBorderBrushKey}" Color="#FF000000"/>
-        <!--Cell data grid-->
+       
         <Style x:Key="DataGridCellStyle1" TargetType="{x:Type DataGridCell}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -144,12 +146,11 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <!--Data grid css-->
         <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
-            <Setter Property="Background" Value="#1c2340"/>
-            <Setter Property="Foreground" Value="#b4c1d1"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
             <Setter Property="BorderBrush" Value="#FF688CAF"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
             <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
             <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
@@ -157,7 +158,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type DataGrid}">
-                        <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
                             <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
                                 <ScrollViewer.Template>
                                     <ControlTemplate TargetType="{x:Type ScrollViewer}">
@@ -202,106 +203,67 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
-    </Page.Resources>
-
+    </Window.Resources>
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70*"></RowDefinition>
-            <RowDefinition Height="380*"/>
-        </Grid.RowDefinitions>
+        <Border Background="#1c2340" CornerRadius="20">
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="45*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
 
-        <!--Operation grid-->
-        <Grid Grid.Row="0" Background="#151934" Margin="40,10,40,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <!--Search section-->
-                <Grid Grid.Column="0" HorizontalAlignment="Left">
-                    <Border Width="270" Height="45" Background="#1c2340" BorderThickness="0" CornerRadius="10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50*"></ColumnDefinition>
-                                <ColumnDefinition Width="210*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Margin="0,0,10,0">
-                                <Viewbox Width="30" Height="30" HorizontalAlignment="Left" Margin="10 0 0 0">
-                                    <ContentControl>
-                                        <Path Style="{DynamicResource SearchSvg}" Fill="#3259e0"/>
-                                    </ContentControl>
-                                </Viewbox>
-                            </Grid>
+                <!--Add major label-->
+                <Grid Grid.Row="0">
+                    <StackPanel>
+                        <Label Content="Thêm" 
+                               FontFamily="Montserrat Bold"
+                               FontSize="20"
+                               Foreground="#3663fe" Height="30"            
+                       />
+                        <Label>
+                            <TextBlock>
+                            <Run Text="Quản lý" Foreground="#91a1be"/>
+                            <Run Text=" · " Foreground="Blue"/> 
+                            <Run Text="Ngành học" Foreground="#91a1be"/> 
+                            <Run Text=" · " Foreground="Blue" />
+                            <Run Text="Thêm" Foreground="#91a1be"/>
+                            </TextBlock>
+                        </Label>
+                    </StackPanel>
+                </Grid>
 
-                            <Grid Grid.Column="1">
-                                <TextBox x:Name="FindMajorTextBox"
-                                     Background="#1c2340" 
-                                     BorderThickness="0" 
-                                     Margin="0 5 15 5" 
-                                     Text="Tìm kiếm tên ngành học"
-                                     FontSize="16"
+                <!--Add major name section-->
+                <Grid Grid.Row="1" Margin="0,0,0,9">
+                    <StackPanel>
+                        <Label Content="Tên ngành học" 
+                               FontFamily="Montserrat"
+                               FontSize="15"
+                               Foreground="#91a1be" 
+                               Height="30"     
+                               Margin="5 0 0 0"
+                        />
+                        <Border Width="200" Height="35" Margin="10 5 0 0" CornerRadius="10" BorderThickness="1"  BorderBrush="#91a1be" HorizontalAlignment="Left">
+                            <TextBox x:Name="MajorNameTextBox" 
+                                     Height="20"
+                                     Background="#1c2340"
+                                     BorderBrush="Transparent"
+                                     Foreground="#ffffff"
+                                     BorderThickness="0"
                                      FontFamily="Montserrat"
-                                     Foreground="#92a8c2"
-                                     VerticalAlignment="Center"
-                                     GotFocus="FindMajorTextBox_GotFocus"
-                                     LostFocus="FindMajorTextBox_LostFocus"
-                                     >
-                                </TextBox>
-                            </Grid>
-                        </Grid>
-                    </Border>
+                                     FontSize="15"
+                                     Margin="5"
+                            />
+                        </Border>
+                    </StackPanel>
                 </Grid>
-
-                <!--add button section-->
-                <Grid Grid.Column="1">
-                    <Button Click="NavigateTo_Click" x:Name="NavigateTo" Width="100" Height="40" HorizontalAlignment="Right" Background="#1c2340" Cursor="Hand">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40*"/>
-                                <ColumnDefinition Width="60*"/>
-                            </Grid.ColumnDefinitions>
-                            <!--add svg column-->
-                            <Grid Grid.Column="0">
-                                <Viewbox Width="25" Height="25">
-                                    <ContentControl>
-                                        <Path Style="{DynamicResource AddFileSvg}" Fill="#3259e0"/>
-                                    </ContentControl>
-                                </Viewbox>
-                            </Grid>
-
-                            <!--Content column-->
-                            <Grid Grid.Column="1">
-                                <TextBlock Text="Thêm" 
-                                       Foreground="#ccccbc" 
-                                       FontSize="16" 
-                                       FontFamily="Montserrat SemiBold" 
-                                       VerticalAlignment="Center" 
-                                       Margin="5 0 0 0"/>
-                            </Grid>
-                        </Grid>
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="10">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                                </Border>
-
-                            </ControlTemplate>
-
-                        </Button.Template>
-
-                    </Button>
-                </Grid>
-            </Grid>
-        </Grid>
-
-        <!--List Grid-->
-        <Grid Grid.Row="1" Background="#151934" Margin="40,40,40,40">
-                <DataGrid x:Name="MajorDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}">
-
+                
+                <!--Major data grid-->
+                <DataGrid x:Name="AddSubjectDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="2">
                     <DataGrid.Columns>
-
-                        <DataGridTemplateColumn Header="Thao tác" IsReadOnly="True" Width="100">
+                        <DataGridTemplateColumn Header="Tên môn học" Width="150" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -315,13 +277,13 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="Tên ngành học" IsReadOnly="True" Width="*" FontFamily="Montserrat SemiBold" FontSize="10"/>
-                        <DataGridTextColumn Header="Số lượng sinh viên" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Số lượng lớp học" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Số lượng môn học" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Số tín chỉ" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Học kỳ" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Thao tác" IsReadOnly="True" Width="*"/>
 
                     </DataGrid.Columns>
                 </DataGrid>
-        </Grid>
+            </Grid>
+        </Border>
     </Grid>
-</Page>
+</Window>

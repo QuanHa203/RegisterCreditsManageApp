@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 
 namespace RegisterCreditsManageApp.Windows.Server.Pages
 {
@@ -23,6 +24,29 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         public StudyProgramPage()
         {
             InitializeComponent();
+        }
+
+        private void FindMajorTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (FindMajorTextBox.Text != null && FindMajorTextBox.Text == "Tìm kiếm tên ngành học")
+            {
+                // Xóa placeholder text
+                FindMajorTextBox.Text = string.Empty;
+            }
+        }
+
+        private void FindMajorTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            // Nếu TextBox rỗng, khôi phục placeholder text
+            if (FindMajorTextBox.Text != null && string.IsNullOrWhiteSpace(FindMajorTextBox.Text))
+            {
+                FindMajorTextBox.Text = "Tìm kiếm tên ngành học";
+            }
+        }
+
+        private void NavigateTo_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

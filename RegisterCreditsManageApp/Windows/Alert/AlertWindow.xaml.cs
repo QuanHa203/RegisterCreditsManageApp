@@ -37,15 +37,7 @@ namespace RegisterCreditsManageApp.Windows.Alert
             InitializeComponent();
         }
 
-                        break;
-                    }
-                case AlertButton.OKCancel:
-                    {
-
-                        break;
-                    }
-            }
-        }
+                   
         
         private static void BtnOk_Click(object sender, RoutedEventArgs e)
         {
