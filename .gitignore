@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /RegisterCreditsManageApp/bin
 /RegisterCreditsManageApp/AssemblyInfo.cs
+/RegisterCreditsManageApp/appsettings.json
