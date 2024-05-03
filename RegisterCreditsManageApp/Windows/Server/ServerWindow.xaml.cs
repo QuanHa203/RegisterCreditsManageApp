@@ -1,5 +1,7 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using MaterialDesignThemes.Wpf;
+using Microsoft.Data.SqlClient;
 using RegisterCreditsManageApp.Windows.Alert;
+using RegisterCreditsManageApp.Windows.Server.Pages;
 using System.Windows;
 
 
@@ -37,7 +39,7 @@ namespace RegisterCreditsManageApp.Windows.Server
 
         private void NotifyBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Notify is click");
+
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)

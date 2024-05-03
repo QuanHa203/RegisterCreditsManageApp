@@ -15,7 +15,8 @@
     <CornerRadius x:Key="DefaultPrimaryCornerRadius">12</CornerRadius>
     <CornerRadius x:Key="DefaultSecondaryCornerRadius">6</CornerRadius>
     <SolidColorBrush x:Key="DefaultFocusForeground" Color="#3663fe"/>
-    <SolidColorBrush x:Key="DefaultBackgroundDataGridColumnHeader" Color="#f5f6fa"/>
+    <SolidColorBrush x:Key="DefaultBackgroundDataGridColumnHeader" Color="#e6e6e6"/>
+    <SolidColorBrush x:Key="DefaultBackgroundDataGridRowHover" Color="#f0f0f0"/>
 
     <!-- End Commom -->
 

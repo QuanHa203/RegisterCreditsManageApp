@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -11,11 +12,13 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
     {
         private SolidColorBrush colorFocus;
         private SolidColorBrush colorLostFocus;
+        private List<Data> dataGridRegisterList;
         public RegisterPage()
         {
             InitializeComponent();
             colorFocus = App.Current.Resources["DefaultFocusForeground"] as SolidColorBrush;
             colorLostFocus = App.Current.Resources["SecondForegroundColor"] as SolidColorBrush;
+            GetDataGridRegister();
 
             List<Data> list = new List<Data>()
             {
@@ -29,7 +32,7 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                 new Data {Id = 8, ClassName = "ClassName8", CourseName = "CourseName8", MajorsName = "MajorsName8", SemesterName = "SemesterName8"},
                 new Data {Id = 9, ClassName = "ClassName9", CourseName = "CourseName9", MajorsName = "MajorsName9", SemesterName = "SemesterName9"}
             };
-            //DataGridRegister.ItemsSource = list;
+            DataGridRegister.ItemsSource = list;
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -37,9 +40,19 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             if (SearchTextBox.Text.Length > 0)
 
                 SearchPlaceHolder.Visibility = Visibility.Hidden;
-
             else
                 SearchPlaceHolder.Visibility = Visibility.Visible;
+        }
+
+        private void DataGridCell_PreviewGotKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void GetDataGridRegister()
+        {
+            dataGridRegisterList = new List<Data>();
+            DataGridRegister.ItemsSource = dataGridRegisterList;
         }
     }
 
