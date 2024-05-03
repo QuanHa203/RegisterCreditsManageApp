@@ -4,11 +4,11 @@ namespace RegisterCreditsManageApp.Windows.Alert
 {
     public enum AlertResult
     {
-        None,
-        OK,
-        Cancel,
-        Yes,
-        No
+        None = 0,
+        OK = 1,
+        Cancel = 2,
+        Yes = 3,
+        No = 4
     }
 
     public enum AlertButton
@@ -32,8 +32,7 @@ namespace RegisterCreditsManageApp.Windows.Alert
     {
         public static AlertResult Show(string alertText)
         {
-            
-            return AlertResult.None;
+            return AlertResult.Cancel;
         }
 
         public static AlertResult Show(string alertText, string caption)
