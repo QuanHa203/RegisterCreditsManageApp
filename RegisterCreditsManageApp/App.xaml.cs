@@ -1,7 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.IO;
-using System.Windows;
+﻿using System.Windows;
 
 namespace RegisterCreditsManageApp
 {
@@ -10,12 +7,12 @@ namespace RegisterCreditsManageApp
     /// </summary>
     public partial class App : Application
     {
+        private bool isDragging;
+        private Point lastMousePosition;
         protected override void OnExit(ExitEventArgs e)
         {
-            
+
             base.OnExit(e);
         }
-       
     }
-
 }
