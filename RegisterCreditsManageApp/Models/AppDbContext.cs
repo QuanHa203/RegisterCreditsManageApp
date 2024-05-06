@@ -46,7 +46,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Major> Majors { get; set; }
 
-    public virtual DbSet<RegisterCredit> RegisterCredits { get; set; }    
+    public virtual DbSet<RegisterCredit> RegisterCredits { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
@@ -58,7 +58,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Teacher> Teachers { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }    
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -68,7 +68,9 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("ClassRoom");
 
-            entity.Property(e => e.IdClassRoom).ValueGeneratedNever();
+            entity.Property(e => e.IdClassRoom)
+                .HasMaxLength(10)
+                .IsFixedLength();
             entity.Property(e => e.Name).HasMaxLength(100);
             entity.Property(e => e.Schedule).HasMaxLength(255);
         });
@@ -101,6 +103,10 @@ public partial class AppDbContext : DbContext
         modelBuilder.Entity<RegisterCredit>(entity =>
         {
             entity.HasKey(e => e.IdRegisterCredits);
+
+            entity.Property(e => e.IdClassRoom)
+                .HasMaxLength(10)
+                .IsFixedLength();
 
             entity.HasOne(d => d.IdClassRoomNavigation).WithMany(p => p.RegisterCredits)
                 .HasForeignKey(d => d.IdClassRoom)
@@ -194,6 +200,7 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("User");
 
+            entity.Property(e => e.IdUser).ValueGeneratedNever();
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .IsFixedLength();

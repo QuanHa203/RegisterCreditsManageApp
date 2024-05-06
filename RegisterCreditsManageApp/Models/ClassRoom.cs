@@ -5,7 +5,11 @@ namespace RegisterCreditsManageApp.Models;
 
 public partial class ClassRoom
 {
-    public int IdClassRoom { get; set; }
+    public string IdClassRoom { get; set; } = null!;
+
+    public int IdMainClass { get; set; }
+
+    public int IdSubject { get; set; }
 
     public string Name { get; set; } = null!;
 

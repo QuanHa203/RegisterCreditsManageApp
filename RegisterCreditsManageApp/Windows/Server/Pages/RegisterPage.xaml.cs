@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegisterCreditsManageApp.Models;
-using RegisterCreditsManageApp.Windows.Alert;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -13,41 +12,46 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
     /// </summary>
     public partial class RegisterPage : Page
     {
-        private SolidColorBrush colorFocus;
-        private SolidColorBrush colorLostFocus;
-        private List<Data> dataGridRegisterList;        
-
+        private List<Data> dataGridRegisterList;
+        List<MainClass> mainClassList;
+        List<MainClass> mainClassNotRegisteredList;
+        List<MainClass> mainClassRegisteredList;
+        
         public RegisterPage()
         {
             InitializeComponent();
-            DataContext = this;
-            colorFocus = App.Current.Resources["DefaultFocusForeground"] as SolidColorBrush;
-            colorLostFocus = App.Current.Resources["SecondForegroundColor"] as SolidColorBrush;
-            GetDataGridRegister();
         }
 
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (SearchTextBox.Text.Length > 0)
+            RadioButtonClassNotRegistered.IsChecked = true;
+            mainClassNotRegisteredList = new List<MainClass>();
+            mainClassRegisteredList = new List<MainClass>();
+            dataGridRegisterList =  new List<Data>();
 
-                SearchPlaceHolder.Visibility = Visibility.Hidden;
-            else
-                SearchPlaceHolder.Visibility = Visibility.Visible;
-        }
-
-        private void GetDataGridRegister()
-        {
-            dataGridRegisterList = new List<Data>();
-            var mainClassList = AppDbContext._Context.MainClasses.Include(mainClass => mainClass.IdCurrentRegisterSemesterNavigation)
+            mainClassList = AppDbContext._Context.MainClasses.Include(mainClass => mainClass.IdCurrentRegisterSemesterNavigation)
                                                                  .Include(mainClass => mainClass.IdMajorsNavigation)
                                                                  .ToList();
+            var classRoomList = AppDbContext._Context.ClassRooms.ToList();
+            foreach (var mainClass in mainClassList)
+            {
+                foreach (var classRoom in classRoomList)
+                {
+                    if()
+                }
+            }
+        }
+
+        private void GetDataGridClassNotRegistered()
+        {            
             foreach (var mainClass in mainClassList)
             {
                 Data data = new Data
                 {
                     IdSemester = mainClass.IdCurrentRegisterSemester.Value,
                     IdMajors = mainClass.IdMajors,
-                    ClassName = mainClass.Name,
+                    IdMainClass = mainClass.IdMainClass,
+                    MainClassName = mainClass.Name,
                     MajorsName = mainClass.IdMajorsNavigation.Name,
                     SemesterName = mainClass.IdCurrentRegisterSemesterNavigation.Name,
                     CourseYear = mainClass.CourseYear
@@ -57,15 +61,31 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             DataGridRegister.ItemsSource = dataGridRegisterList;
         }
 
+        private void GetDataGridClassRegistered() 
+        {
+            
+        }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (SearchTextBox.Text.Length > 0)
+                SearchPlaceHolder.Visibility = Visibility.Hidden;
+            else
+                SearchPlaceHolder.Visibility = Visibility.Visible;
+        }
+
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             var parent = btn.Parent as Panel;
-            var idSemesterTextBlock = parent.Children[parent.Children.Count - 2] as TextBlock;
-            var idMajorsTextBlock = parent.Children[parent.Children.Count - 1] as TextBlock;
-            AlertBox.Show("Hello");
-            MessageBox.Show($"IdSemester: {idSemesterTextBlock.Text}");
-            MessageBox.Show($"IdMajors: {idMajorsTextBlock.Text}");
+            var idSemesterTextBlock = parent.Children[1] as TextBlock;
+            var idMajorsTextBlock = parent.Children[2] as TextBlock;
+            var idClassNameTextBlock = parent.Children[3] as TextBlock;
+
+            int idSemester = Convert.ToInt32(idSemesterTextBlock.Text);
+            int idMajors = Convert.ToInt32(idMajorsTextBlock.Text);
+            int idMainClass = Convert.ToInt32(idClassNameTextBlock.Text);
+            new RegisterClassesRoomWindow(idSemester, idMajors, idMainClass).ShowDialog();
         }
 
         private void BtnShowPopup_Click(object sender, RoutedEventArgs e)
@@ -73,17 +93,30 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             Button btn = sender as Button;            
             var parent = btn.Parent as Panel;
             var popup = parent.Children[0] as Popup;
-            popup.IsOpen = true;
+            popup.IsOpen = true;            
         }
-    }
 
-    public class Data
-    {
-        public int IdSemester { get; set; }
-        public int IdMajors { get; set; }
-        public string ClassName { get; set; }
-        public string MajorsName { get; set; }
-        public string SemesterName { get; set; }
-        public int CourseYear { get; set; }
+        private void RadioButtonClassNotRegistered_CheckedAndUnchecked(object sender, RoutedEventArgs e)
+        {
+            if(RadioButtonClassNotRegistered.IsChecked == true)
+            {
+                GetDataGridClassNotRegistered();
+            }
+            else
+            {
+                MessageBox.Show("Hello");
+            }
+        }
+
+        public class Data
+        {
+            public int IdSemester { get; set; }
+            public int IdMajors { get; set; }
+            public int IdMainClass { get; set; }
+            public string MainClassName { get; set; }
+            public string MajorsName { get; set; }
+            public string SemesterName { get; set; }
+            public int CourseYear { get; set; }
+        }
     }
 }
