@@ -9,6 +9,13 @@
       Title="RegisterPage">
 
     <Grid>
-        <TextBlock Background="#ccc">This is RegisterPage</TextBlock>
+        <DataGrid x:Name="DataGridRegister" Style="{DynamicResource DefaultDataGrid}" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="STT" Binding="{Binding Stt}"/>
+                <DataGridTextColumn Header="Mã học phần" Binding="{Binding MaHocPhan}"/>
+                <DataGridTextColumn Header="Môn học/ học phần" Binding="{Binding MonHoc}"/>
+                <DataGridTextColumn Header="Số tín chỉ" Binding="{Binding SoTinChi}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

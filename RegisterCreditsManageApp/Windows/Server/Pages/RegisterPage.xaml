@@ -5,7 +5,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d" 
       Background="{DynamicResource SecondaryBackgroundColor}"
+      FontFamily="{DynamicResource DefaultFontFamily}"
       d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
       Title="AnalysisPage">
     <Page.Resources>
         <Style x:Key="SearchBorder" TargetType="Border">
@@ -39,7 +41,6 @@
 
         <Style x:Key="SearchTextBox" TargetType="TextBox">
             <Setter Property="Foreground" Value="{DynamicResource ThirdForegroundColor}"/>
-            <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Margin" Value="12 0 12 0"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -54,7 +55,6 @@
             <Setter Property="Margin" Value="0 0 24 0"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -73,154 +73,88 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        <Style x:Key="DataGridRegisterCellStyle" TargetType="{x:Type DataGridCell}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type DataGridCell}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
-                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
-                    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                </Trigger>
-                <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>
-                </Trigger>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition Property="IsSelected" Value="true"/>
-                        <Condition Property="Selector.IsSelectionActive" Value="false"/>
-                    </MultiTrigger.Conditions>
-                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-                    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
-                </MultiTrigger>
-                <Trigger Property="IsEnabled" Value="false">
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        
-        <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
-            <Setter Property="Width" Value="8"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Cursor" Value="SizeWE"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
-        <Style x:Key="DataGridRegisterColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="{DynamicResource DefaultBackgroundDataGridColumnHeader}"/>
-            <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
-            <Setter Property="Padding" Value="12"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                        <Grid>
-                            <theme:DataGridHeaderBorder Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" IsPressed="{TemplateBinding IsPressed}" IsHovered="{TemplateBinding IsMouseOver}" IsClickable="{TemplateBinding CanUserSort}" Padding="{TemplateBinding Padding}" SortDirection="{TemplateBinding SortDirection}" SeparatorVisibility="{TemplateBinding SeparatorVisibility}" SeparatorBrush="{TemplateBinding SeparatorBrush}">
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </theme:DataGridHeaderBorder>
-                            <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" Style="{StaticResource ColumnHeaderGripperStyle}"/>
-                            <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Style="{StaticResource ColumnHeaderGripperStyle}"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
-        <Style x:Key="DataGridRegisterRowStyle" TargetType="{x:Type DataGridRow}">
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
-            <Setter Property="SnapsToDevicePixels" Value="true"/>
-            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
-            <Setter Property="ValidationErrorTemplate">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <TextBlock Foreground="Red" Margin="2,0,0,0" Text="!" VerticalAlignment="Center"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type DataGridRow}">
-                        <Border x:Name="DGR_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
-                            <SelectiveScrollingGrid>
-                                <SelectiveScrollingGrid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </SelectiveScrollingGrid.ColumnDefinitions>
-                                <SelectiveScrollingGrid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                </SelectiveScrollingGrid.RowDefinitions>
-                                <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1" SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Visibility="{TemplateBinding DetailsVisibility}"/>
-                                <DataGridRowHeader Grid.RowSpan="2" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
-                            </SelectiveScrollingGrid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsNewItem" Value="True">
-                    <Setter Property="Margin" Value="{Binding NewItemMargin, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
 
-        
+        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Red"/>
+
     </Page.Resources>
 
     <Grid Margin="32">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Border Style="{DynamicResource SearchBorder}">
                 <StackPanel Margin="12 0 12 0" Orientation="Horizontal">
                     <Button Style="{DynamicResource SearchBtn}"/>
                     <Grid>
-                        <TextBox x:Name="SearchPlaceHolder" Style="{DynamicResource SearchTextBox}" >Tìm kiếm tên lớp học</TextBox>
-                        <TextBox x:Name="SearchTextBox" Style="{DynamicResource SearchTextBox}" Width="{Binding ActualWidth, ElementName=SearchPlaceHolder}" TextChanged="SearchTextBox_TextChanged"></TextBox>
+                        <TextBox x:Name="SearchPlaceHolder" Style="{DynamicResource SearchTextBox}">Tìm kiếm tên lớp học</TextBox>
+                        <TextBox x:Name="SearchTextBox" Style="{DynamicResource SearchTextBox}" Width="{Binding ActualWidth, ElementName=SearchPlaceHolder}" CaretBrush="{DynamicResource DefaultCaretBrush}" TextChanged="SearchTextBox_TextChanged"></TextBox>
                     </Grid>
                 </StackPanel>
             </Border>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <Border Margin="0 24 0 0" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="24">
-                        <RadioButton Style="{DynamicResource RedirectRadioButton}" IsChecked="True">Lớp học chưa đăng ký tín chỉ</RadioButton>
-                        <RadioButton Style="{DynamicResource RedirectRadioButton}">Lớp học đã đăng ký tín chỉ</RadioButton>
-                    </StackPanel>
 
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" BorderBrush="Transparent" BorderThickness="0">
-                            <DataGrid.Columns>
-                                <DataGridTemplateColumn>
-
-
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </ScrollViewer>
+        <Border Grid.Row="1" Margin="0 24 0 0" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}" Height="auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="24">
+                    <RadioButton x:Name="RadioButtonClassNotRegistered" Style="{DynamicResource RedirectRadioButton}" IsChecked="{x:Null}" Checked="RadioButtonClassNotRegistered_CheckedAndUnchecked" Unchecked="RadioButtonClassNotRegistered_CheckedAndUnchecked">Lớp học chưa đăng ký tín chỉ</RadioButton>
+                    <RadioButton Style="{DynamicResource RedirectRadioButton}">Lớp học đã đăng ký tín chỉ</RadioButton>
                 </StackPanel>
-            </Border>
-        </Grid>
+
+                <DataGrid Style="{DynamicResource DefaultDataGrid}"  Grid.Row="1" Margin="0 0 0 24" x:Name="DataGridRegister" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>Thao tác</DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate DataType="Grid">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Popup Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" AllowsTransparency="True" Margin="12">
+                                            <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" Margin="12">
+                                                <StackPanel HorizontalAlignment="Left" Background="{DynamicResource PrimaryBackgroundColor}">
+                                                    <Button x:Name="BtnRegister" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnRegister_Click">Đăng ký lớp học phần</Button>
+                                                    <TextBlock Text="{Binding IdSemester}"  Height="0"/>
+                                                    <TextBlock Text="{Binding IdMajors}"  Height="0"/>
+                                                    <TextBlock Text="{Binding IdMainClass}"  Height="0"/>
+                                                </StackPanel>
+                                                <Border.Effect>
+                                                    <DropShadowEffect ShadowDepth="0" Direction="90" Opacity="0.4" BlurRadius="18" RenderingBias="Performance" Color="{DynamicResource DefaultColorDropShadowOfPopup}"/>
+                                                </Border.Effect>
+                                            </Border>
+                                        </Popup>
+                                        <Button x:Name="BtnShowPopup" Background="Transparent" BorderThickness="0" Click="BtnShowPopup_Click">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate>
+                                                                <Border Background="Transparent" BorderThickness="0">
+                                                                    <Viewbox Width="24" Margin="0 0 20 0">
+                                                                        <Path Fill="#3663fe" Style="{DynamicResource MenuSvg}"/>
+                                                                    </Viewbox>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn x:Name="abc" Header="Tên lớp học" Width="auto" Binding="{Binding MainClassName}"/>
+                        <DataGridTextColumn Header="Ngành học" Width="auto" Binding="{Binding MajorsName}"/>
+                        <DataGridTextColumn Header="Học kỳ đăng ký" Width="auto" Binding="{Binding SemesterName}"/>
+                        <DataGridTextColumn Header="Khóa học" Width="auto" Binding="{Binding CourseYear}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

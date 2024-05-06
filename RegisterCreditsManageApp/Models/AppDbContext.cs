@@ -48,8 +48,6 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<RegisterCredit> RegisterCredits { get; set; }
 
-    public virtual DbSet<RegisterSubject> RegisterSubjects { get; set; }
-
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<Semester> Semesters { get; set; }
@@ -60,7 +58,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Teacher> Teachers { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }    
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -70,7 +68,9 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("ClassRoom");
 
-            entity.Property(e => e.IdClassRoom).ValueGeneratedNever();
+            entity.Property(e => e.IdClassRoom)
+                .HasMaxLength(10)
+                .IsFixedLength();
             entity.Property(e => e.Name).HasMaxLength(100);
             entity.Property(e => e.Schedule).HasMaxLength(255);
         });
@@ -104,25 +104,14 @@ public partial class AppDbContext : DbContext
         {
             entity.HasKey(e => e.IdRegisterCredits);
 
+            entity.Property(e => e.IdClassRoom)
+                .HasMaxLength(10)
+                .IsFixedLength();
+
             entity.HasOne(d => d.IdClassRoomNavigation).WithMany(p => p.RegisterCredits)
                 .HasForeignKey(d => d.IdClassRoom)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RegisterCredits_ClassRoom");
-
-            entity.HasOne(d => d.IdRegisterSubjectNavigation).WithMany(p => p.RegisterCredits)
-                .HasForeignKey(d => d.IdRegisterSubject)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_RegisterCredits_RegisterSubject");
-        });
-
-        modelBuilder.Entity<RegisterSubject>(entity =>
-        {
-            entity.HasKey(e => e.IdRegisterSubject);
-
-            entity.ToTable("RegisterSubject");
-
-            entity.Property(e => e.IdRegisterSubject).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -211,6 +200,7 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("User");
 
+            entity.Property(e => e.IdUser).ValueGeneratedNever();
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .IsFixedLength();

@@ -17,6 +17,8 @@
     <SolidColorBrush x:Key="DefaultFocusForeground" Color="#3663fe"/>
     <SolidColorBrush x:Key="DefaultBackgroundDataGridColumnHeader" Color="#2f3756"/>
     <SolidColorBrush x:Key="DefaultBackgroundDataGridRowHover" Color="#252d4c"/>
+    <SolidColorBrush x:Key="DefaultCaretBrush" Color="White"/>
+    <Color x:Key="DefaultColorDropShadowOfPopup">#99acc2</Color>
     <!-- End Commom -->
 
     <!-- MainWindow -->

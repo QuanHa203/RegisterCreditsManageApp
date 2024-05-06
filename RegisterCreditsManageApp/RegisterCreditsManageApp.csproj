@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Windows\Alert\Alert.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>

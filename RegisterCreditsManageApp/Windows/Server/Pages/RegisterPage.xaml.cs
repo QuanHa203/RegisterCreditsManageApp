@@ -1,6 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.EntityFrameworkCore;
+using RegisterCreditsManageApp.Models;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
 namespace RegisterCreditsManageApp.Windows.Server.Pages
@@ -10,59 +12,113 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
     /// </summary>
     public partial class RegisterPage : Page
     {
-        private SolidColorBrush colorFocus;
-        private SolidColorBrush colorLostFocus;
         private List<Data> dataGridRegisterList;
+        List<MainClass> mainClassList;
+        List<MainClass> mainClassNotRegisteredList;
+        List<MainClass> mainClassRegisteredList;
+        
         public RegisterPage()
         {
             InitializeComponent();
-            colorFocus = App.Current.Resources["DefaultFocusForeground"] as SolidColorBrush;
-            colorLostFocus = App.Current.Resources["SecondForegroundColor"] as SolidColorBrush;
-            GetDataGridRegister();
+            
+        }
 
-            List<Data> list = new List<Data>()
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {            
+            mainClassNotRegisteredList = new List<MainClass>();
+            mainClassRegisteredList = new List<MainClass>();
+            dataGridRegisterList =  new List<Data>();
+
+            mainClassList = AppDbContext._Context.MainClasses.Include(mainClass => mainClass.IdCurrentRegisterSemesterNavigation)
+                                                                 .Include(mainClass => mainClass.IdMajorsNavigation)
+                                                                 .ToList();
+            var classRoomList = AppDbContext._Context.ClassRooms.ToList();
+            foreach (var mainClass in mainClassList)
             {
-                new Data {Id = 1, ClassName = "ClassName1", CourseName = "CourseName1", MajorsName = "MajorsName1", SemesterName = "SemesterName1"},
-                new Data {Id = 2, ClassName = "ClassName2", CourseName = "CourseName2", MajorsName = "MajorsName2", SemesterName = "SemesterName2"},
-                new Data {Id = 3, ClassName = "ClassName3", CourseName = "CourseName3", MajorsName = "MajorsName3", SemesterName = "SemesterName3"},
-                new Data {Id = 4, ClassName = "ClassName4", CourseName = "CourseName4", MajorsName = "MajorsName4", SemesterName = "SemesterName4"},
-                new Data {Id = 5, ClassName = "ClassName5", CourseName = "CourseName5", MajorsName = "MajorsName5", SemesterName = "SemesterName5"},
-                new Data {Id = 6, ClassName = "ClassName6", CourseName = "CourseName6", MajorsName = "MajorsName6", SemesterName = "SemesterName6"},
-                new Data {Id = 7, ClassName = "ClassName7", CourseName = "CourseName7", MajorsName = "MajorsName7", SemesterName = "SemesterName7"},
-                new Data {Id = 8, ClassName = "ClassName8", CourseName = "CourseName8", MajorsName = "MajorsName8", SemesterName = "SemesterName8"},
-                new Data {Id = 9, ClassName = "ClassName9", CourseName = "CourseName9", MajorsName = "MajorsName9", SemesterName = "SemesterName9"}
-            };
-            DataGridRegister.ItemsSource = list;
+                foreach (var classRoom in classRoomList)
+                {
+                    
+                }
+            }
+            RadioButtonClassNotRegistered.IsChecked = true;
+        }
+
+        private void GetDataGridClassNotRegistered()
+        {            
+            foreach (var mainClass in mainClassList)
+            {
+                Data data = new Data
+                {
+                    IdSemester = mainClass.IdCurrentRegisterSemester.Value,
+                    IdMajors = mainClass.IdMajors,
+                    IdMainClass = mainClass.IdMainClass,
+                    MainClassName = mainClass.Name,
+                    MajorsName = mainClass.IdMajorsNavigation.Name,
+                    SemesterName = mainClass.IdCurrentRegisterSemesterNavigation.Name,
+                    CourseYear = mainClass.CourseYear
+                };
+                dataGridRegisterList.Add(data);
+            }
+            DataGridRegister.ItemsSource = dataGridRegisterList;
+        }
+
+        private void GetDataGridClassRegistered() 
+        {
+            
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (SearchTextBox.Text.Length > 0)
-
                 SearchPlaceHolder.Visibility = Visibility.Hidden;
 
             else
                 SearchPlaceHolder.Visibility = Visibility.Visible;
         }
 
-        private void DataGridCell_PreviewGotKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e)
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            e.Handled = true;
+            Button btn = sender as Button;
+            var parent = btn.Parent as Panel;
+            var idSemesterTextBlock = parent.Children[1] as TextBlock;
+            var idMajorsTextBlock = parent.Children[2] as TextBlock;
+            var idClassNameTextBlock = parent.Children[3] as TextBlock;
+
+            int idSemester = Convert.ToInt32(idSemesterTextBlock.Text);
+            int idMajors = Convert.ToInt32(idMajorsTextBlock.Text);
+            int idMainClass = Convert.ToInt32(idClassNameTextBlock.Text);
+            new RegisterClassesRoomWindow(idSemester, idMajors, idMainClass).ShowDialog();
         }
 
-        private void GetDataGridRegister()
+        private void BtnShowPopup_Click(object sender, RoutedEventArgs e)
         {
-            dataGridRegisterList = new List<Data>();
-            DataGridRegister.ItemsSource = dataGridRegisterList;
+            Button btn = sender as Button;            
+            var parent = btn.Parent as Panel;
+            var popup = parent.Children[0] as Popup;
+            popup.IsOpen = true;            
         }
-    }
 
-    public class Data
-    {
-        public int Id { get; set; }
-        public string ClassName { get; set; }
-        public string MajorsName { get; set; }
-        public string SemesterName { get; set; }
-        public string CourseName { get; set; }
+        private void RadioButtonClassNotRegistered_CheckedAndUnchecked(object sender, RoutedEventArgs e)
+        {
+            if(RadioButtonClassNotRegistered.IsChecked == true)
+            {
+                GetDataGridClassNotRegistered();
+            }
+            else if (RadioButtonClassNotRegistered.IsChecked == false)
+            {
+                MessageBox.Show("Hello");
+            }
+        }
+
+        public class Data
+        {
+            public int IdSemester { get; set; }
+            public int IdMajors { get; set; }
+            public int IdMainClass { get; set; }
+            public string MainClassName { get; set; }
+            public string MajorsName { get; set; }
+            public string SemesterName { get; set; }
+            public int CourseYear { get; set; }
+        }
     }
 }
