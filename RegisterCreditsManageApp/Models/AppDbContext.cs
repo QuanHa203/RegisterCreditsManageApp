@@ -46,9 +46,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Major> Majors { get; set; }
 
-    public virtual DbSet<RegisterCredit> RegisterCredits { get; set; }
-
-    public virtual DbSet<RegisterSubject> RegisterSubjects { get; set; }
+    public virtual DbSet<RegisterCredit> RegisterCredits { get; set; }    
 
     public virtual DbSet<Role> Roles { get; set; }
 
@@ -108,21 +106,6 @@ public partial class AppDbContext : DbContext
                 .HasForeignKey(d => d.IdClassRoom)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RegisterCredits_ClassRoom");
-
-            entity.HasOne(d => d.IdRegisterSubjectNavigation).WithMany(p => p.RegisterCredits)
-                .HasForeignKey(d => d.IdRegisterSubject)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_RegisterCredits_RegisterSubject");
-        });
-
-        modelBuilder.Entity<RegisterSubject>(entity =>
-        {
-            entity.HasKey(e => e.IdRegisterSubject);
-
-            entity.ToTable("RegisterSubject");
-
-            entity.Property(e => e.IdRegisterSubject).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Role>(entity =>

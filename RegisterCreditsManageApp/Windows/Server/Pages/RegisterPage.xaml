@@ -113,7 +113,6 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="24">
                     <RadioButton Style="{DynamicResource RedirectRadioButton}" IsChecked="True">Lớp học chưa đăng ký tín chỉ</RadioButton>
                     <RadioButton Style="{DynamicResource RedirectRadioButton}">Lớp học đã đăng ký tín chỉ</RadioButton>
@@ -131,7 +130,8 @@
                                                 <StackPanel HorizontalAlignment="Left">
                                                     <Button x:Name="BtnRegister" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnRegister_Click">Đăng ký</Button>
                                                     <Button Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand">Xóa</Button>
-                                                    <TextBlock Text="{Binding Id}"  MaxHeight="0"/>
+                                                    <TextBlock Text="{Binding IdSemester}"  MaxHeight="0"/>
+                                                    <TextBlock Text="{Binding IdMajors}"  MaxHeight="0"/>
                                                 </StackPanel>
                                                 <Border.Effect>
                                                     <DropShadowEffect ShadowDepth="5" Direction="320" Opacity="0.5" BlurRadius="10" RenderingBias="Performance"/>
@@ -162,7 +162,7 @@
                         <DataGridTextColumn x:Name="abc" Header="Tên lớp học" Width="auto" Binding="{Binding ClassName}"/>
                         <DataGridTextColumn Header="Ngành học" Width="auto" Binding="{Binding MajorsName}"/>
                         <DataGridTextColumn Header="Học kỳ đăng ký" Width="auto" Binding="{Binding SemesterName}"/>
-                        <DataGridTextColumn Header="Khóa học" Width="auto" Binding="{Binding CourseName}"/>
+                        <DataGridTextColumn Header="Khóa học" Width="auto" Binding="{Binding CourseYear}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

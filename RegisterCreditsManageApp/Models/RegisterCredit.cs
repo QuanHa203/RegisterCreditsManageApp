@@ -11,7 +11,7 @@ public partial class RegisterCredit
 
     public int IdClassRoom { get; set; }
 
-    public int IdRegisterSubject { get; set; }
+    public int IdSubject { get; set; }
 
     public int IdTeacher { get; set; }
 
@@ -19,5 +19,5 @@ public partial class RegisterCredit
 
     public virtual ClassRoom IdClassRoomNavigation { get; set; } = null!;
 
-    public virtual RegisterSubject IdRegisterSubjectNavigation { get; set; } = null!;
+    public virtual Subject IdSubjectNavigation { get; set; } = null!;
 }

@@ -1,6 +1,6 @@
-﻿using RegisterCreditsManageApp.Windows.Alert;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using Microsoft.EntityFrameworkCore;
+using RegisterCreditsManageApp.Models;
+using RegisterCreditsManageApp.Windows.Alert;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -24,20 +24,6 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             colorFocus = App.Current.Resources["DefaultFocusForeground"] as SolidColorBrush;
             colorLostFocus = App.Current.Resources["SecondForegroundColor"] as SolidColorBrush;
             GetDataGridRegister();
-
-            List<Data> list = new List<Data>()
-            {
-                new Data {Id = 1, ClassName = "ClassName1", CourseName = "CourseName1", MajorsName = "MajorsName1", SemesterName = "SemesterName1"},
-                new Data {Id = 2, ClassName = "ClassName2", CourseName = "CourseName2", MajorsName = "MajorsName2", SemesterName = "SemesterName2"},
-                new Data {Id = 3, ClassName = "ClassName3", CourseName = "CourseName3", MajorsName = "MajorsName3", SemesterName = "SemesterName3"},
-                new Data {Id = 4, ClassName = "ClassName4", CourseName = "CourseName4aaaaaaaaaaaaaaaaaaaaaa", MajorsName = "MajorsName4", SemesterName = "SemesterName4"},
-                new Data {Id = 5, ClassName = "ClassName5", CourseName = "CourseName5", MajorsName = "MajorsName5", SemesterName = "SemesterName5"},
-                new Data {Id = 6, ClassName = "ClassName6", CourseName = "CourseName6", MajorsName = "MajorsName6", SemesterName = "SemesterName6"},
-                new Data {Id = 7, ClassName = "ClassName7", CourseName = "CourseName7", MajorsName = "MajorsName7", SemesterName = "SemesterName7"},
-                new Data {Id = 8, ClassName = "ClassName8", CourseName = "CourseName8", MajorsName = "MajorsName8", SemesterName = "SemesterName8"},
-                new Data {Id = 9, ClassName = "ClassName9", CourseName = "CourseName9", MajorsName = "MajorsName9", SemesterName = "SemesterName9"}
-            };
-            DataGridRegister.ItemsSource = list;
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -52,6 +38,22 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         private void GetDataGridRegister()
         {
             dataGridRegisterList = new List<Data>();
+            var mainClassList = AppDbContext._Context.MainClasses.Include(mainClass => mainClass.IdCurrentRegisterSemesterNavigation)
+                                                                 .Include(mainClass => mainClass.IdMajorsNavigation)
+                                                                 .ToList();
+            foreach (var mainClass in mainClassList)
+            {
+                Data data = new Data
+                {
+                    IdSemester = mainClass.IdCurrentRegisterSemester.Value,
+                    IdMajors = mainClass.IdMajors,
+                    ClassName = mainClass.Name,
+                    MajorsName = mainClass.IdMajorsNavigation.Name,
+                    SemesterName = mainClass.IdCurrentRegisterSemesterNavigation.Name,
+                    CourseYear = mainClass.CourseYear
+                };
+                dataGridRegisterList.Add(data);
+            }
             DataGridRegister.ItemsSource = dataGridRegisterList;
         }
 
@@ -59,8 +61,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         {
             Button btn = sender as Button;
             var parent = btn.Parent as Panel;
-            var id = parent.Children[parent.Children.Count - 1] as TextBlock;
-            MessageBox.Show($"Click {id.Text}");
+            var idSemesterTextBlock = parent.Children[parent.Children.Count - 2] as TextBlock;
+            var idMajorsTextBlock = parent.Children[parent.Children.Count - 1] as TextBlock;
+            AlertBox.Show("Hello");
+            MessageBox.Show($"IdSemester: {idSemesterTextBlock.Text}");
+            MessageBox.Show($"IdMajors: {idMajorsTextBlock.Text}");
         }
 
         private void BtnShowPopup_Click(object sender, RoutedEventArgs e)
@@ -74,10 +79,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
 
     public class Data
     {
-        public int Id { get; set; }
+        public int IdSemester { get; set; }
+        public int IdMajors { get; set; }
         public string ClassName { get; set; }
         public string MajorsName { get; set; }
         public string SemesterName { get; set; }
-        public string CourseName { get; set; }
+        public int CourseYear { get; set; }
     }
 }
