@@ -11,11 +11,11 @@
         AllowsTransparency="True"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="AlertWindow" Height="150" Width="250">
+        Title="AlertWindow" Height="200" Width="300">
 
     <Grid Background="{DynamicResource PrimaryBackgroundColor}" >
         <Grid.Clip>
-            <RectangleGeometry Rect="0,0,250,150" RadiusX="10" RadiusY="10"/>
+            <RectangleGeometry Rect="0,0,300,200" RadiusX="10" RadiusY="10"/>
 
         </Grid.Clip>
 
