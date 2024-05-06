@@ -20,11 +20,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         public RegisterPage()
         {
             InitializeComponent();
+            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            RadioButtonClassNotRegistered.IsChecked = true;
+        {            
             mainClassNotRegisteredList = new List<MainClass>();
             mainClassRegisteredList = new List<MainClass>();
             dataGridRegisterList =  new List<Data>();
@@ -37,9 +37,10 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             {
                 foreach (var classRoom in classRoomList)
                 {
-                    if()
+                    
                 }
             }
+            RadioButtonClassNotRegistered.IsChecked = true;
         }
 
         private void GetDataGridClassNotRegistered()
@@ -102,7 +103,7 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             {
                 GetDataGridClassNotRegistered();
             }
-            else
+            else if (RadioButtonClassNotRegistered.IsChecked == false)
             {
                 MessageBox.Show("Hello");
             }
