@@ -32,7 +32,7 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                 new Data {Id = 8, ClassName = "ClassName8", CourseName = "CourseName8", MajorsName = "MajorsName8", SemesterName = "SemesterName8"},
                 new Data {Id = 9, ClassName = "ClassName9", CourseName = "CourseName9", MajorsName = "MajorsName9", SemesterName = "SemesterName9"}
             };
-            DataGridRegister.ItemsSource = list;
+            DataGridRegister.ItemsSource = list;    
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)

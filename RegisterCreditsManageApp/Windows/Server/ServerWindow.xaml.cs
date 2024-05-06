@@ -1,7 +1,9 @@
 ﻿using MaterialDesignThemes.Wpf;
 using Microsoft.Data.SqlClient;
+using Microsoft.Identity.Client;
 using RegisterCreditsManageApp.Windows.Alert;
 using RegisterCreditsManageApp.Windows.Server.Pages;
+using System.Net.Security;
 using System.Windows;
 
 
@@ -12,6 +14,7 @@ namespace RegisterCreditsManageApp.Windows.Server
     /// </summary>
     public partial class ServerWindow : MainWindow
     {
+        
         public ServerWindow() : base()
         {
             InitializeComponent();            
@@ -39,7 +42,7 @@ namespace RegisterCreditsManageApp.Windows.Server
 
         private void NotifyBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            AlertBox.Show("a","a",AlertButton.OKCancel,AlertIcon.None);
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)

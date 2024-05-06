@@ -143,6 +143,62 @@ namespace RegisterCreditsManageApp.Windows.Alert
 
             switch (icon)
             {
+                case AlertIcon.None:
+                {
+                        switch (button)
+                        {
+                            case AlertButton.OK:
+                                {
+                                    Style tbnStyle = App.Current.Resources["AlertBtnOK"] as Style;
+                                    alertBtn1.Style = tbnStyle;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+
+                                    alertBtn2.Visibility = Visibility.Collapsed;
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.YesNo:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnYES"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.Yes;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnNO"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.No;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.OKCancel:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnOK"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnCancel"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.Cancel;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                        }
+                        break;
+                }
                 case AlertIcon.Information:
                 {
                         Style alerticonStyle = App.Current.Resources["InfoSvg"] as Style;
@@ -441,8 +497,12 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 }
                         }
                         break;
+
+                        
+                       
                     }
             }
+           
         }
 
         public AlertWindow(string alertText, string caption, AlertButton button, AlertIcon icon, AlertResult defaultResult)
@@ -451,73 +511,177 @@ namespace RegisterCreditsManageApp.Windows.Alert
 
             Text.Text = alertText;
             alertCaption.Text = caption;
-            switch (button)
-            {
-                case AlertButton.OK:
-                    {
-
-
-                        Style tbnStyle = App.Current.Resources["AlertBtnOK"] as Style;
-                        alertBtn1.Style = tbnStyle;
-                        alertBtn1.Click += (sender, e) => {
-                            AlertBox.AlertResult = AlertResult.OK;
-                            this.Close();
-                        };
-
-                        alertBtn2.Visibility = Visibility.Collapsed;
-                        alertBtn3.Visibility = Visibility.Collapsed;
-                        break;
-                    }
-                case AlertButton.YesNo:
-                    {
-                        Style tbnStyle1 = App.Current.Resources["AlertBtnYES"] as Style;
-                        alertBtn1.Style = tbnStyle1;
-                        alertBtn1.Click += (sender, e) =>
-                        {
-                            AlertBox.AlertResult = AlertResult.Yes;
-                            this.Close();
-                        };
-                        Style tbnStyle2 = App.Current.Resources["AlertBtnNO"] as Style;
-                        alertBtn2.Style = tbnStyle2;
-                        alertBtn2.Click += (sender, e) =>
-                        {
-                            AlertBox.AlertResult = AlertResult.No;
-                            this.Close();
-                        };
-                        alertBtn3.Visibility = Visibility.Collapsed;
-                        break;
-                    }
-                case AlertButton.OKCancel:
-                    {
-                        Style tbnStyle1 = App.Current.Resources["AlertBtnOK"] as Style;
-                        alertBtn1.Style = tbnStyle1;
-                        alertBtn1.Click += (sender, e) => {
-                            AlertBox.AlertResult = AlertResult.OK;
-                            this.Close();
-                        };
-                        Style tbnStyle2 = App.Current.Resources["AlertBtnCancel"] as Style;
-                        alertBtn2.Style = tbnStyle2;
-                        alertBtn2.Click += (sender, e) => {
-                            AlertBox.AlertResult = AlertResult.Cancel;
-                            this.Close();
-                        };
-                        alertBtn3.Visibility = Visibility.Collapsed;
-                        break;
-                    }
-            }
-
             switch (icon)
             {
+                case AlertIcon.None:
+                    {
+                        switch (button)
+                        {
+                            case AlertButton.OK:
+                                {
+                                    Style tbnStyle = App.Current.Resources["AlertBtnOK"] as Style;
+                                    alertBtn1.Style = tbnStyle;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+
+                                    alertBtn2.Visibility = Visibility.Collapsed;
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.YesNo:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnYES"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.Yes;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnNO"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.No;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.OKCancel:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnOK"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnCancel"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.Cancel;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                        }
+                        break;
+                    }
                 case AlertIcon.Information:
                     {
                         Style alerticonStyle = App.Current.Resources["InfoSvg"] as Style;
                         alertIcon.Style = alerticonStyle;
+                        switch (button)
+                        {
+                            case AlertButton.OK:
+                                {
+                                    Style tbnStyle = App.Current.Resources["AlertBtnOK"] as Style;
+                                    alertBtn1.Style = tbnStyle;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+
+                                    alertBtn2.Visibility = Visibility.Collapsed;
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.YesNo:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnYES"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.Yes;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnNO"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.No;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.OKCancel:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnOK"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnCancel"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.Cancel;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                        }
                         break;
                     }
                 case AlertIcon.Question:
                     {
                         Style alerticonStyle = App.Current.Resources["QuestionSvg"] as Style;
                         alertIcon.Style = alerticonStyle;
+                        switch (button)
+                        {
+                            case AlertButton.OK:
+                                {
+                                    Style tbnStyle = App.Current.Resources["AlertBtnOK"] as Style;
+                                    alertBtn1.Style = tbnStyle;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+                                    alertBtn2.Visibility = Visibility.Collapsed;
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.YesNo:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnYES"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.Yes;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnNO"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.No;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.OKCancel:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnOK"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnCancel"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.Cancel;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                        }
                         break;
                     }
                 case AlertIcon.Warning:
@@ -526,6 +690,58 @@ namespace RegisterCreditsManageApp.Windows.Alert
                         alertIcon.Style = alerticonStyle;
                         Brush fg = App.Current.Resources["AlertCaption_Warning"] as Brush;
                         alertCaption.Foreground = fg;
+                        switch (button)
+                        {
+                            case AlertButton.OK:
+                                {
+                                    Style tbnStyle = App.Current.Resources["AlertBtnOK_Warning"] as Style;
+                                    alertBtn1.Style = tbnStyle;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+
+                                    alertBtn2.Visibility = Visibility.Collapsed;
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.YesNo:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnYES_Warning"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.Yes;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnNO_Warning"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.No;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.OKCancel:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnOK_Warning"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnCancel_Warning"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.Cancel;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                        }
                         break;
                     }
                 case AlertIcon.Error:
@@ -534,6 +750,60 @@ namespace RegisterCreditsManageApp.Windows.Alert
                         alertIcon.Style = alerticonStyle;
                         Brush fg = App.Current.Resources["AlertCaption_Error"] as Brush;
                         alertCaption.Foreground = fg;
+                        switch (button)
+                        {
+                            case AlertButton.OK:
+                                {
+
+
+                                    Style tbnStyle = App.Current.Resources["AlertBtnOK_Error"] as Style;
+                                    alertBtn1.Style = tbnStyle;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+
+                                    alertBtn2.Visibility = Visibility.Collapsed;
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.YesNo:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnYES_Error"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.Yes;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnNO_Error"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.No;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.OKCancel:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnOK_Error"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnCancel_Error"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.Cancel;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                        }
                         break;
                     }
                 case AlertIcon.Success:
@@ -542,9 +812,65 @@ namespace RegisterCreditsManageApp.Windows.Alert
                         alertIcon.Style = alerticonStyle;
                         Brush fg = App.Current.Resources["AlertCaption_Success"] as Brush;
                         alertCaption.Foreground = fg;
-                        break;
-                    }
+                        switch (button)
+                        {
+                            case AlertButton.OK:
+                                {
 
+
+                                    Style tbnStyle = App.Current.Resources["AlertBtnOK_Success"] as Style;
+                                    alertBtn1.Style = tbnStyle;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+
+                                    alertBtn2.Visibility = Visibility.Collapsed;
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.YesNo:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnYES_Success"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.Yes;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnNO_Success"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
+                                        AlertBox.AlertResult = AlertResult.No;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                            case AlertButton.OKCancel:
+                                {
+                                    Style tbnStyle1 = App.Current.Resources["AlertBtnOK_Success"] as Style;
+                                    alertBtn1.Style = tbnStyle1;
+                                    alertBtn1.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.OK;
+                                        this.Close();
+                                    };
+                                    Style tbnStyle2 = App.Current.Resources["AlertBtnCancel_Success"] as Style;
+                                    alertBtn2.Style = tbnStyle2;
+                                    alertBtn2.Click += (sender, e) => {
+                                        AlertBox.AlertResult = AlertResult.Cancel;
+                                        this.Close();
+                                    };
+                                    alertBtn3.Visibility = Visibility.Collapsed;
+                                    break;
+                                }
+                        }
+                        break;
+
+
+
+                    }
             }
         }
             private void xAlertBtn(object sender, RoutedEventArgs e)
