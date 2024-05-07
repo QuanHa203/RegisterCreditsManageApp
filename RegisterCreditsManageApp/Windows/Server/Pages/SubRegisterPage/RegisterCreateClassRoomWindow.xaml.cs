@@ -44,10 +44,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                 {
                     IdClassRoom = idClassRoom,
                     IdMainClass = mainClass.IdMainClass,
-                    IdSubject = idSubject,
+                    IdSubject = idSubject,         
+                    IdSemester = mainClass.IdCurrentRegisterSemester,
                     Name = mainClass.Name,
                     Schedule = schedule,
-                    Status = RadioButtonStatusOpen.IsChecked.HasValue,
+                    Status = RadioButtonStatusOpen.IsChecked.Value,
                     Capacity = Convert.ToInt32(numberOfCapacity),
                     CurrentStudent = mainClass.Students.Count,
                     StartRegisterDate = startRegister,

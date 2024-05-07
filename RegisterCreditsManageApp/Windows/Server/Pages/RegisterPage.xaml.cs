@@ -12,44 +12,58 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
     /// </summary>
     public partial class RegisterPage : Page
     {
-        private List<Data> dataGridRegisterList;
-        List<MainClass> mainClassList;
+        private List<Data> dataGridRegisterList;        
         List<MainClass> mainClassNotRegisteredList;
         List<MainClass> mainClassRegisteredList;
         
         public RegisterPage()
         {
+            LoadDataMainCLass();
             InitializeComponent();
-            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
-        {            
-            mainClassNotRegisteredList = new List<MainClass>();
-            mainClassRegisteredList = new List<MainClass>();
-            dataGridRegisterList =  new List<Data>();
-
-            mainClassList = AppDbContext._Context.MainClasses.Include(mainClass => mainClass.IdCurrentRegisterSemesterNavigation)
-                                                                 .Include(mainClass => mainClass.IdMajorsNavigation)
-                                                                 .ToList();
-            var classRoomList = AppDbContext._Context.ClassRooms.ToList();
-            foreach (var mainClass in mainClassList)
-            {
-                foreach (var classRoom in classRoomList)
-                {
-                    
-                }
-            }
+        {
             RadioButtonClassNotRegistered.IsChecked = true;
         }
 
+        private void LoadDataMainCLass()
+        {
+            string sqlMainClassNotRegistered = @"SELECT mc.*
+                            FROM MainClass mc
+                            WHERE EXISTS (
+                                SELECT s.IdSubject
+                                FROM Subject s
+                                WHERE s.IdSemester = mc.IdCurrentRegisterSemester
+                                EXCEPT
+                                SELECT cr.IdSubject
+                                FROM ClassRoom cr
+                                WHERE cr.IdMainClass = mc.IdMainClass AND cr.IdSemester = mc.IdCurrentRegisterSemester)";
+            string sqlMainClassRegistered = @"SELECT mc.*
+                            FROM MainClass mc
+                            WHERE NOT EXISTS (
+                                SELECT s.IdSubject
+                                FROM Subject s
+                                WHERE s.IdSemester = mc.IdCurrentRegisterSemester
+                                EXCEPT
+                                SELECT cr.IdSubject
+                                FROM ClassRoom cr
+                                WHERE cr.IdMainClass = mc.IdMainClass AND cr.IdSemester = mc.IdCurrentRegisterSemester)";
+            
+            mainClassNotRegisteredList = AppDbContext._Context.MainClasses.FromSqlRaw(sqlMainClassNotRegistered).Include(mc => mc.IdCurrentRegisterSemesterNavigation).Include(mc => mc.IdMajorsNavigation).ToList();
+            mainClassRegisteredList = AppDbContext._Context.MainClasses.FromSqlRaw(sqlMainClassRegistered).Include(mc => mc.IdCurrentRegisterSemesterNavigation).Include(mc => mc.IdMajorsNavigation).ToList();
+            dataGridRegisterList = new List<Data>();            
+        }
+
         private void GetDataGridClassNotRegistered()
-        {            
-            foreach (var mainClass in mainClassList)
+        {
+            dataGridRegisterList.Clear();
+            DataGridRegister.ItemsSource = null;
+            foreach (var mainClass in mainClassNotRegisteredList)
             {
                 Data data = new Data
                 {
-                    IdSemester = mainClass.IdCurrentRegisterSemester.Value,
+                    IdSemester = mainClass.IdCurrentRegisterSemester,
                     IdMajors = mainClass.IdMajors,
                     IdMainClass = mainClass.IdMainClass,
                     MainClassName = mainClass.Name,
@@ -64,13 +78,30 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
 
         private void GetDataGridClassRegistered() 
         {
-            
+            dataGridRegisterList.Clear();
+            DataGridRegister.ItemsSource = null;
+            foreach (var mainClass in mainClassRegisteredList)
+            {
+                Data data = new Data
+                {
+                    IdSemester = mainClass.IdCurrentRegisterSemester,
+                    IdMajors = mainClass.IdMajors,
+                    IdMainClass = mainClass.IdMainClass,
+                    MainClassName = mainClass.Name,
+                    MajorsName = mainClass.IdMajorsNavigation.Name,
+                    SemesterName = mainClass.IdCurrentRegisterSemesterNavigation.Name,
+                    CourseYear = mainClass.CourseYear
+                };
+                dataGridRegisterList.Add(data);
+            }
+            DataGridRegister.ItemsSource = dataGridRegisterList;
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (SearchTextBox.Text.Length > 0)
                 SearchPlaceHolder.Visibility = Visibility.Hidden;
+
             else
                 SearchPlaceHolder.Visibility = Visibility.Visible;
         }
@@ -86,7 +117,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             int idSemester = Convert.ToInt32(idSemesterTextBlock.Text);
             int idMajors = Convert.ToInt32(idMajorsTextBlock.Text);
             int idMainClass = Convert.ToInt32(idClassNameTextBlock.Text);
-            new RegisterClassesRoomWindow(idSemester, idMajors, idMainClass).ShowDialog();
+
+            if (RadioButtonClassNotRegistered.IsChecked == true)
+                new RegisterClassesRoomNotRegisterWindow(idSemester, idMajors, idMainClass).ShowDialog();
+            else
+                new RegisterClassesRoomRegisteredWindow(idSemester, idMajors, idMainClass).ShowDialog();
         }
 
         private void BtnShowPopup_Click(object sender, RoutedEventArgs e)
@@ -105,7 +140,7 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             }
             else if (RadioButtonClassNotRegistered.IsChecked == false)
             {
-                MessageBox.Show("Hello");
+                GetDataGridClassRegistered();
             }
         }
 

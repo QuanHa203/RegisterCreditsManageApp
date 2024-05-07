@@ -7,7 +7,7 @@ public partial class RegisterCredit
 {
     public int IdRegisterCredits { get; set; }
 
-    public int IdStudent { get; set; }
+    public string IdStudent { get; set; } = null!;
 
     public string IdClassRoom { get; set; } = null!;
 

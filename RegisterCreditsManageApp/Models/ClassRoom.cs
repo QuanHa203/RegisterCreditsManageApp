@@ -11,6 +11,8 @@ public partial class ClassRoom
 
     public int IdSubject { get; set; }
 
+    public int IdSemester { get; set; }
+
     public string Name { get; set; } = null!;
 
     public string Schedule { get; set; } = null!;

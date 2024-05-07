@@ -6,9 +6,100 @@
       xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Client.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="StudyProgramPage">
+      Title="StudyProgramPage"
+      Background="#151934">
 
+    
     <Grid>
-        <TextBlock Background="#ccc">This is ProgramStudyPage</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70*"></RowDefinition>
+            <RowDefinition Height="380*"/>
+        </Grid.RowDefinitions>
+
+        <!--Operation grid-->
+        <Grid Grid.Row="0" Background="#151934" Margin="40,10,40,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!--Search section-->
+                <Grid Grid.Column="0" HorizontalAlignment="Left">
+                    <Border Width="270" Height="45" Background="#1c2340" BorderThickness="0" CornerRadius="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"></ColumnDefinition>
+                                <ColumnDefinition Width="210*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Margin="0,0,10,0">
+                                <Viewbox Width="30" Height="30" HorizontalAlignment="Left" Margin="10 0 0 0">
+                                    <ContentControl>
+                                        <Path Style="{DynamicResource SearchSvg}" Fill="#3259e0"/>
+                                    </ContentControl>
+                                </Viewbox>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <TextBox x:Name="FindMajorTextBox"
+                                         Background="#1c2340" 
+                                         BorderThickness="0" 
+                                         Margin="0 5 15 5" 
+                                         Text="Tìm kiếm tên ngành học"
+                                         FontSize="16"
+                                         FontFamily="Montserrat"
+                                         Foreground="#92a8c2"
+                                         VerticalAlignment="Center"
+                                         >
+                                </TextBox>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <!--add button section-->
+                <Grid Grid.Column="1">
+                    <Button x:Name="NavigateTo" Width="100" Height="40" HorizontalAlignment="Right" Background="#1c2340">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"/>
+                                <ColumnDefinition Width="60*"/>
+                            </Grid.ColumnDefinitions>
+                            <!--add svg column-->
+                            <Grid Grid.Column="0">
+                                <Viewbox Width="25" Height="25">
+                                    <ContentControl>
+                                        <Path Style="{DynamicResource AddFileSvg}" Fill="#3259e0"/>
+                                    </ContentControl>
+                                </Viewbox>
+                            </Grid>
+                            
+                            <!--Content column-->
+                            <Grid Grid.Column="1">
+                                <TextBlock Text="Thêm" 
+                                           Foreground="#ccccbc" 
+                                           FontSize="16" 
+                                           FontFamily="Montserrat SemiBold" 
+                                           VerticalAlignment="Center" 
+                                           Margin="5 0 0 0"/>
+                            </Grid>
+                        </Grid>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    
+                                </Border>
+                                
+                            </ControlTemplate>
+                            
+                        </Button.Template>
+                        
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!--List Grid-->
+        <Grid Grid.Row="1" Background="#151934" Margin="40,40,40,40"/>
     </Grid>
 </Page>

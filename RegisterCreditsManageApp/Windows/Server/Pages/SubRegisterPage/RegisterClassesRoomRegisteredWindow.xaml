@@ -1,13 +1,14 @@
-﻿<Window x:Class="RegisterCreditsManageApp.Windows.Server.Pages.RegisterClassesRoomWindow"
+﻿<Window x:Class="RegisterCreditsManageApp.Windows.Server.Pages.RegisterClassesRoomRegisteredWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages"
         mc:Ignorable="d"
         Background="{DynamicResource PrimaryBackgroundColor}"        
         FontFamily="{DynamicResource DefaultFontFamily}"
         Loaded="Window_Loaded"
-        Title="RegisterClassesRoomWindow" Height="450" Width="800">
+        Title="RegisterClassesRoomRegisteredWindow" Height="450" Width="800">
     <Window.Resources>
         <Style x:Key="BtnExit" TargetType="Button">
             <Setter Property="FontSize" Value="16"/>
@@ -19,10 +20,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
-                                Padding="{TemplateBinding Padding}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{DynamicResource DefaultSecondaryCornerRadius}"
-                                BorderBrush="{TemplateBinding BorderBrush}">
+                            Padding="{TemplateBinding Padding}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{DynamicResource DefaultSecondaryCornerRadius}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -44,7 +45,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0"  Margin="32 32 32 0">
-            <TextBlock Text="Lớp học phần cần đăng ký">
+            <TextBlock Text="Lớp học phần đã đăng ký">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="#3663fe"/>
@@ -67,9 +68,8 @@
                                         <Popup Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" AllowsTransparency="True">
                                             <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" Margin="12">
                                                 <StackPanel HorizontalAlignment="Left">
-                                                    <Button x:Name="BtnAddClassRoom" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnAddClassRoom_Click">Tạo lớp học phần</Button>
-                                                    <TextBlock Text="{Binding IdSubject}" Height="0" Visibility="Hidden"/>
-                                                    <TextBlock Text="{Binding IdMainClass}" Height="0" Visibility="Hidden"/>
+                                                    <Button x:Name="BtnEditClassRoom" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnEditClassRoom_Click">Chỉnh sửa lớp học phần</Button>
+                                                    <TextBlock Text="{Binding IdClassRoom}" Height="0" Visibility="Hidden"/>
                                                 </StackPanel>
                                                 <Border.Effect>
                                                     <DropShadowEffect ShadowDepth="0" Direction="90" Opacity="0.4" BlurRadius="18" RenderingBias="Performance" Color="{DynamicResource DefaultColorDropShadowOfPopup}"/>
@@ -109,4 +109,4 @@
             <Button Name="BtnExit" Style="{DynamicResource BtnExit}" Foreground="#f03537" BorderBrush="#f03537" Padding="12" Click="BtnExit_Click">Thoát</Button>
         </StackPanel>
     </Grid>
-</Window>    
+</Window>

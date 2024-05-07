@@ -9,7 +9,6 @@
     <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#ffffff" />
     <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#f1f1f1"/>
 
-
     <SolidColorBrush x:Key="SearchIconFill" Color="#3663fe"/>
     <FontFamily x:Key="DefaultFontFamily">Montserrat</FontFamily>
     <CornerRadius x:Key="DefaultPrimaryCornerRadius">12</CornerRadius>
@@ -47,61 +46,351 @@
     <Color x:Key="LeftMenuBtnGradientStop0">#993867FF</Color>
     <Color x:Key="LeftMenuBtnGradientStop1">#fff</Color>
     <!-- End MainWindow -->
-
-    <!-- Alert Window -->
-    <Style x:Key="AlertDangerBtn" TargetType="Button">
-        <Setter Property="Foreground" Value="#fff"/>
+    
+    <!--AlertWindow-->
+    <SolidColorBrush x:Key="AlertCaption_Warning">#333333</SolidColorBrush>
+    <SolidColorBrush x:Key="AlertCaption_Error">#333333</SolidColorBrush>
+    <SolidColorBrush x:Key="AlertCaption_Success">#333333</SolidColorBrush>
+    <SolidColorBrush x:Key="AlertCaption">#333333</SolidColorBrush>
+    <SolidColorBrush x:Key="xAlertBtn">#d0dbe8</SolidColorBrush>
+    <Style x:Key="AlertBtnOK" TargetType="Button">
+        
+        <Setter Property="Content" Value="OK"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff" />
+        <Setter Property="Background" Value="#3663fd"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#3663fd"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
-                    <Border CornerRadius="4" Background="#f03537" Width="auto" Height="30" HorizontalAlignment="Center">
-
-                        <ContentPresenter>
-                            <TextBlock x:Name="Text" Padding="12 0 12 0" HorizontalAlignment="Center" VerticalAlignment="Center">Ok</TextBlock>
-                        </ContentPresenter>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style x:Key="AlertInfoBtn" TargetType="Button">
-        <Setter Property="Foreground" Value="#fff"/>
+    <Style x:Key="AlertBtnYES" TargetType="Button">
+        <Setter Property="Content" Value="Yes"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff" />
+        <Setter Property="Background" Value="#3663fd"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#3663fd"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
-                    <Border CornerRadius="4" Background="#3663fd" Width="auto" Height="30" HorizontalAlignment="Center">
-                        <TextBlock Padding="12 0 12 0" HorizontalAlignment="Center" VerticalAlignment="Center">Ok</TextBlock>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style x:Key="AlertWarningBtn" TargetType="Button">
-        <Setter Property="Foreground" Value="#fff"/>
+    <Style x:Key="AlertBtnNO" TargetType="Button">
+        <Setter Property="Content" Value="No"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="Background" Value="#fff"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#d0dbe8"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
-                    <Border CornerRadius="4" Background="#ffae00" Width="auto" Height="30" HorizontalAlignment="Center">
-                        <TextBlock Padding="12 0 12 0" HorizontalAlignment="Center" VerticalAlignment="Center">Ok</TextBlock>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style x:Key="AlertSuccessBtn" TargetType="Button">
-        <Setter Property="Foreground" Value="#fff"/>
+    <Style x:Key="AlertBtnCancel" TargetType="Button">
+        <Setter Property="Content" Value="Cancel"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="Background" Value="#fff"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#d0dbe8"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
-                    <Border CornerRadius="4" Background="#1eff0f" Width="auto" Height="30" HorizontalAlignment="Center">
-                        <TextBlock Padding="12 0 12 0" HorizontalAlignment="Center" VerticalAlignment="Center">Ok</TextBlock>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    <!-- Alert Window -->
+       <!--WarningBTN-->
+    <Style x:Key="AlertBtnOK_Warning" TargetType="Button">
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#ffd270"/>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Content" Value="OK"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff" />
+        <Setter Property="Background" Value="#ffae00"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#ffae00"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AlertBtnYES_Warning" TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#ffd270"/>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Content" Value="Yes"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff" />
+        <Setter Property="Background" Value="#ffae00"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#ffae00"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AlertBtnNO_Warning" TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#bcbcbc"/>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Content" Value="No"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="Background" Value="#fff"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#d0dbe8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AlertBtnCancel_Warning" TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#bcbcbc"/>
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="Content" Value="Cancel"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="Background" Value="#fff"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#d0dbe8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--ErrorBTN -->
+    <Style x:Key="AlertBtnOK_Error" TargetType="Button">
+
+        <Setter Property="Content" Value="OK"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff" />
+        <Setter Property="Background" Value="#f03537"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#f03537"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AlertBtnYES_Error" TargetType="Button">
+        <Setter Property="Content" Value="Yes"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff" />
+        <Setter Property="Background" Value="#f03537"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#f03537"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AlertBtnNO_Error" TargetType="Button">
+        <Setter Property="Content" Value="No"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="Background" Value="#fff"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#d0dbe8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AlertBtnCancel_Error" TargetType="Button">
+        <Setter Property="Content" Value="Cancel"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="Background" Value="#fff"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#d0dbe8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--SuccessBTN-->
+    <Style x:Key="AlertBtnOK_Success" TargetType="Button">
+
+        <Setter Property="Content" Value="OK"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff" />
+        <Setter Property="Background" Value="#1eff0f"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#1eff0f"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AlertBtnYES_Success" TargetType="Button">
+        <Setter Property="Content" Value="Yes"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff" />
+        <Setter Property="Background" Value="#1eff0f"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#1eff0f"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AlertBtnNO_Success" TargetType="Button">
+        <Setter Property="Content" Value="No"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="Background" Value="#fff"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="45"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#d0dbe8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AlertBtnCancel_Success" TargetType="Button">
+        <Setter Property="Content" Value="Cancel"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="Background" Value="#fff"/>
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Margin" Value="15"/>
+        <Setter Property="BorderBrush" Value="#d0dbe8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--End AlertWindow-->
+
+    <!--HomePage-->
+    <SolidColorBrush x:Key="ColorClipboardSvg">#3663fd</SolidColorBrush>
+    <SolidColorBrush x:Key="ColorCalendarTimeSvg">#3663fd</SolidColorBrush>
+    <SolidColorBrush x:Key="ColorClipboardTimeSvg">#3663fd</SolidColorBrush>
+    <SolidColorBrush x:Key="ColorAddFileSvg">#3663fd</SolidColorBrush>
+    <!--End HomePage-->
 </ResourceDictionary>

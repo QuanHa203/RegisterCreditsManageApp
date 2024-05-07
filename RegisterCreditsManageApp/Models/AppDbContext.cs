@@ -18,10 +18,10 @@ public partial class AppDbContext : DbContext
             {
                 context = new AppDbContext();
             }
-
             return context;
         }
     }
+
     private AppDbContext()
     {
         ConfigurationBuilder builder = new ConfigurationBuilder();

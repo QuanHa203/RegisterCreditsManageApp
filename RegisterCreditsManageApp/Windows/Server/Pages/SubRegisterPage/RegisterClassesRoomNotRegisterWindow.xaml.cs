@@ -1,5 +1,4 @@
 ﻿using RegisterCreditsManageApp.Models;
-using RegisterCreditsManageApp.Windows.Alert;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -9,17 +8,31 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
     /// <summary>
     /// Interaction logic for RegisterClassesRoomWindow.xaml
     /// </summary>
-    public partial class RegisterClassesRoomWindow : Window
+    public partial class RegisterClassesRoomNotRegisterWindow : Window
     {
-        private List<Data> dataGridRegisterClassesRoom = new List<Data>();
-        public RegisterClassesRoomWindow(int idSemester, int idMajors, int idMainClass)
+        int idSemester;
+        int idMajors;
+        int idMainClass;
+        private List<Data> dataGrid = new List<Data>();
+        public RegisterClassesRoomNotRegisterWindow(int idSemester, int idMajors, int idMainClass)
         {
             InitializeComponent();
-            GetDataGridRegisterClassesRoom(idSemester, idMajors, idMainClass);
+            this.idSemester = idSemester;
+            this.idMajors = idMajors;
+            this.idMainClass = idMainClass;
         }
 
-        private void GetDataGridRegisterClassesRoom(int idSemester, int idMajors, int idMainClass)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            GetDataGrid(idSemester, idMajors, idMainClass);
+        }
+
+        private void GetDataGrid(int idSemester, int idMajors, int idMainClass)
+        {
+            // Reset 
+            dataGrid.Clear();
+            DataGridRegisterClassesRoom.ItemsSource = null;
+
             string className = AppDbContext._Context.MainClasses.ToList().FirstOrDefault(mainClass => mainClass.IdMainClass == idMainClass).Name;
 
             // Get SubjectList based on IdMajors and IdSemester 
@@ -29,13 +42,13 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
 
             // Get ClassRoomList based on IdMainClass
             var classRoomList = (from list in AppDbContext._Context.ClassRooms
-                                 where list.IdMainClass == idMainClass 
+                                 where list.IdMainClass == idMainClass
                                  select list).ToList();
 
             // Get SubjectNeedRegisterList 
             var subjectNeedRegisterList = (from subject in subjectList
-                                   where !classRoomList.Any(cr => cr.IdSubject == subject.IdSubject)
-                                   select subject).ToList();
+                                           where !classRoomList.Any(cr => cr.IdSubject == subject.IdSubject)
+                                           select subject).ToList();
 
 
             foreach (var subject in subjectNeedRegisterList)
@@ -48,11 +61,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                     NumberOfCredits = subject.NumberOfCredits,
                     MainClassName = className
                 };
-                dataGridRegisterClassesRoom.Add(data);
+                dataGrid.Add(data);
             }
 
-            DataGridRegisterClassesRoom.ItemsSource = dataGridRegisterClassesRoom;
-        }
+            DataGridRegisterClassesRoom.ItemsSource = dataGrid;
+        }        
 
         private void BtnShowPopup_Click(object sender, RoutedEventArgs e)
         {
@@ -72,6 +85,7 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             int idSubject = Convert.ToInt32(idSubjectTextBlock.Text);
             int idMainClass = Convert.ToInt32(idMainClassTextBlock.Text);
             new RegisterCreateClassRoomWindow(idSubject, idMainClass).ShowDialog();
+            GetDataGrid(idSemester, idMajors, idMainClass);
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
@@ -86,11 +100,6 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             public string SubjectName { get; set; }
             public int NumberOfCredits { get; set; }
             public string MainClassName { get; set; }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

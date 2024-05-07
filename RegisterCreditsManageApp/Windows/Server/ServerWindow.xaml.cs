@@ -1,5 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Alert;
 using RegisterCreditsManageApp.Windows.Server.Pages;
 using System.Windows;
@@ -14,12 +16,13 @@ namespace RegisterCreditsManageApp.Windows.Server
     {
         public ServerWindow() : base()
         {
-            InitializeComponent();            
+            InitializeComponent();     
+            
         }
 
-        private void HomeBtn_Click(object sender, RoutedEventArgs e)
-        {            
-            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/HomePage.xaml", UriKind.Relative));
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            StudyProgramBtn_Click(sender, e);
         }
 
         private void StudyProgramBtn_Click(object sender, RoutedEventArgs e)
@@ -32,6 +35,11 @@ namespace RegisterCreditsManageApp.Windows.Server
             MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/RegisterPage.xaml", UriKind.Relative));
         }
 
+        private void StudentManagerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/StudentPage.xaml", UriKind.Relative));
+        }
+
         private void AccountBtn_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/AccountPage.xaml", UriKind.Relative));
@@ -39,12 +47,12 @@ namespace RegisterCreditsManageApp.Windows.Server
 
         private void NotifyBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
-        }        
+        }
     }
 }
