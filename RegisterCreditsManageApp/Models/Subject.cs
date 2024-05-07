@@ -15,6 +15,8 @@ public partial class Subject
 
     public int NumberOfCredits { get; set; }
 
+    public virtual ICollection<ClassRoom> ClassRooms { get; set; } = new List<ClassRoom>();
+
     public virtual Major IdMajorsNavigation { get; set; } = null!;
 
     public virtual Semester IdSemesterNavigation { get; set; } = null!;
