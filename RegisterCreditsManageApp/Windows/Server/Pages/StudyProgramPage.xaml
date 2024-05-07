@@ -155,8 +155,8 @@
                                 </DataGridTemplateColumn.CellTemplate>
 
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Tên ngành học" Width="2*" Binding="{Binding majorName}"/>
-                            <DataGridTextColumn Header="Số lượng môn học" Width="*"/>
+                            <DataGridTextColumn Header="Tên ngành học" Width="*" Binding="{Binding majorName}"/>
+                            <DataGridTextColumn Header="Số lượng môn học" Binding="{Binding subjectNum}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
+using Microsoft.EntityFrameworkCore;
 using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Server.Pages.SubWindow;
 
@@ -26,12 +27,24 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         public StudyProgramPage()
         {
             InitializeComponent();
-            
+            List<Major> majorList = AppDbContext._Context.Majors.Include((major) => major.Subjects).ToList();
+            var list = new List<MajorData>();
+            foreach (Major major in majorList)
+            {
+                MajorData majorData = new MajorData()
+                {
+                    majorName = major.Name,
+                    subjectNum = major.Subjects.Count,
+                };
+                list.Add(majorData);
+            }
+            MajorDataGrid.ItemsSource = list;
         }
         public class MajorData
         {
-            private int idMajor {  get; set; }
-            private string majorName {  get; set; }
+            private int idMajor { get; set; }
+            public string majorName {  get; set; }
+            public int subjectNum {  get; set; }
         }
     private void FindMajorTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
