@@ -9,7 +9,6 @@
     <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#1c2340" />
     <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#151934"/>
 
-
     <SolidColorBrush x:Key="SearchIconFill" Color="#9b69ea"/>
     <FontFamily x:Key="DefaultFontFamily">Montserrat</FontFamily>
     <CornerRadius x:Key="DefaultPrimaryCornerRadius">12</CornerRadius>
@@ -17,6 +16,8 @@
     <SolidColorBrush x:Key="DefaultFocusForeground" Color="#3663fe"/>
     <SolidColorBrush x:Key="DefaultBackgroundDataGridColumnHeader" Color="#2f3756"/>
     <SolidColorBrush x:Key="DefaultBackgroundDataGridRowHover" Color="#252d4c"/>
+    <SolidColorBrush x:Key="DefaultCaretBrush" Color="White"/>
+    <Color x:Key="DefaultColorDropShadowOfPopup">#99acc2</Color>
     <!-- End Commom -->
 
     <!-- MainWindow -->
@@ -29,8 +30,8 @@
         </Setter>
     </Style>
     <SolidColorBrush x:Key="SvgLeftMenuColor">#ffae00</SolidColorBrush>
-    <SolidColorBrush x:Key="LeftMenuBackground" Color="#1c2340"/>
     <SolidColorBrush x:Key="SvgLeftMenuColorHover" Color="#3663fe"/>
+    <SolidColorBrush x:Key="LeftMenuBackground" Color="#1c2340"/>
     <Color x:Key="LeftMenuBtnGradientStop0">#FF3867FF</Color>
     <Color x:Key="LeftMenuBtnGradientStop1">#FF1C2340</Color>
     <!-- End MainWindow -->

@@ -5,7 +5,7 @@ namespace RegisterCreditsManageApp.Models;
 
 public partial class Student
 {
-    public int IdStudent { get; set; }
+    public string IdStudent { get; set; } = null!;
 
     public int IdMajors { get; set; }
 
