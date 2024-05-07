@@ -27,5 +27,7 @@ public partial class ClassRoom
 
     public DateOnly EndRegisterDate { get; set; }
 
+    public virtual Subject IdSubjectNavigation { get; set; } = null!;
+
     public virtual ICollection<RegisterCredit> RegisterCredits { get; set; } = new List<RegisterCredit>();
 }
