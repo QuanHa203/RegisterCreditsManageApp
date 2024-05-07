@@ -54,7 +54,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions> 
         <Grid Grid.Row="0">
             <Border>
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -105,24 +105,24 @@
         <Border Grid.Row="1" CornerRadius="20" BorderThickness="0" Background="{DynamicResource PrimaryBackgroundColor}" >
             <StackPanel>
                 <Button x:Name="btnShowPopup" Click="btnShowPopup_Click" Height="30" Width="auto" HorizontalAlignment="Left" Margin="0 0 50 0" Background="Transparent">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock VerticalAlignment="Center" Margin="10 0 10 0" Foreground="{DynamicResource SecondForegroundColor}" FontSize="16">Lớp học phần</TextBlock>
-                        <Viewbox Width="10">
-                            <Path Style="{DynamicResource ArrowDownSvg}"></Path>
-                        </Viewbox>
-                    </StackPanel>
-                </Button>
-                <Popup x:Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=btnShowPopup}" HorizontalOffset="0" VerticalOffset="20" >
-                    <StackPanel Background="{DynamicResource LeftMenuBackground}" >
-                        <Button Style="{DynamicResource btnpopup}">Học kì 1</Button>
-                        <Button Style="{DynamicResource btnpopup}">Học kì 2</Button>
-                        <Button Style="{DynamicResource btnpopup}">Học kì 3</Button>
-                        <Button Style="{DynamicResource btnpopup}">Học kì 4</Button>
-                    </StackPanel>
-                </Popup>
-
-
-                <DataGrid x:Name="DataGridSubject" Style="{DynamicResource DefaultDataGrid}" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}" Grid.ColumnSpan="3" >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" Margin="10 0 10 0" Foreground="{DynamicResource SecondForegroundColor}" FontSize="16">Lớp học phần</TextBlock>
+                            <Viewbox Width="10">
+                                <Path Style="{DynamicResource ArrowDownSvg}"></Path>
+                            </Viewbox>
+                        </StackPanel>
+                    </Button>
+                    <Popup x:Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=btnShowPopup}" HorizontalOffset="0" VerticalOffset="20" >
+                        <StackPanel Background="{DynamicResource LeftMenuBackground}" >
+                            <Button Style="{DynamicResource btnpopup}">Học kì 1</Button>
+                            <Button Style="{DynamicResource btnpopup}">Học kì 2</Button>
+                            <Button Style="{DynamicResource btnpopup}">Học kì 3</Button>
+                            <Button Style="{DynamicResource btnpopup}">Học kì 4</Button>
+                        </StackPanel>
+                    </Popup>
+                
+                   
+                    <DataGrid x:Name="DataGridSubject" Style="{DynamicResource DefaultDataGrid}" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}" Grid.ColumnSpan="3" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Mã học phần" Binding="{Binding Id}" ></DataGridTextColumn>
                         <DataGridTextColumn Header="Môn học/ Học phần" Binding="{Binding Subject}"></DataGridTextColumn>
@@ -130,10 +130,10 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
+                
+                    
 
-
-
-
+                
         </Border>
 
 

@@ -144,7 +144,7 @@ namespace RegisterCreditsManageApp.Windows.Alert
             switch (icon)
             {
                 case AlertIcon.None:
-                {
+                    {
                         switch (button)
                         {
                             case AlertButton.OK:
@@ -198,7 +198,7 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 }
                         }
                         break;
-                }
+                    }
                 case AlertIcon.Information:
                 {
                         Style alerticonStyle = App.Current.Resources["InfoSvg"] as Style;
@@ -502,7 +502,7 @@ namespace RegisterCreditsManageApp.Windows.Alert
                        
                     }
             }
-           
+
         }
 
         public AlertWindow(string alertText, string caption, AlertButton button, AlertIcon icon, AlertResult defaultResult)
@@ -521,7 +521,8 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 {
                                     Style tbnStyle = App.Current.Resources["AlertBtnOK"] as Style;
                                     alertBtn1.Style = tbnStyle;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
@@ -553,13 +554,15 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 {
                                     Style tbnStyle1 = App.Current.Resources["AlertBtnOK"] as Style;
                                     alertBtn1.Style = tbnStyle1;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
                                     Style tbnStyle2 = App.Current.Resources["AlertBtnCancel"] as Style;
                                     alertBtn2.Style = tbnStyle2;
-                                    alertBtn2.Click += (sender, e) => {
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.Cancel;
                                         this.Close();
                                     };
@@ -579,7 +582,8 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 {
                                     Style tbnStyle = App.Current.Resources["AlertBtnOK"] as Style;
                                     alertBtn1.Style = tbnStyle;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
@@ -611,13 +615,15 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 {
                                     Style tbnStyle1 = App.Current.Resources["AlertBtnOK"] as Style;
                                     alertBtn1.Style = tbnStyle1;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
                                     Style tbnStyle2 = App.Current.Resources["AlertBtnCancel"] as Style;
                                     alertBtn2.Style = tbnStyle2;
-                                    alertBtn2.Click += (sender, e) => {
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.Cancel;
                                         this.Close();
                                     };
@@ -637,7 +643,8 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 {
                                     Style tbnStyle = App.Current.Resources["AlertBtnOK"] as Style;
                                     alertBtn1.Style = tbnStyle;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
@@ -668,13 +675,15 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 {
                                     Style tbnStyle1 = App.Current.Resources["AlertBtnOK"] as Style;
                                     alertBtn1.Style = tbnStyle1;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
                                     Style tbnStyle2 = App.Current.Resources["AlertBtnCancel"] as Style;
                                     alertBtn2.Style = tbnStyle2;
-                                    alertBtn2.Click += (sender, e) => {
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.Cancel;
                                         this.Close();
                                     };
@@ -696,7 +705,8 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 {
                                     Style tbnStyle = App.Current.Resources["AlertBtnOK_Warning"] as Style;
                                     alertBtn1.Style = tbnStyle;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
@@ -728,13 +738,15 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 {
                                     Style tbnStyle1 = App.Current.Resources["AlertBtnOK_Warning"] as Style;
                                     alertBtn1.Style = tbnStyle1;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
                                     Style tbnStyle2 = App.Current.Resources["AlertBtnCancel_Warning"] as Style;
                                     alertBtn2.Style = tbnStyle2;
-                                    alertBtn2.Click += (sender, e) => {
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.Cancel;
                                         this.Close();
                                     };
@@ -758,7 +770,8 @@ namespace RegisterCreditsManageApp.Windows.Alert
 
                                     Style tbnStyle = App.Current.Resources["AlertBtnOK_Error"] as Style;
                                     alertBtn1.Style = tbnStyle;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
@@ -790,13 +803,15 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 {
                                     Style tbnStyle1 = App.Current.Resources["AlertBtnOK_Error"] as Style;
                                     alertBtn1.Style = tbnStyle1;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
                                     Style tbnStyle2 = App.Current.Resources["AlertBtnCancel_Error"] as Style;
                                     alertBtn2.Style = tbnStyle2;
-                                    alertBtn2.Click += (sender, e) => {
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.Cancel;
                                         this.Close();
                                     };
@@ -820,7 +835,8 @@ namespace RegisterCreditsManageApp.Windows.Alert
 
                                     Style tbnStyle = App.Current.Resources["AlertBtnOK_Success"] as Style;
                                     alertBtn1.Style = tbnStyle;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
@@ -852,13 +868,15 @@ namespace RegisterCreditsManageApp.Windows.Alert
                                 {
                                     Style tbnStyle1 = App.Current.Resources["AlertBtnOK_Success"] as Style;
                                     alertBtn1.Style = tbnStyle1;
-                                    alertBtn1.Click += (sender, e) => {
+                                    alertBtn1.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.OK;
                                         this.Close();
                                     };
                                     Style tbnStyle2 = App.Current.Resources["AlertBtnCancel_Success"] as Style;
                                     alertBtn2.Style = tbnStyle2;
-                                    alertBtn2.Click += (sender, e) => {
+                                    alertBtn2.Click += (sender, e) =>
+                                    {
                                         AlertBox.AlertResult = AlertResult.Cancel;
                                         this.Close();
                                     };

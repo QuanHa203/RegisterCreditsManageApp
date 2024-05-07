@@ -13,17 +13,14 @@
         WindowStartupLocation="CenterScreen"
         Title="AlertWindow" Height="200" Width="300">
 
-    <Grid Background="{DynamicResource PrimaryBackgroundColor}" >
-        <Grid.Clip>
-            <RectangleGeometry Rect="0,0,300,200" RadiusX="10" RadiusY="10"/>
-
-        </Grid.Clip>
-
-        <Grid.RowDefinitions>
+     <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}">
+        <Grid>
+            <Grid.RowDefinitions>
             <RowDefinition Height="20" ></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+       
+            <Grid Grid.Row="0">
             <Button Background="Transparent" Height="16" Width="20" HorizontalAlignment="Right" Margin="0,5,7.5,0" BorderThickness="0" Click="xAlertBtn">
                 <Viewbox>
                     <Path Style="{DynamicResource XMarkSvg}"></Path>
@@ -34,11 +31,11 @@
 
         <Grid Grid.Row="1">
 
-            <Viewbox Width="50" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
+            <Viewbox Width="60" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0">
                 <Path x:Name="alertIcon" ></Path>
             </Viewbox>
-            <TextBlock x:Name="alertCaption" Margin="75,10,10,92" FontWeight="Bold" FontFamily="Montserra"  Background="Transparent" Foreground="{DynamicResource AlertCaption}"/>
-            <TextBlock x:Name="Text" Margin="75,38,10,48" FontFamily="Montserra"  Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}"/>
+            <TextBlock x:Name="alertCaption" Margin="75,30,60,92" FontWeight="Bold" FontFamily="Montserra"  Background="Transparent" Foreground="{DynamicResource AlertCaption}" TextWrapping="Wrap" FontSize="16"/>
+                <TextBlock x:Name="Text" Margin="75,68,60,48" FontFamily="Montserra"  Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" TextWrapping="Wrap" FontSize="16"/>
 
 
             <StackPanel VerticalAlignment="Bottom" Width="auto" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Margin="5" >
@@ -47,6 +44,10 @@
                 <Button x:Name="alertBtn3" ></Button>
             </StackPanel>
         </Grid>
-
+         
+        
     </Grid>
+        
+     </Border>   
+    
 </Window>
