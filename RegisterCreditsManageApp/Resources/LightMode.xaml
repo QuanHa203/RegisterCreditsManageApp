@@ -9,7 +9,6 @@
     <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#ffffff" />
     <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#f1f1f1"/>
 
-
     <SolidColorBrush x:Key="SearchIconFill" Color="#3663fe"/>
     <FontFamily x:Key="DefaultFontFamily">Montserrat</FontFamily>
     <CornerRadius x:Key="DefaultPrimaryCornerRadius">12</CornerRadius>
@@ -17,7 +16,8 @@
     <SolidColorBrush x:Key="DefaultFocusForeground" Color="#3663fe"/>
     <SolidColorBrush x:Key="DefaultBackgroundDataGridColumnHeader" Color="#e6e6e6"/>
     <SolidColorBrush x:Key="DefaultBackgroundDataGridRowHover" Color="#f0f0f0"/>
-
+    <SolidColorBrush x:Key="DefaultCaretBrush" Color="Black"/>
+    <Color x:Key="DefaultColorDropShadowOfPopup">Black</Color>
     <!-- End Commom -->
 
     <!-- MainWindow -->
@@ -61,7 +61,7 @@
         <Setter Property="Background" Value="#3663fd"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#3663fd"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -80,7 +80,7 @@
         <Setter Property="Background" Value="#3663fd"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#3663fd"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -99,7 +99,7 @@
         <Setter Property="Background" Value="#fff"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#d0dbe8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -117,8 +117,8 @@
         <Setter Property="Foreground" Value="#333333" />
         <Setter Property="Background" Value="#fff"/>
         <Setter Property="Height" Value="23"/>
-        <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#d0dbe8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -144,7 +144,7 @@
         <Setter Property="Background" Value="#ffae00"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#ffae00"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -168,7 +168,7 @@
         <Setter Property="Background" Value="#ffae00"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#ffae00"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -192,7 +192,7 @@
         <Setter Property="Background" Value="#fff"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#d0dbe8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -215,8 +215,8 @@
         <Setter Property="Foreground" Value="#333333" />
         <Setter Property="Background" Value="#fff"/>
         <Setter Property="Height" Value="23"/>
-        <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#d0dbe8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -238,7 +238,7 @@
         <Setter Property="Background" Value="#f03537"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#f03537"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -257,7 +257,7 @@
         <Setter Property="Background" Value="#f03537"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#f03537"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -276,7 +276,7 @@
         <Setter Property="Background" Value="#fff"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#d0dbe8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -294,8 +294,8 @@
         <Setter Property="Foreground" Value="#333333" />
         <Setter Property="Background" Value="#fff"/>
         <Setter Property="Height" Value="23"/>
-        <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#d0dbe8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -316,7 +316,7 @@
         <Setter Property="Background" Value="#1eff0f"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#1eff0f"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -335,7 +335,7 @@
         <Setter Property="Background" Value="#1eff0f"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#1eff0f"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -354,7 +354,7 @@
         <Setter Property="Background" Value="#fff"/>
         <Setter Property="Height" Value="23"/>
         <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#d0dbe8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -372,8 +372,8 @@
         <Setter Property="Foreground" Value="#333333" />
         <Setter Property="Background" Value="#fff"/>
         <Setter Property="Height" Value="23"/>
-        <Setter Property="Width" Value="45"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Margin" Value="15"/>
         <Setter Property="BorderBrush" Value="#d0dbe8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -387,5 +387,10 @@
     </Style>
     <!--End AlertWindow-->
 
-
+    <!--HomePage-->
+    <SolidColorBrush x:Key="ColorClipboardSvg">#3663fd</SolidColorBrush>
+    <SolidColorBrush x:Key="ColorCalendarTimeSvg">#3663fd</SolidColorBrush>
+    <SolidColorBrush x:Key="ColorClipboardTimeSvg">#3663fd</SolidColorBrush>
+    <SolidColorBrush x:Key="ColorAddFileSvg">#3663fd</SolidColorBrush>
+    <!--End HomePage-->
 </ResourceDictionary>

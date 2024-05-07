@@ -9,13 +9,13 @@ public partial class MainClass
 
     public int IdMajors { get; set; }
 
-    public int? IdCurrentRegisterSemester { get; set; }
+    public int IdCurrentRegisterSemester { get; set; }
 
     public string Name { get; set; } = null!;
 
     public int CourseYear { get; set; }
 
-    public virtual Semester? IdCurrentRegisterSemesterNavigation { get; set; }
+    public virtual Semester IdCurrentRegisterSemesterNavigation { get; set; } = null!;
 
     public virtual Major IdMajorsNavigation { get; set; } = null!;
 

@@ -7,17 +7,15 @@ public partial class RegisterCredit
 {
     public int IdRegisterCredits { get; set; }
 
-    public int IdStudent { get; set; }
+    public string IdStudent { get; set; } = null!;
 
-    public int IdClassRoom { get; set; }
+    public string IdClassRoom { get; set; } = null!;
 
-    public int IdRegisterSubject { get; set; }
+    public int IdSubject { get; set; }
 
-    public int IdTeacher { get; set; }
+    public int? IdTeacher { get; set; }
 
     public bool? IsPass { get; set; }
 
     public virtual ClassRoom IdClassRoomNavigation { get; set; } = null!;
-
-    public virtual RegisterSubject IdRegisterSubjectNavigation { get; set; } = null!;
 }

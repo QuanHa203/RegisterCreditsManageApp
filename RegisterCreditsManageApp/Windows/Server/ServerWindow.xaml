@@ -3,9 +3,9 @@
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                  xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows"                  
-                  mc:Ignorable="d"
-                                    
+                  xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows"
+                    
+        Loaded="MainWindow_Loaded"                  
         Title="ServerWindow" Width="800" Height="450">
 
     <Window.Resources>
@@ -119,32 +119,6 @@
             <Grid Grid.Column="0" Background="{DynamicResource LeftMenuBackground}">
                 <Grid>
                     <StackPanel x:Name="LeftMenuStackPanel" Margin="0 48 0 48" >
-                        <Button x:Name="HomeBtn" 
-                                Click="HomeBtn_Click"
-                                MouseEnter="LeftMenuBtn_MouseEnter"
-                                MouseLeave="LeftMenuBtn_MouseLeave"
-                                Style="{DynamicResource LeftMenuBtn}" 
-                                Width="{Binding ActualWidth, ElementName=LeftMenuStackPanel}">
-                            <Border BorderThickness="2 0 0 0">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="#FF3663FE" Opacity="0"/>
-                                </Border.BorderBrush>
-                                <Border.Background>
-                                    <LinearGradientBrush EndPoint="1,0" StartPoint="-1.6,0">
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop0}"/>
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop1}" Offset="0"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-
-                                <StackPanel Orientation="Horizontal" >
-                                    <Viewbox Style="{DynamicResource LeftMenuIcon}" HorizontalAlignment="Left">
-                                        <Path Style="{DynamicResource HomeSvg}"/>
-                                    </Viewbox>
-                                    <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Trang chủ</TextBlock>
-                                </StackPanel>
-                            </Border>
-                        </Button>
-
                         <Button x:Name="StudyProgramBtn" 
                                 Click="StudyProgramBtn_Click"
                                 MouseEnter="LeftMenuBtn_MouseEnter"
@@ -193,6 +167,32 @@
                                         <Path Style="{DynamicResource ClipboardPenSvg}"/>
                                     </Viewbox>
                                     <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Đăng ký tín chỉ</TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </Button>
+
+                        <Button x:Name="StudentManagerBtn" 
+        Click="StudentManagerBtn_Click"
+        MouseEnter="LeftMenuBtn_MouseEnter"
+        MouseLeave="LeftMenuBtn_MouseLeave"
+        Style="{DynamicResource LeftMenuBtn}" 
+        Width="{Binding ActualWidth, ElementName=LeftMenuStackPanel}">
+                            <Border BorderThickness="2 0 0 0">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="#FF3663FE" Opacity="0"/>
+                                </Border.BorderBrush>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="1,0" StartPoint="-1.6,0">
+                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop0}"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop1}" Offset="0"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+
+                                <StackPanel Orientation="Horizontal" >
+                                    <Viewbox Style="{DynamicResource LeftMenuIcon}" HorizontalAlignment="Left">
+                                        <Path Style="{DynamicResource GroupSvg}"/>
+                                    </Viewbox>
+                                    <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Quản lý sinh viên</TextBlock>
                                 </StackPanel>
                             </Border>
                         </Button>
