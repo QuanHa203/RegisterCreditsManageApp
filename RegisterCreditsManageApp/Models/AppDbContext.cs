@@ -58,7 +58,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Teacher> Teachers { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<User> Users { get; set; }    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -73,6 +73,11 @@ public partial class AppDbContext : DbContext
                 .IsFixedLength();
             entity.Property(e => e.Name).HasMaxLength(100);
             entity.Property(e => e.Schedule).HasMaxLength(255);
+
+            entity.HasOne(d => d.IdSubjectNavigation).WithMany(p => p.ClassRooms)
+                .HasForeignKey(d => d.IdSubject)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ClassRoom_Subject");
         });
 
         modelBuilder.Entity<MainClass>(entity =>
@@ -85,6 +90,7 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.IdCurrentRegisterSemesterNavigation).WithMany(p => p.MainClasses)
                 .HasForeignKey(d => d.IdCurrentRegisterSemester)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_MainClass_Semester");
 
             entity.HasOne(d => d.IdMajorsNavigation).WithMany(p => p.MainClasses)
@@ -106,6 +112,9 @@ public partial class AppDbContext : DbContext
 
             entity.Property(e => e.IdClassRoom)
                 .HasMaxLength(10)
+                .IsFixedLength();
+            entity.Property(e => e.IdStudent)
+                .HasMaxLength(12)
                 .IsFixedLength();
 
             entity.HasOne(d => d.IdClassRoomNavigation).WithMany(p => p.RegisterCredits)
@@ -140,7 +149,9 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("Student");
 
-            entity.Property(e => e.IdStudent).ValueGeneratedNever();
+            entity.Property(e => e.IdStudent)
+                .HasMaxLength(12)
+                .IsFixedLength();
             entity.Property(e => e.Address).HasMaxLength(255);
             entity.Property(e => e.Name).HasMaxLength(100);
             entity.Property(e => e.PhoneNumber)
@@ -200,7 +211,9 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("User");
 
-            entity.Property(e => e.IdUser).ValueGeneratedNever();
+            entity.Property(e => e.IdUser)
+                .HasMaxLength(12)
+                .IsFixedLength();
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .IsFixedLength();
