@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
+using RegisterCreditsManageApp.Models;
+using RegisterCreditsManageApp.Windows.Server.Pages.SubWindow;
 
 namespace RegisterCreditsManageApp.Windows.Server.Pages
 {
@@ -24,9 +26,14 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         public StudyProgramPage()
         {
             InitializeComponent();
+            
         }
-
-        private void FindMajorTextBox_GotFocus(object sender, RoutedEventArgs e)
+        public class MajorData
+        {
+            private int idMajor {  get; set; }
+            private string majorName {  get; set; }
+        }
+    private void FindMajorTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (FindMajorTextBox.Text != null && FindMajorTextBox.Text == "Tìm kiếm tên ngành học")
             {
@@ -43,10 +50,9 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                 FindMajorTextBox.Text = "Tìm kiếm tên ngành học";
             }
         }
-
-        private void NavigateTo_Click(object sender, RoutedEventArgs e)
+        private void NavigateToAddMajor_Click(object sender, RoutedEventArgs e)
         {
-
+            new AddMajor().ShowDialog();
         }
     }
 }
