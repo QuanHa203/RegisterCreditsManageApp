@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Alert;
 using RegisterCreditsManageApp.Windows.Server.Pages;
+using System.Net.Security;
 using System.Windows;
 
 
@@ -14,6 +15,7 @@ namespace RegisterCreditsManageApp.Windows.Server
     /// </summary>
     public partial class ServerWindow : MainWindow
     {
+        
         public ServerWindow() : base()
         {
             InitializeComponent();     
