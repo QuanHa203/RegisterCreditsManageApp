@@ -6,8 +6,7 @@
       mc:Ignorable="d" 
       Background="{DynamicResource SecondaryBackgroundColor}"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AnalysisPage"
-    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+      Title="AnalysisPage">
     <Page.Resources>
         <Style x:Key="SearchBorder" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
@@ -183,7 +182,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         
     </Page.Resources>
 
@@ -213,40 +212,10 @@
                     </StackPanel>
 
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" BorderBrush="Transparent" BorderThickness="0">
-                        <DataGrid RowStyle="{DynamicResource DataGridRegisterRowStyle}" ColumnHeaderStyle="{DynamicResource DataGridRegisterColumnHeaderStyle}" CellStyle="{DynamicResource DataGridRegisterCellStyle}" x:Name="DataGridRegister" Background="Transparent" BorderThickness="0">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn>
-                                    
-                                </DataGridTemplateColumn>
-                                <DataGridTextColumn Width="auto">
-                                    <DataGridTextColumn.Header>
-                                        <TextBlock>Thao tác</TextBlock>
-                                    </DataGridTextColumn.Header>
-                                </DataGridTextColumn>
 
-                                <DataGridTextColumn Width="auto">
-                                    <DataGridTextColumn.Header>
-                                        <TextBlock>Tên lớp học</TextBlock>
-                                    </DataGridTextColumn.Header>
-                                </DataGridTextColumn>
 
-                                <DataGridTextColumn Width="auto">
-                                    <DataGridTextColumn.Header>
-                                        <TextBlock>Ngành học</TextBlock>
-                                    </DataGridTextColumn.Header>
-                                </DataGridTextColumn>
-
-                                <DataGridTextColumn Width="auto">
-                                    <DataGridTextColumn.Header>
-                                        <TextBlock>Học kỳ đăng ký</TextBlock>
-                                    </DataGridTextColumn.Header>
-                                </DataGridTextColumn>
-
-                                <DataGridTextColumn Width="auto">
-                                    <DataGridTextColumn.Header>
-                                        <TextBlock>Khóa học</TextBlock>
-                                    </DataGridTextColumn.Header>
-                                </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </ScrollViewer>

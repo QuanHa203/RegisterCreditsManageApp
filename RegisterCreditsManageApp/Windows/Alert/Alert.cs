@@ -30,26 +30,40 @@ namespace RegisterCreditsManageApp.Windows.Alert
 
     public class AlertBox
     {
+        public static AlertResult AlertResult;
         public static AlertResult Show(string alertText)
         {
+            AlertWindow alert = new AlertWindow(alertText);
+            alert.ShowDialog();
             return AlertResult.Cancel;
         }
 
         public static AlertResult Show(string alertText, string caption)
         {
-            return AlertResult.None;
+            AlertWindow alert = new AlertWindow(alertText, caption);
+            alert.ShowDialog();
+            return AlertResult.Cancel;
         }
 
         public static AlertResult Show(string alertText, string caption, AlertButton button)
         {
             AlertWindow alert = new AlertWindow(alertText, caption, button);
             alert.ShowDialog();
-            return AlertResult.Cancel;
+            return AlertResult;
         }
 
         public static AlertResult Show(string alertText, string caption, AlertButton button, AlertIcon icon)
         {
+            AlertWindow alert = new AlertWindow(alertText, caption, button, icon);
+            alert.ShowDialog();
             return AlertResult.Cancel;
+        }
+
+        public static AlertResult Show(string alertText, string caption, AlertButton button, AlertIcon icon, AlertResult defaultResult)
+        {
+            AlertWindow alert = new AlertWindow(alertText, caption, button, icon, defaultResult);
+            alert.ShowDialog();
+            return defaultResult;
         }
     }
 }
