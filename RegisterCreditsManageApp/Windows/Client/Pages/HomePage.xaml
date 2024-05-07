@@ -112,11 +112,9 @@
                     </StackPanel>
                 </Button>
                 <Popup x:Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=btnShowPopup}" HorizontalOffset="0" VerticalOffset="20" >
-                    <StackPanel Background="{DynamicResource LeftMenuBackground}" >
-                        <Button Style="{DynamicResource btnpopup}">Học kì 1</Button>
-                        <Button Style="{DynamicResource btnpopup}">Học kì 2</Button>
-                        <Button Style="{DynamicResource btnpopup}">Học kì 3</Button>
-                        <Button Style="{DynamicResource btnpopup}">Học kì 4</Button>
+                    <StackPanel Background="{DynamicResource LeftMenuBackground}" x:Name="StackPanelPopup" >
+                        <Button Style="{DynamicResource btnpopup}"  Visibility="Hidden" Height="0">a</Button>
+                        
                     </StackPanel>
                 </Popup>
 
