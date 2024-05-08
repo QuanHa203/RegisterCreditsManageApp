@@ -58,7 +58,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Border Style="{DynamicResource SearchBorder}">
+            <Border Style="{DynamicResource SearchBorder}" HorizontalAlignment="Left">
                 <StackPanel Margin="12 0 12 0" Orientation="Horizontal">
                     <Button Style="{DynamicResource SearchBtn}"/>
                     <Grid>
@@ -67,10 +67,42 @@
                     </Grid>
                 </StackPanel>
             </Border>
+
+            <Button x:Name="BtnAdd" HorizontalAlignment="Right" Click="BtnAdd_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
+                        <Setter Property="Padding" Value="12 12 24 12"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}" Padding="{TemplateBinding Padding}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Viewbox Width="24" Margin="0 0 12 0">
+                                                <Path x:Name="Icon" Fill="#3663fe" Style="{DynamicResource AddSvg}"/>
+                                            </Viewbox>
+                                            <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="Medium">Thêm</TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#3663fe"/>
+                                            <Setter Property="Fill" TargetName="Icon" Value="#fff"/>
+                                            <Setter Property="Foreground" Value="#fff"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
 
         <Border Grid.Row="1" Margin="0 24 0 0" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}" Height="auto">
-            <Grid>
+            <Grid Margin="0 32 0 0">
                 <DataGrid x:Name="DataGridStudent" Style="{DynamicResource DefaultDataGrid}" Margin="0 0 0 24" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
@@ -115,9 +147,37 @@
                         <DataGridTextColumn Header="Họ và tên" Width="auto" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Lớp học" Width="auto" Binding="{Binding IdMainClassNavigation.Name}"/>
                         <DataGridTextColumn Header="Khóa học" Width="auto" Binding="{Binding IdMainClassNavigation.CourseYear}"/>
-                        <DataGridTextColumn Header="Ngày sinh" Width="auto" Binding="{Binding DateOfBirth}"/>
+                        <DataGridTextColumn Header="Ngày sinh" Width="auto" Binding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}"/>
                         <DataGridTextColumn Header="Số điện thoại" Width="auto" Binding="{Binding PhoneNumber}"/>
                         <DataGridTextColumn Header="Địa chỉ" Width="auto" Binding="{Binding Address}"/>
+                        <DataGridTextColumn Header="Giới tính" Width="auto">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="DataGridCell">
+                                                <TextBlock x:Name="Gender"/>
+                                                <ControlTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding Gender}" Value="True">
+                                                        <Setter Property="Text" Value="Nam" TargetName="Gender"/>
+                                                    </DataTrigger>
+                                        
+                                                    <DataTrigger Binding="{Binding Gender}" Value="False">
+                                                        <Setter Property="Text" Value="Nữ" TargetName="Gender"/>
+                                                    </DataTrigger>
+
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter Property="Background" Value="{DynamicResource DefaultBackgroundDataGridRowHover}"/>
+                                                        <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

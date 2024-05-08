@@ -56,7 +56,7 @@ namespace RegisterCreditsManageApp.Windows.Alert
         {
             AlertWindow alert = new AlertWindow(alertText, caption, button, icon);
             alert.ShowDialog();
-            return AlertResult.Cancel;
+            return AlertResult;
         }
 
         public static AlertResult Show(string alertText, string caption, AlertButton button, AlertIcon icon, AlertResult defaultResult)
