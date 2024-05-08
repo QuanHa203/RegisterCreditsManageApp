@@ -24,22 +24,17 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
     public partial class HomePage : Page
     {
         int idsemester = 1;
+        Student student = AppDbContext._Context.Students.Include(student => student.IdMainClassNavigation).FirstOrDefault(student => student.IdStudent == "2");
+
         public HomePage()
         {
 
             InitializeComponent();
-            List<Data> data = new List<Data>()
-            {
-                new Data(){Id=1,Subject="AAA",NumberOfCredits=1},
-                new Data(){Id=2,Subject="AAA",NumberOfCredits=1},
-                new Data(){Id=3,Subject="AAA",NumberOfCredits=1},
-                new Data(){Id=4,Subject="AAA",NumberOfCredits=1}
-            };
+ 
             Style btnStyle = this.Resources["btnpopup"] as Style;
-
-            DataGridSubject.ItemsSource = data;
-            Student student = AppDbContext._Context.Students.Include(student => student.IdMainClassNavigation).FirstOrDefault(student => student.IdStudent == "2");
-
+            RenderDataGrid();
+            
+            
             for (int i = 1; i <= student.IdMainClassNavigation.IdCurrentRegisterSemester; i++)
             {
                 Semester semester = AppDbContext._Context.Semesters.FirstOrDefault(semester => semester.IdSemester == i);
@@ -49,14 +44,21 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
                 btn.Click += (object sender, RoutedEventArgs e) =>
                 {
                     idsemester = semester.IdSemester;
+                    RenderDataGrid();
                 };
                 StackPanelPopup.Children.Add(btn);
 
             }
+            
         }
 
 
+        public void RenderDataGrid()
+        {
+            List<ClassRoom> classRoomList = AppDbContext._Context.ClassRooms.Include(classroom => classroom.IdSubjectNavigation).Where(classroom => classroom.IdSemester == idsemester).Where(classroom => classroom.IdMainClass == student.IdMainClass).ToList();
 
+            DataGridSubject.ItemsSource = classRoomList;
+        }
 
         public class Data
         {
@@ -69,7 +71,6 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         private void btnShowPopup_Click(object sender, RoutedEventArgs e)
         {
             popup.IsOpen = true;
-
         }
     }
 }

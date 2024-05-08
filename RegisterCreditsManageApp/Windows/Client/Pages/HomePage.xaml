@@ -60,7 +60,7 @@
                     <Button>
                         <StackPanel>
                             <Viewbox Width="35" Height="50" Margin="3">
-                                <Path Style="{DynamicResource ClipboardSvg}"></Path>
+                                <Path Style="{DynamicResource ClipboardSvg}" Fill="{DynamicResource ColorClipboardSvg}"  ></Path>
                             </Viewbox>
                             <TextBlock Style="{DynamicResource Text_center_btn}" >0</TextBlock>
                             <TextBlock Style="{DynamicResource Text_bottom_btn}" >Lịch học hôm nay</TextBlock>
@@ -70,7 +70,7 @@
                     <Button>
                         <StackPanel>
                             <Viewbox Width="35" Height="50" Margin="3">
-                                <Path Style="{DynamicResource CalendarTimeSvg}"></Path>
+                                <Path Style="{DynamicResource CalendarTimeSvg}" Fill="{DynamicResource ColorCalendarTimeSvg}"></Path>
                             </Viewbox>
                             <TextBlock Style="{DynamicResource Text_center_btn}" >0</TextBlock>
                             <TextBlock Style="{DynamicResource Text_bottom_btn}" >Lịch học tuần này</TextBlock>
@@ -79,7 +79,7 @@
                     <Button>
                         <StackPanel>
                             <Viewbox Width="35" Height="50" Margin="3">
-                                <Path Style="{DynamicResource ClipboardTimeSvg}"></Path>
+                                <Path Style="{DynamicResource ClipboardTimeSvg}" Fill="{DynamicResource ColorClipboardTimeSvg}"></Path>
                             </Viewbox>
                             <TextBlock Style="{DynamicResource Text_center_btn}" >0</TextBlock>
                             <TextBlock Style="{DynamicResource Text_bottom_btn}" >Học phần đã đăng ký</TextBlock>
@@ -88,7 +88,7 @@
                     <Button>
                         <StackPanel>
                             <Viewbox Width="35" Height="50" Margin="3">
-                                <Path Style="{DynamicResource AddFileSvg}"></Path>
+                                <Path Style="{DynamicResource AddFileSvg}" Fill="{DynamicResource ColorAddFileSvg}"></Path>
                             </Viewbox>
                             <TextBlock Style="{DynamicResource Text_center_btn}" >0</TextBlock>
                             <TextBlock Style="{DynamicResource Text_bottom_btn}" >Học phần chưa đăng ký</TextBlock>
@@ -98,14 +98,17 @@
             </Border>
         </Grid>
 
-
-
-
-        <Border Grid.Row="1" CornerRadius="20" BorderThickness="0" Background="{DynamicResource PrimaryBackgroundColor}" >
-            <StackPanel>
-                <Button x:Name="btnShowPopup" Click="btnShowPopup_Click" Height="30" Width="auto" HorizontalAlignment="Left" Margin="0 0 50 0" Background="Transparent">
+        <Border Grid.Row="1" CornerRadius="20" BorderThickness="0" Background="{DynamicResource PrimaryBackgroundColor}" Margin="20" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Button  x:Name="btnShowPopup" Click="btnShowPopup_Click" Height="30" Width="auto" HorizontalAlignment="Left" Margin="12 12 50 12" Background="Transparent">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock VerticalAlignment="Center" Margin="10 0 10 0" Foreground="{DynamicResource SecondForegroundColor}" FontSize="16">Lớp học phần</TextBlock>
+                        <TextBlock VerticalAlignment="Center" Margin="20 0 10 0" Foreground="{DynamicResource SecondForegroundColor}" FontSize="16">Lớp học phần</TextBlock>
+                        
                         <Viewbox Width="10">
                             <Path Style="{DynamicResource ArrowDownSvg}"></Path>
                         </Viewbox>
@@ -117,16 +120,18 @@
                         
                     </StackPanel>
                 </Popup>
+                </Grid>
+                
 
 
-                <DataGrid x:Name="DataGridSubject" Style="{DynamicResource DefaultDataGrid}" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}" Grid.ColumnSpan="3" >
+                <DataGrid Grid.Row="1" x:Name="DataGridSubject" Style="{DynamicResource DefaultDataGrid}" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}" Grid.ColumnSpan="3" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mã học phần" Binding="{Binding Id}" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="Môn học/ Học phần" Binding="{Binding Subject}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Số tín chỉ" Binding="{Binding NumberOfCredits }" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="Mã học phần" Binding="{Binding IdClassRoom}" ></DataGridTextColumn>
+                        <DataGridTextColumn Header="Môn học/ Học phần" Binding="{Binding IdSubjectNavigation.Name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Số tín chỉ" Binding="{Binding IdSubjectNavigation.NumberOfCredits}" ></DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-            </StackPanel>
+            </Grid>
 
 
 
