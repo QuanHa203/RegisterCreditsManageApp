@@ -8,25 +8,145 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePage">
     <Page.Resources>
-        <Style TargetType="Button">
+        <Style x:Key="btnClipboard" TargetType="Button">
+            <!-- Default settings for the button -->
             <Setter Property="Background" Value="{DynamicResource LeftMenuBackground}"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
             <Setter Property="Width" Value="130"></Setter>
             <Setter Property="Height" Value="130"></Setter>
             <Setter Property="Margin" Value="20"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            <StackPanel VerticalAlignment="Top" Margin="0 10 0 0">
+                                <Viewbox Width="35" Height="50" Margin="3">
+                                    <Path Name="IconPath" Style="{DynamicResource ClipboardSvg}" Fill="{DynamicResource ColorClipboardSvg}" />
+                                </Viewbox>
+                                <TextBlock Name="TopText" Text="0" Style="{DynamicResource Text_center_btn}" />
+                                <TextBlock Name="BottomText" Text="Lịch học hôm nay" Style="{DynamicResource Text_bottom_btn}" />
+                            </StackPanel>
                         </Border>
+                        <!-- Triggers for changing appearance on hover -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource TriggerBtnTopHomPage}" />
+                                <Setter TargetName="IconPath" Property="Fill" Value="#ffffff" />
+                                <Setter TargetName="TopText" Property="Foreground" Value="#ffffff" />
+                                <Setter TargetName="BottomText" Property="Foreground" Value="#ffffff" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="btnCalendar" TargetType="Button">
+            <!-- Default settings for the button -->
+            <Setter Property="Background" Value="{DynamicResource LeftMenuBackground}"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Width" Value="130"></Setter>
+            <Setter Property="Height" Value="130"></Setter>
+            <Setter Property="Margin" Value="20"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}">
+
+                            <StackPanel VerticalAlignment="Top" Margin="0 10 0 0">
+                                <Viewbox Width="35" Height="50" Margin="3">
+                                    <Path Name="IconPath" Style="{DynamicResource CalendarSvg}" Fill="{DynamicResource ColorCalendarTimeSvg}" />
+                                </Viewbox>
+                                <TextBlock Name="TopText" Text="0" Style="{DynamicResource Text_center_btn}" />
+                                <TextBlock Name="BottomText" Text="Lịch học hôm nay" Style="{DynamicResource Text_bottom_btn}" />
+                            </StackPanel>
+                        </Border>
+                        <!-- Triggers for changing appearance on hover -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource TriggerBtnTopHomPage}" />
+                                <Setter TargetName="IconPath" Property="Fill" Value="#ffffff" />
+                                <Setter TargetName="TopText" Property="Foreground" Value="#ffffff" />
+                                <Setter TargetName="BottomText" Property="Foreground" Value="#ffffff" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="btnClipboardTime" TargetType="Button">
+            <!-- Default settings for the button -->
+            <Setter Property="Background" Value="{DynamicResource LeftMenuBackground}"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Width" Value="130"></Setter>
+            <Setter Property="Height" Value="130"></Setter>
+            <Setter Property="Margin" Value="20"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}">
+
+                            <StackPanel VerticalAlignment="Top" Margin="0 10 0 0">
+                                <Viewbox Width="35" Height="50" Margin="3">
+                                    <Path Name="IconPath" Style="{DynamicResource ClipboardTimeSvg}" Fill="{DynamicResource ColorClipboardTimeSvg}" />
+                                </Viewbox>
+                                <TextBlock Name="TopText" Text="0" Style="{DynamicResource Text_center_btn}" />
+                                <TextBlock Name="BottomText" Text="Lịch học hôm nay" Style="{DynamicResource Text_bottom_btn}" />
+                            </StackPanel>
+                        </Border>
+                        <!-- Triggers for changing appearance on hover -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource TriggerBtnTopHomPage}" />
+                                <Setter TargetName="IconPath" Property="Fill" Value="#ffffff" />
+                                <Setter TargetName="TopText" Property="Foreground" Value="#ffffff" />
+                                <Setter TargetName="BottomText" Property="Foreground" Value="#ffffff" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="btnAddFile" TargetType="Button">
+            <!-- Default settings for the button -->
+            <Setter Property="Background" Value="{DynamicResource LeftMenuBackground}"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Width" Value="130"></Setter>
+            <Setter Property="Height" Value="130"></Setter>
+            <Setter Property="Margin" Value="20"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}">
+
+                            <StackPanel VerticalAlignment="Top" Margin="0 10 0 0">
+                                <Viewbox Width="35" Height="50" Margin="3">
+                                    <Path Name="IconPath" Style="{DynamicResource AddFileSvg}" Fill="{DynamicResource ColorAddFileSvg}" />
+                                </Viewbox>
+                                <TextBlock Name="TopText" Text="0" Style="{DynamicResource Text_center_btn}" />
+                                <TextBlock Name="BottomText" Text="Lịch học hôm nay" Style="{DynamicResource Text_bottom_btn}" />
+                            </StackPanel>
+                        </Border>
+                        <!-- Triggers for changing appearance on hover -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource TriggerBtnTopHomPage}" />
+                                <Setter TargetName="IconPath" Property="Fill" Value="#ffffff" />
+                                <Setter TargetName="TopText" Property="Foreground" Value="#ffffff" />
+                                <Setter TargetName="BottomText" Property="Foreground" Value="#ffffff" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
         <Style TargetType="TextBlock" x:Key="Text_center_btn">
             <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"></Setter>
-            <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
+            
             <Setter Property="Margin" Value="2"></Setter>
             <Setter Property="FontSize" Value="25"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -34,7 +154,7 @@
         </Style>
         <Style TargetType="TextBlock" x:Key="Text_bottom_btn">
             <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"></Setter>
-            <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
+            
             <Setter Property="Margin" Value="2"></Setter>
             <Setter Property="FontSize" Value="12"></Setter>
             <Setter Property="Margin" Value="2 0 2 0"></Setter>
@@ -48,8 +168,23 @@
             <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
             <Setter Property="Margin" Value="5 2 5 2"></Setter>
         </Style>
+        <Style x:Key="btnSectionClasses" TargetType="Button" >
+           
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="auto"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Margin" Value="12 12 50 12"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#3663fe"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
-    <Grid Background="{DynamicResource SecondaryBackgroundColor}" Margin="32">
+    <Grid Background="{DynamicResource SecondaryBackgroundColor}" Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -57,42 +192,13 @@
         <Grid Grid.Row="0">
             <Border>
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Button>
-                        <StackPanel>
-                            <Viewbox Width="35" Height="50" Margin="3">
-                                <Path Style="{DynamicResource ClipboardSvg}" Fill="{DynamicResource ColorClipboardSvg}"  ></Path>
-                            </Viewbox>
-                            <TextBlock Style="{DynamicResource Text_center_btn}" >0</TextBlock>
-                            <TextBlock Style="{DynamicResource Text_bottom_btn}" >Lịch học hôm nay</TextBlock>
-                        </StackPanel>
-
+                    <Button Style="{DynamicResource btnClipboard}">
                     </Button>
-                    <Button>
-                        <StackPanel>
-                            <Viewbox Width="35" Height="50" Margin="3">
-                                <Path Style="{DynamicResource CalendarTimeSvg}" Fill="{DynamicResource ColorCalendarTimeSvg}"></Path>
-                            </Viewbox>
-                            <TextBlock Style="{DynamicResource Text_center_btn}" >0</TextBlock>
-                            <TextBlock Style="{DynamicResource Text_bottom_btn}" >Lịch học tuần này</TextBlock>
-                        </StackPanel>
+                    <Button Style="{DynamicResource btnCalendar}">
                     </Button>
-                    <Button>
-                        <StackPanel>
-                            <Viewbox Width="35" Height="50" Margin="3">
-                                <Path Style="{DynamicResource ClipboardTimeSvg}" Fill="{DynamicResource ColorClipboardTimeSvg}"></Path>
-                            </Viewbox>
-                            <TextBlock Style="{DynamicResource Text_center_btn}" >0</TextBlock>
-                            <TextBlock Style="{DynamicResource Text_bottom_btn}" >Học phần đã đăng ký</TextBlock>
-                        </StackPanel>
+                    <Button Style="{DynamicResource btnClipboardTime}">
                     </Button>
-                    <Button>
-                        <StackPanel>
-                            <Viewbox Width="35" Height="50" Margin="3">
-                                <Path Style="{DynamicResource AddFileSvg}" Fill="{DynamicResource ColorAddFileSvg}"></Path>
-                            </Viewbox>
-                            <TextBlock Style="{DynamicResource Text_center_btn}" >0</TextBlock>
-                            <TextBlock Style="{DynamicResource Text_bottom_btn}" >Học phần chưa đăng ký</TextBlock>
-                        </StackPanel>
+                    <Button Style="{DynamicResource btnAddFile}">
                     </Button>
                 </StackPanel>
             </Border>
@@ -105,21 +211,19 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <Button  x:Name="btnShowPopup" Click="btnShowPopup_Click" Height="30" Width="auto" HorizontalAlignment="Left" Margin="12 12 50 12" Background="Transparent">
+                    <Button  x:Name="btnShowPopup" Click="btnShowPopup_Click"  Style="{DynamicResource btnSectionClasses}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock VerticalAlignment="Center" Margin="20 0 10 0" Foreground="{DynamicResource SecondForegroundColor}" FontSize="16">Lớp học phần</TextBlock>
-                        
-                        <Viewbox Width="10">
+                            <TextBlock VerticalAlignment="Center" Margin="20 0 10 0" FontSize="16">Lớp học phần</TextBlock>
+                            <Viewbox Width="10">
                             <Path Style="{DynamicResource ArrowDownSvg}"></Path>
                         </Viewbox>
                     </StackPanel>
-                </Button>
-                <Popup x:Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=btnShowPopup}" HorizontalOffset="0" VerticalOffset="20" >
-                    <StackPanel Background="{DynamicResource LeftMenuBackground}" x:Name="StackPanelPopup" >
-                        <Button Style="{DynamicResource btnpopup}"  Visibility="Hidden" Height="0">a</Button>
-                        
-                    </StackPanel>
-                </Popup>
+                    </Button>
+                    <Popup x:Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=btnShowPopup}" HorizontalOffset="0" VerticalOffset="20">
+                        <StackPanel Background="{DynamicResource LeftMenuBackground}" x:Name="StackPanelPopup" >
+                            <Button Style="{DynamicResource btnpopup}"  Visibility="Hidden" Height="0">a</Button>
+                        </StackPanel>
+                    </Popup>
                 </Grid>
                 
 

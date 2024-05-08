@@ -387,6 +387,8 @@
     </Style>
     <!--End AlertWindow-->
     <!--HomePage-->
+    <SolidColorBrush x:Key="TriggerBtnTopHomPage">#3663fd</SolidColorBrush>
+    <SolidColorBrush x:Key="TriggerTextblockTopHomPage">#ffffff</SolidColorBrush>
     <SolidColorBrush x:Key="ColorClipboardSvg">#3663fd</SolidColorBrush>
     <SolidColorBrush x:Key="ColorCalendarTimeSvg">#3663fd</SolidColorBrush>
     <SolidColorBrush x:Key="ColorClipboardTimeSvg">#3663fd</SolidColorBrush>

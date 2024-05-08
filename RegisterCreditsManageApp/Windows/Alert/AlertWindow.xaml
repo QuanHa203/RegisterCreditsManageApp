@@ -17,12 +17,12 @@
      <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.RowDefinitions>
-            <RowDefinition Height="20" ></RowDefinition>
+            <RowDefinition Height="30" ></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
        
             <Grid Grid.Row="0">
-            <Button Background="Transparent" Height="16" Width="20" HorizontalAlignment="Right" Margin="0,5,7.5,0" BorderThickness="0" Click="xAlertBtn">
+            <Button Background="Transparent" Height="20" Width="20" HorizontalAlignment="Right" Margin="0,5,7.5,0" BorderThickness="0" Click="xAlertBtn">
                 <Viewbox>
                     <Path Style="{DynamicResource XMarkSvg}"></Path>
                 </Viewbox>

@@ -30,7 +30,6 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         {
 
             InitializeComponent();
- 
             Style btnStyle = this.Resources["btnpopup"] as Style;
             RenderDataGrid();
             
