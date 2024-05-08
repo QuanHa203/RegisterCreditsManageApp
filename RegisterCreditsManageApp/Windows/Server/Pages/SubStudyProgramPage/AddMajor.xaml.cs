@@ -29,11 +29,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubWindow
        
         private void CancelAddingMajorBtn_Click(object sender, RoutedEventArgs e)
         {
-            //AlertResult result = AlertBox.Show("Bạn có chắc muốn hủy thêm ngành học không?", "Thông báo", AlertButton.YesNo, AlertIcon.Question);
-            //if(result == AlertResult.Yes)
-            //{
-               this.Close();
-            //}
+            AlertResult result = AlertBox.Show("Bạn có chắc muốn hủy thêm ngành học không?", "Thông báo", AlertButton.YesNo, AlertIcon.Question);
+            if (result == AlertResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void AddMajorBtn_Click(object sender, RoutedEventArgs e)

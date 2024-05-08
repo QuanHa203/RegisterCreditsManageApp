@@ -1,4 +1,5 @@
 ﻿using RegisterCreditsManageApp.Models;
+using RegisterCreditsManageApp.Windows.Alert;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,13 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubWindow
         public AddSubject()
         {
             InitializeComponent();
+            DisplaySemester();
+        }
+        public void DisplaySemester()
+        {
             var btnStyle = this.Resources["SemesterBtn"] as Style;
             var SemesterList = AppDbContext._Context.Semesters.ToList();
-            foreach(var semester in SemesterList)
+            foreach (var semester in SemesterList)
             {
                 Button btn = new Button()
                 {
@@ -45,7 +50,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubWindow
         }
         private void CancelAddingSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            AlertResult result = AlertBox.Show("Bạn có chắc muốn hủy thêm môn học không?", "Thông báo", AlertButton.YesNo, AlertIcon.Question);
+            if (result == AlertResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void SemesterToggleButton_Click(object sender, RoutedEventArgs e)
@@ -58,6 +67,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubWindow
             {
                 SemesterPopup.IsOpen = false;
             }
+        }
+
+        private void AddSubjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

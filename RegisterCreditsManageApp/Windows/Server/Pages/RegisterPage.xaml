@@ -99,7 +99,7 @@
             <Border Margin="0 24 0 0" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="24">
-                        <RadioButton x:Name="RadioButtonClassNotRegistered" Style="{DynamicResource RedirectRadioButton}" IsChecked="True">Lớp học chưa đăng ký tín chỉ</RadioButton>
+                        <RadioButton x:Name="RadioButtonClassNotRegistered" Style="{DynamicResource RedirectRadioButton}" Unchecked="RadioButtonClassNotRegistered_CheckedAndUnchecked" Checked="RadioButtonClassNotRegistered_CheckedAndUnchecked" IsChecked="{x:Null}">Lớp học chưa đăng ký tín chỉ</RadioButton>
                         <RadioButton Style="{DynamicResource RedirectRadioButton}">Lớp học đã đăng ký tín chỉ</RadioButton>
                     </StackPanel>
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" BorderBrush="Transparent" BorderThickness="0">
@@ -148,7 +148,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
 
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Tên lớp học" Width="180" Binding="{Binding ClassName}"/>
+                                <DataGridTextColumn Header="Tên lớp học" Width="180" Binding="{Binding MainClassName}"/>
                                 <DataGridTextColumn Header="Ngành học" Width="180" Binding="{Binding MajorsName}"/>
                                 <DataGridTextColumn Header="Học kỳ đăng ký" Width="160" Binding="{Binding SemesterName}"/>
                                 <DataGridTextColumn Header="Khóa học" Width="120" Binding="{Binding Id}"/>

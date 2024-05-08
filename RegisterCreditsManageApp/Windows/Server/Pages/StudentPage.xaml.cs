@@ -22,13 +22,6 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
 
             List<Student> studentList = AppDbContext._Context.Students.Include((student) => student.IdMainClassNavigation).ToList();
             DataGridStudent.ItemsSource = studentList;
-
-            Student student = new Student();
-            int idSemester = student.IdMainClassNavigation.IdCurrentRegisterSemester;
-            for(int i = 1; i <= idSemester; i++)
-            {
-
-            }
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
