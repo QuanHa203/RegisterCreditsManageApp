@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RegisterCreditsManageApp.Windows.Client.Pages.IteamAccountPage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,26 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
     {
         public AccountPage()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+
+            rdbStudentInformation.IsChecked = true;
+            AccFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/IteamAccountPage/StudentInformation.xaml", UriKind.Relative));
+        }
+
+        private void rdbStudentInformation_Checked(object sender, RoutedEventArgs e)
+        {
+            AccFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/IteamAccountPage/StudentInformation.xaml", UriKind.Relative));
+
+        }
+
+        private void rdbEducationInformation_Checked(object sender, RoutedEventArgs e)
+        {
+            AccFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/IteamAccountPage/EducationInformation.xaml", UriKind.Relative));
+        }
+
+        private void rdbChangePassword_Checked(object sender, RoutedEventArgs e)
+        {
+            AccFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/IteamAccountPage/ChangePassword.xaml", UriKind.Relative));
         }
     }
 }
