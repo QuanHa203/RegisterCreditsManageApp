@@ -61,18 +61,19 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
             idCurrentSemester = LoginWindow.CurrentStudent.IdMainClassNavigation.IdCurrentRegisterSemester;
 
             var btnStyle = this.Resources["SemesterButton"] as Style;
-            var CurrentSemesterList = AppDbContext._Context.Semesters.Where((Semester s) => s.IdSemester == idCurrentSemester).ToList();
-            foreach (var semester in CurrentSemesterList)
+           
+            for (int i=1; i<=idCurrentSemester; i++)
             {
                 Button btn = new Button()
                 {
                     Style = btnStyle,
-                    Content = semester.Name,
+                    Content = $"Học kỳ {i}",
                 };
+                int index = i;
                 btn.Click += (s, e) =>
                 {
-                    semester.IdSemester = idCurrentSemester;
-                    SemesterTitle.Text = semester.Name;
+                    idCurrentSemester = index;
+                    SemesterTitle.Text = $"Học kỳ {index}";
                     SemesterPopup.IsOpen = false;
                     LoadData();
                 };
