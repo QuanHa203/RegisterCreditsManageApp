@@ -223,12 +223,6 @@ namespace RegisterCreditsManageApp.Windows
 
             await Task.Delay(120);
             path.SetValue(Path.FillProperty, DependencyProperty.UnsetValue);
-        }
-        
-        protected void LeftMenuBtnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            AlertBox.Show("Hello");
-
-        }
+        }        
     }
 }

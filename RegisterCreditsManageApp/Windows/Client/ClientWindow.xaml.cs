@@ -30,13 +30,20 @@ namespace RegisterCreditsManageApp.Windows.Client
 
         private void AccountBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/AccountPage.xaml", UriKind.Relative));
-            AlertBox.Show("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",AlertButton.YesNo);
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/AccountPage.xaml", UriKind.Relative));            
+        }
+
+        private void NotifyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AlertBox.Show("Chức năng này đang trong quá trình phát triển", "Thông báo", AlertButton.OK, AlertIcon.Information);
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            var alertResult = AlertBox.Show("Bạn có chắc chắn muốn thoát không?", "", AlertButton.YesNo, AlertIcon.Question);
+            if (alertResult == AlertResult.Yes)                
+                Application.Current.Shutdown();
         }
+
     }
 }

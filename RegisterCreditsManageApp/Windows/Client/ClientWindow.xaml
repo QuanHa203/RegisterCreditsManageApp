@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows"      
         WindowState="Maximized"          
-        Title="ClientWindow" Width="800" Height="450">
+        Title="ClientWindow" Width="1200" Height="600">
 
     <Window.Resources>
         <!-- Navigation -->
@@ -103,7 +103,7 @@
         <Grid Grid.Row="0" Background="{DynamicResource PrimaryBackgroundColor}">
             <Grid Margin="24 0 24 0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="NotifyBtn" Style="{DynamicResource NotifyBtn}"/>
+                    <Button x:Name="NotifyBtn" Style="{DynamicResource NotifyBtn}" Click="NotifyBtn_Click"/>
                     <CheckBox x:Name="ThemeModeCheckBox" 
                       Template="{DynamicResource ThemeModeCheckBox}"
                       Checked="ThemeModeCheckBox_Checked"

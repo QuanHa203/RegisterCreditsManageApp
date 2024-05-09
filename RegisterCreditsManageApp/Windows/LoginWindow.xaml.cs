@@ -30,6 +30,7 @@ namespace RegisterCreditsManageApp.Windows
         private string password = "";
         private string filePath = "";
         private static Student currentStudent = null;
+        private static User currentAdmin = null;
         public static Student CurrentStudent
         {
             get
@@ -39,6 +40,18 @@ namespace RegisterCreditsManageApp.Windows
                 else
                     return currentStudent;
             }
+        }
+
+        public static User CurrentAdmin
+        {
+            get
+            {
+                if (currentAdmin == null)
+                    throw new Exception("Admin only get in ServertWindow");
+                else
+                    return currentAdmin;
+            }
+            set { currentAdmin = value; }
         }
         public LoginWindow()
         {
@@ -146,7 +159,8 @@ namespace RegisterCreditsManageApp.Windows
                     if (user.Password.Trim() == passwordInput.Trim() && user.Email.Trim() == userInput.Trim())
                     {
                         if (user.IdRole == 1)
-                        {                            
+                        {
+                            currentAdmin = user;
                             ServerWindow sv = new ServerWindow();
                             sv.Show();
                             this.Close();
@@ -159,7 +173,7 @@ namespace RegisterCreditsManageApp.Windows
                                                                            .Include(student => student.IdMajorsNavigation)
                                                                            .Include(student => student.IdStudentNavigation)
 
-                                                                           .FirstOrDefault(student => student.IdStudent == user.IdUser);
+                                                                           .FirstOrDefault(student => student.IdStudent == user.IdUser)!;
                             ClientWindow cl = new ClientWindow();
                             cl.Show();
                             this.Close();
