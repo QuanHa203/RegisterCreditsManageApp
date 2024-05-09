@@ -73,12 +73,6 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubStudyProgramPage
             }
         }
 
-        private void AddSubjectButton_Click(object sender, RoutedEventArgs e)
-        {
-            new AddSubject(idMajor).ShowDialog();
-            LoadSubjectData(idMajor);
-        }
-
         private void ModifySubjectBtn_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
@@ -114,6 +108,12 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubStudyProgramPage
             StackPanel st = btn.Parent as StackPanel;
             Popup popup = st.Children[0] as Popup;
             popup.IsOpen = true;
+        }
+
+        private void AddSubjectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new AddSubject(idMajor).ShowDialog();
+            LoadSubjectData(idMajor);
         }
     }
 }

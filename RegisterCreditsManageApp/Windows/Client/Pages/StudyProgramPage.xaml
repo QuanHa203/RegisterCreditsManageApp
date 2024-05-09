@@ -38,7 +38,7 @@
         </Style>
 
         <!--Semester selection button style-->
-        <Style x:Key="SemesterBtn" TargetType="Button">
+        <Style x:Key="SemesterButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -117,7 +117,7 @@
                            HorizontalOffset="0" 
                            VerticalOffset="0">
 
-                        <Border CornerRadius="5" Background="{DynamicResource SecondaryBackgroundColor}" BorderThickness="0">
+                        <Border CornerRadius="5" Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0">
                             <StackPanel x:Name="SemesterListPopup"
                             Background="Transparent"
                             Width="200" 
@@ -137,18 +137,17 @@
         <Border Grid.Row="1" Margin="40,40,40,40" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}">
             <Grid>
                 <DataGrid Margin="0 25 0 10" 
-                          x:Name="DataGrid" 
+                          x:Name="SubjectProgramDataGrid" 
                           Style="{DynamicResource DefaultDataGrid}" 
                           CellStyle="{DynamicResource DefaultDataGridCell}" 
                           RowStyle="{DynamicResource DefaultDataGridRow}" 
                           ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="STT" Width="100" Binding="{Binding majorName}"/>
-                        <DataGridTextColumn Header="Môn học/ học phần" Binding="{Binding subjectNum}" Width="*"/>
-                        <DataGridTextColumn Header="Mã học phần" Binding="{Binding subjectNum}" Width="*"/>
-                        <DataGridTextColumn Header="Số tín chỉ" Binding="{Binding subjectNum}" Width="*"/>
-                        <DataGridTextColumn Header="Đạt" Binding="{Binding subjectNum}" Width="*"/>
+                        <DataGridTextColumn Header="STT" Width="100" Binding="{Binding stt}"/>
+                        <DataGridTextColumn Header="Môn học/ học phần" Binding="{Binding subjectName}" Width="*"/>
+                        <DataGridTextColumn Header="Mã học phần" Binding="{Binding idClassroom}" Width="*"/>
+                        <DataGridTextColumn Header="Số tín chỉ" Binding="{Binding creditNum}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

@@ -108,7 +108,6 @@ namespace RegisterCreditsManageApp.Windows
         {
             string userInput = UserTextbox.Text;
             string passwordInput = PasswordText.Password;
-
             //Check cac textbox
             if (userInput.Trim().Length == 0)
             {
@@ -256,13 +255,11 @@ namespace RegisterCreditsManageApp.Windows
         private void PasswordTextbox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
             password = PasswordText.Password;
-
         }
 
         private void PasswordText_PasswordChanged_1(object sender, RoutedEventArgs e)
         {
             password = PasswordTextbox.Text;
-
         }
 
         private void UserTextbox_KeyUp(object sender, KeyEventArgs e)

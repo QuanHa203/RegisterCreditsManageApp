@@ -16,6 +16,9 @@
         <Style x:Key="AddSubjectBtn" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="0 180 0 0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -60,10 +63,10 @@
                 <!--subject data grid-->
                 <Border Grid.Row="1" Margin="40" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}">
                     <Grid>
-                        <DataGrid Margin="0 25 0 10" 
-                   x:Name="SubjectDataGrid" 
-                   Style="{DynamicResource DefaultDataGrid}" 
-                   CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
+                        <DataGrid Margin="0,25,0,30" 
+                               x:Name="SubjectDataGrid" 
+                               Style="{DynamicResource DefaultDataGrid}" 
+                               CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Tên ngành học" Width="*" Binding="{Binding subjectName}"/>
@@ -113,6 +116,14 @@
                                
                             </DataGrid.Columns>
                         </DataGrid>
+                        <Button x:Name="AddSubjectBtn" Click="AddSubjectBtn_Click" Style="{DynamicResource AddSubjectBtn}">
+                            <Viewbox>
+                                <Path Style="{DynamicResource AddSvg}" Fill="Blue"/>
+                            </Viewbox>
+                            <Button.ToolTip>
+                                <ToolTip Content="Thêm môn học" />
+                            </Button.ToolTip>
+                        </Button>
                     </Grid>
                 </Border>
 
