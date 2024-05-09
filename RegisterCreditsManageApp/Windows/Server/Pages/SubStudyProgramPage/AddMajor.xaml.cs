@@ -1,4 +1,5 @@
-﻿using RegisterCreditsManageApp.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Alert;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,28 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubWindow
         public AddMajor()
         {
             InitializeComponent();
+            LoadMajorDataGrid();
         }
-       
+
+        public void LoadMajorDataGrid()
+        {
+            List<Major> majorList = AppDbContext._Context.Majors.ToList();
+            var list = new List<MajorData>();
+            foreach (Major major in majorList)
+            {
+                MajorData majorData = new MajorData()
+                {
+                    majorName = major.Name,
+                };
+                list.Add(majorData);
+            }
+            MajorDataGrid.ItemsSource = list;
+        }
+        public class MajorData
+        {
+            public int idMajor { get; set; }
+            public string majorName { get; set; }
+        }
         private void CancelAddingMajorBtn_Click(object sender, RoutedEventArgs e)
         {
             AlertResult result = AlertBox.Show("Bạn có chắc muốn hủy thêm ngành học không?", "Thông báo", AlertButton.YesNo, AlertIcon.Question);
@@ -38,29 +59,35 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubWindow
 
         private void AddMajorBtn_Click(object sender, RoutedEventArgs e)
         {
-           if(MajorNameTextBox.Text == "")
+           if(MajorNameTextBox.Text.Trim() == "" || MajorNameTextBox.Text.Trim() == "Nhập tên ngành học")
            {
                 AlertBox.Show("Vui lòng nhập tên ngành học!", "Thông báo", AlertButton.OK, AlertIcon.Information);
+           }
+            else
+            {
+                Major major = new Major {Name = MajorNameTextBox.Text.Trim() };
+                AppDbContext._Context.Add(major);
+                AppDbContext._Context.SaveChanges();
+                AlertBox.Show("Thêm ngành học thành công", "Thông báo", AlertButton.OK, AlertIcon.Success);
+                MajorNameTextBox.Clear();
+                LoadMajorDataGrid();
             }
-           else
-           {
-                if (SubjectDataGrid.ItemsSource != null)
-                {
-                    Major major = new Major { Name = MajorNameTextBox.Text };
-                    AppDbContext._Context.Add(major);
-                    AppDbContext._Context.SaveChanges();
-                }
-                else
-                {
-                    AlertBox.Show("Vui lòng thêm môn học!", "Thông báo", AlertButton.OK, AlertIcon.Information);
-                }
-            }
-               
         }
 
-        private void AddSubjectButton_Click(object sender, RoutedEventArgs e)
+        private void MajorNameTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            new AddSubject().ShowDialog();
+            if(string.IsNullOrEmpty(MajorNameTextBox.Text))
+            {
+                MajorNameTextBox.Text = "Nhập tên ngành học";
+            }    
+        }
+
+        private void MajorNameTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if(MajorNameTextBox.Text == "Nhập tên ngành học")
+            {
+                MajorNameTextBox.Text = "";
+            }    
         }
     }
 }

@@ -22,9 +22,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubWindow
     /// </summary>
     public partial class AddSubject : Window
     {
+        private int idMajor;
         private int? idSemester; 
-        public AddSubject()
+        public AddSubject(int idMajor)
         {
+            this.idMajor = idMajor;
             InitializeComponent();
             DisplaySemester();
         }
@@ -71,7 +73,17 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubWindow
 
         private void AddSubjectBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (SubjectNameTextBox.Text.Trim() == "" || CreditNumberTextBox.Text.Trim() == "" || idSemester == null)
+            {
+                AlertBox.Show("Vui lòng hoàn thành hết dữ liệu!", "Thông báo", AlertButton.OK, AlertIcon.Information);
+                return;
+            }
+                Subject subject = new Subject { Name = SubjectNameTextBox.Text.Trim(), NumberOfCredits = int.Parse(CreditNumberTextBox.Text.Trim()), IdMajors = idMajor, IdSemester = idSemester.Value };
+                AppDbContext._Context.Add(subject);
+                AppDbContext._Context.SaveChanges();
+                AlertBox.Show("Thêm môn học thành công", "Thông báo", AlertButton.OK, AlertIcon.Success);
+
+            this.Close();
         }
     }
 }

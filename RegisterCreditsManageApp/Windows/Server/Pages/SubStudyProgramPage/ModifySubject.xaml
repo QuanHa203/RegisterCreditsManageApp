@@ -14,6 +14,63 @@
          AllowsTransparency="True"
          WindowStyle="None"
         >
+
+    <Window.Resources>
+        <Style x:Key="SemesterToggleBtn" TargetType="ToggleButton">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Transparent" />
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Semester selection button style-->
+        <Style x:Key="SemesterBtn" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="FontFamily" Value="Montserrat"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0 5 0 5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <!--Clear hover btn-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Content="{TemplateBinding Content}" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Border Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="20">
             <Grid Margin="20">
@@ -30,7 +87,7 @@
                     FontFamily="Montserrat Bold"
                     FontSize="20"
                     Foreground="#3663fe" Height="34" Width="606"            
-            />
+                        />
                         <Label>
                             <TextBlock Margin="2 0 0 0">
                  <Run Text="Quản lý" Foreground="#91a1be"/>
@@ -101,33 +158,59 @@
                     <!--Semesters ComboBox-->
                     <StackPanel Grid.Column="1">
                         <Label Content="Học kỳ" 
-                       FontFamily="Montserrat"
-                       FontSize="15"
-                       Foreground="{DynamicResource PrimaryForegroundColor}" 
-                       Height="30"     
-                       Margin="5 0 0 0"
-                       Width="130"
-                       HorizontalAlignment="Left"   
-                />
+                                FontFamily="Montserrat"
+                                FontSize="15"
+                                Foreground="{DynamicResource PrimaryForegroundColor}" 
+                                Height="30"     
+                                Margin="5 0 0 0"
+                                Width="130"
+                                HorizontalAlignment="Left"      
+                        />
                         <Border Width="200" Height="35" Margin="10 5 0 0" CornerRadius="10" BorderThickness="1"  BorderBrush="#91a1be" HorizontalAlignment="Left">
-                            <ComboBox x:Name="SemesterComboBox"
-                              Background="Red"
-                              BorderThickness="0"
-                              FontFamily="Montserrat"
-                              FontSize="15"
-                              Margin="5"
-                              Cursor="Hand"
-                              ItemsSource="{Binding SemesterData}"
-                            >
+                            <StackPanel>
+                                <ToggleButton x:Name="SemesterToggleButton"
+                           Style="{DynamicResource SemesterToggleBtn}"
+                           Click="SemesterToggleButton_Click"
+             >
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="SemesterTitle" 
+                                                    Text="-- Chọn học kỳ--"
+                                                    Width="150"
+                                                    Foreground="#91a1be"
+                                                    FontFamily="Montserrat"
+                                                    FontSize="15"
+                                                    VerticalAlignment="Center"
+                                                    Margin="10 0 0 0"
+                                        >
 
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border>
-                                            <TextBlock Text="{Binding SemesterTitle}"/>
-                                        </Border>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                                        </TextBlock>
+                                        <Viewbox  Width="20" Height="20" Margin="10 0 15 5">
+                                            <Path Style="{DynamicResource ArrowDownSvg}" Fill="#d0bdbd"/>
+                                        </Viewbox>
+                                    </StackPanel>
+                                </ToggleButton>
+
+                                <Popup x:Name="SemesterPopup" 
+                                        AllowsTransparency="True"
+                                        IsOpen="False" 
+                                        StaysOpen="False" 
+                                        Placement="{Binding ElementName=SemesterButton}" 
+                                        HorizontalOffset="0" 
+                                        VerticalOffset="0">
+
+                                    <Border CornerRadius="5" Background="{DynamicResource SecondaryBackgroundColor}" BorderThickness="0">
+                                        <StackPanel x:Name="SemesterListPopup"
+                                                     Background="Transparent"
+                                                     Width="200" 
+                                                     Height="auto"
+                                                     >
+
+                                        </StackPanel>
+                                    </Border>
+
+                                </Popup>
+                            </StackPanel>
+
                         </Border>
                     </StackPanel>
                 </Grid>
@@ -136,7 +219,7 @@
                 <!--Button section-->
                 <Grid Grid.Row="2" HorizontalAlignment="Left" Margin="360,13,0,-10" Width="300">
                     <Border Margin="0 0 120 0" Width="100" Height="50" BorderBrush="#1ef118" BorderThickness="1" CornerRadius="10">
-                        <Button x:Name="ModifyMajorBtn" Content="Cập nhật" Cursor="Hand" FontFamily="Montserrat" FontSize="15" BorderThickness="0" Foreground="#1ef118" Background="Transparent">
+                        <Button x:Name="UpdateSubjectBtn" Click="UpdateSubjectBtn_Click" Content="Cập nhật" Cursor="Hand" FontFamily="Montserrat" FontSize="15" BorderThickness="0" Foreground="#1ef118" Background="Transparent">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Grid>
@@ -149,7 +232,7 @@
                         </Button>
                     </Border>
                     <Border Margin="100 0 0 0" Width="100" Height="50" BorderBrush="#932d3b" BorderThickness="1" CornerRadius="10">
-                        <Button x:Name="CancelAddingMajorBtn" Content="Hủy" Cursor="Hand" FontFamily="Montserrat" FontSize="15" BorderThickness="0" Foreground="#932d3b" Background="Transparent">
+                        <Button x:Name="CancelModifyingSubjectBtn" Click="CancelModifyingSubjectBtn_Click" Content="Hủy" Cursor="Hand" FontFamily="Montserrat" FontSize="15" BorderThickness="0" Foreground="#932d3b" Background="Transparent">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Grid>
