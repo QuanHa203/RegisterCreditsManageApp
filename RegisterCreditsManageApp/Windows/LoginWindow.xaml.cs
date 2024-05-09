@@ -17,6 +17,7 @@ using RegisterCreditsManageApp.Models;
 using System.Data;
 using RegisterCreditsManageApp.Windows.Client;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace RegisterCreditsManageApp.Windows
 {
@@ -28,6 +29,17 @@ namespace RegisterCreditsManageApp.Windows
         private List<User> userList;
         private string password = "";
         private string filePath = "";
+        private static Student currentStudent = null;
+        public static Student CurrentStudent
+        {
+            get
+            {
+                if (currentStudent == null)
+                    throw new Exception("Student only get in ClientWindow");
+                else
+                    return currentStudent;
+            }
+        }
         public LoginWindow()
         {
             InitializeComponent();
@@ -135,13 +147,20 @@ namespace RegisterCreditsManageApp.Windows
                     if (user.Password.Trim() == passwordInput.Trim() && user.Email.Trim() == userInput.Trim())
                     {
                         if (user.IdRole == 1)
-                        {
+                        {                            
                             ServerWindow sv = new ServerWindow();
                             sv.Show();
                             this.Close();
                         }
                         else
                         {
+                            // Get student login success
+                            currentStudent = AppDbContext._Context.Students.Include(student => student.IdMainClassNavigation)
+                                                                           .Include(student => student.IdMainClassNavigation.IdCurrentRegisterSemesterNavigation)
+                                                                           .Include(student => student.IdMajorsNavigation)
+                                                                           .Include(student => student.IdStudentNavigation)
+
+                                                                           .FirstOrDefault(student => student.IdStudent == user.IdUser);
                             ClientWindow cl = new ClientWindow();
                             cl.Show();
                             this.Close();
@@ -247,7 +266,7 @@ namespace RegisterCreditsManageApp.Windows
         }
 
         private void UserTextbox_KeyUp(object sender, KeyEventArgs e)
-        {
+       {
             if (e.Key == Key.Down)
             {
                 PasswordText.Focus();
