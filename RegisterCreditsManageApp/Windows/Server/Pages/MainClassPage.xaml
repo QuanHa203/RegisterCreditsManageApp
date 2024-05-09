@@ -1,15 +1,16 @@
-﻿<Page x:Class="RegisterCreditsManageApp.Windows.Server.Pages.RegisterPage"
+﻿<Page x:Class="RegisterCreditsManageApp.Windows.Server.Pages.MainClassPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages"
       mc:Ignorable="d" 
       Background="{DynamicResource SecondaryBackgroundColor}"
       FontFamily="{DynamicResource DefaultFontFamily}"
-      d:DesignHeight="450" d:DesignWidth="800"
       Loaded="Page_Loaded"
-      Title="AnalysisPage">
-    
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainClassPage">
+
     <Page.Resources>
         <Style x:Key="SearchBorder" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
@@ -75,7 +76,6 @@
             </Setter>
         </Style>
 
-        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Red"/>
 
     </Page.Resources>
 
@@ -94,21 +94,44 @@
                     </Grid>
                 </StackPanel>
             </Border>
+
+            <Button x:Name="BtnAdd" HorizontalAlignment="Right" Click="BtnAdd_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
+                        <Setter Property="Padding" Value="12 12 24 12"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}" Padding="{TemplateBinding Padding}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Viewbox Width="24" Margin="0 0 12 0">
+                                                <Path x:Name="Icon" Fill="#3663fe" Style="{DynamicResource AddSvg}"/>
+                                            </Viewbox>
+                                            <TextBlock VerticalAlignment="Center" FontSize="16" FontWeight="Medium">Thêm</TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#3663fe"/>
+                                            <Setter Property="Fill" TargetName="Icon" Value="#fff"/>
+                                            <Setter Property="Foreground" Value="#fff"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
 
 
         <Border Grid.Row="1" Margin="0 24 0 0" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}" Height="auto">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="24">
-                    <RadioButton x:Name="RadioButtonClassNotRegistered" Style="{DynamicResource RedirectRadioButton}" IsChecked="{x:Null}" Checked="RadioButtonClassNotRegistered_CheckedAndUnchecked" Unchecked="RadioButtonClassNotRegistered_CheckedAndUnchecked">Lớp học chưa đăng ký tín chỉ</RadioButton>
-                    <RadioButton Style="{DynamicResource RedirectRadioButton}">Lớp học đã đăng ký tín chỉ</RadioButton>
-                </StackPanel>
-
-                <DataGrid Style="{DynamicResource DefaultDataGrid}"  Grid.Row="1" Margin="0 0 0 24" x:Name="DataGridRegister" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
+            <Grid Margin="0 32 0 0">
+                <DataGrid Style="{DynamicResource DefaultDataGrid}"  Grid.Row="1" Margin="0 0 0 24" x:Name="DataGridMainClass" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>Thao tác</DataGridTemplateColumn.Header>
@@ -118,9 +141,8 @@
                                         <Popup Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" AllowsTransparency="True" Margin="12">
                                             <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" Margin="12">
                                                 <StackPanel HorizontalAlignment="Left" Background="{DynamicResource PrimaryBackgroundColor}">
-                                                    <Button x:Name="BtnRegister" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnRegister_Click">Đăng ký lớp học phần</Button>
-                                                    <TextBlock Text="{Binding IdSemester}"  Height="0"/>
-                                                    <TextBlock Text="{Binding IdMajors}"  Height="0"/>
+                                                    <Button x:Name="BtnEdit" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnEdit_Click">Chỉnh sửa lớp danh nghĩa</Button>
+                                                    <Button x:Name="BtnDelete" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnDelete_Click">Xóa lớp danh nghĩa</Button>
                                                     <TextBlock Text="{Binding IdMainClass}"  Height="0"/>
                                                 </StackPanel>
                                                 <Border.Effect>
@@ -149,9 +171,9 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Tên lớp học" Width="auto" Binding="{Binding MainClassName}"/>
-                        <DataGridTextColumn Header="Ngành học" Width="auto" Binding="{Binding MajorsName}"/>
-                        <DataGridTextColumn Header="Học kỳ đăng ký" Width="auto" Binding="{Binding SemesterName}"/>
+                        <DataGridTextColumn Header="Tên lớp học" Width="auto" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Ngành học" Width="auto" Binding="{Binding IdMajorsNavigation.Name}"/>
+                        <DataGridTextColumn Header="Học kỳ hiện tại" Width="auto" Binding="{Binding IdCurrentRegisterSemesterNavigation.Name}"/>
                         <DataGridTextColumn Header="Khóa học" Width="auto" Binding="{Binding CourseYear}"/>
                     </DataGrid.Columns>
                 </DataGrid>

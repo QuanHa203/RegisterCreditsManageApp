@@ -6,7 +6,7 @@
                   xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows"
                     
         Loaded="MainWindow_Loaded"                  
-        Title="ServerWindow" Width="800" Height="450">
+        Title="ServerWindow" Width="1200" Height="600">
 
     <Window.Resources>
         <!-- Navigation -->
@@ -193,6 +193,32 @@
                                         <Path Style="{DynamicResource GroupSvg}"/>
                                     </Viewbox>
                                     <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Quản lý sinh viên</TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </Button>
+
+                        <Button x:Name="MainClassManagerBtn" 
+                                    Click="MainClassManagerBtn_Click"
+                                    MouseEnter="LeftMenuBtn_MouseEnter"
+                                    MouseLeave="LeftMenuBtn_MouseLeave"
+                                    Style="{DynamicResource LeftMenuBtn}" 
+                                    Width="{Binding ActualWidth, ElementName=LeftMenuStackPanel}">
+                            <Border BorderThickness="2 0 0 0">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="#FF3663FE" Opacity="0"/>
+                                </Border.BorderBrush>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="1,0" StartPoint="-1.6,0">
+                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop0}"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop1}" Offset="0"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+
+                                <StackPanel Orientation="Horizontal" >
+                                    <Viewbox Style="{DynamicResource LeftMenuIcon}" HorizontalAlignment="Left">
+                                        <Path Style="{DynamicResource ClassRoomSvg}"/>
+                                    </Viewbox>
+                                    <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Quản lý Lớp học</TextBlock>
                                 </StackPanel>
                             </Border>
                         </Button>

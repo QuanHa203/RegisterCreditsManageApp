@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegisterCreditsManageApp.Models;
+using RegisterCreditsManageApp.Windows.Alert;
 using RegisterCreditsManageApp.Windows.Server.Pages.SubStudentPage;
 using System.Windows;
 using System.Windows.Controls;
@@ -68,7 +69,24 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             Button btn = sender as Button;
             var parent = btn.Parent as Panel;
             var idStudentTextBlock = parent.Children[2] as TextBlock;
-            LoadDataGrid();
+            string idStudent = idStudentTextBlock.Text;
+            AlertResult alertResult = AlertBox.Show("Bạn có chắc muốn xóa sinh viên này không?", "Thông báo", AlertButton.YesNo, AlertIcon.Question);
+            if(alertResult == AlertResult.Yes)
+            {
+                try
+                {
+                    var student = AppDbContext._Context.Students.FirstOrDefault(student => student.IdStudent == idStudent);
+                    AppDbContext._Context.Remove(student);
+                    AppDbContext._Context.SaveChanges();
+                    AlertBox.Show("Đã xóa sinh viên thành công!", "Thành công", AlertButton.OK, AlertIcon.Success);
+                    LoadDataGrid();
+                }
+                catch (Exception ex)
+                {
+                    AlertBox.Show($"Lỗi, xóa sinh viên thất bại.\nLỗi: {ex.Message}", "Lỗi", AlertButton.OK, AlertIcon.Error);
+                }
+            }
+
 
         }
         public class Data

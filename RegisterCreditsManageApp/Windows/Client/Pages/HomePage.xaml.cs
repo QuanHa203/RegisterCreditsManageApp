@@ -24,7 +24,7 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
     public partial class HomePage : Page
     {
         int idsemester = 1;
-        Student student = AppDbContext._Context.Students.Include(student => student.IdMainClassNavigation).FirstOrDefault(student => student.IdStudent == "2");
+        Student student = LoginWindow.CurrentStudent;
 
         public HomePage()
         {
@@ -55,7 +55,6 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         public void RenderDataGrid()
         {
             List<ClassRoom> classRoomList = AppDbContext._Context.ClassRooms.Include(classroom => classroom.IdSubjectNavigation).Where(classroom => classroom.IdSemester == idsemester).Where(classroom => classroom.IdMainClass == student.IdMainClass).ToList();
-
             DataGridSubject.ItemsSource = classRoomList;
         }
 
