@@ -1,4 +1,5 @@
 ﻿using RegisterCreditsManageApp.Models;
+using RegisterCreditsManageApp.Windows.Alert;
 using RegisterCreditsManageApp.Windows.Server.Pages.SubRegisterPage;
 using System;
 using System.Collections.Generic;
@@ -58,7 +59,8 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                                  select list).ToList();
 
             // Get SubjectNeedEditList 
-            var subjectNeedEditList = (from subject in subjectList from classRoom in classRoomList
+            var subjectNeedEditList = (from subject in subjectList
+                                       from classRoom in classRoomList
                                        where subject.IdSubject == classRoom.IdSubject
                                        select new
                                        {
@@ -67,7 +69,6 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                                            NumberOfCredits = subject.NumberOfCredits
                                        }
                                        ).ToList();
-
 
             foreach (var subject in subjectNeedEditList)
             {
@@ -96,12 +97,30 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         {
             Button btn = sender as Button;
             var parent = btn.Parent as Panel;
-            var idClassRoomTextBlock = parent.Children[1] as TextBlock;
+            var idClassRoomTextBlock = parent.Children[2] as TextBlock;
 
             string idClassRoom = idClassRoomTextBlock.Text;
             new RegisterEditClassRoomWindow(idClassRoom).ShowDialog();
             GetDataGrid(idSemester, idMajors, idMainClass);
-        }        
+        }
+
+        private void BtnDeleteClassRoom_Click(object sender, RoutedEventArgs e)
+        {
+            var alertResult = AlertBox.Show($"Bạn có muốn xóa lớp học phần này không?)", "Cảnh báo", AlertButton.YesNo, AlertIcon.Warning);
+            if(alertResult == AlertResult.Yes)
+            {
+                Button btn = sender as Button;
+                var parent = btn.Parent as Panel;
+                var idClassRoomTextBlock = parent.Children[2] as TextBlock;
+                string idClassRoom = idClassRoomTextBlock.Text;
+            
+                var classRoom = AppDbContext._Context.ClassRooms.FirstOrDefault(classRoom => classRoom.IdClassRoom == idClassRoom);
+                AppDbContext._Context.ClassRooms.Remove(classRoom);
+                AppDbContext._Context.SaveChanges();
+                AlertBox.Show($"Đã xóa lớp học phần thành công", "Thành công", AlertButton.OK, AlertIcon.Success);
+                GetDataGrid(idSemester, idMajors, idMainClass);
+            }
+        }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
@@ -115,5 +134,6 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             public int NumberOfCredits { get; set; }
             public string MainClassName { get; set; }
         }
+
     }
 }

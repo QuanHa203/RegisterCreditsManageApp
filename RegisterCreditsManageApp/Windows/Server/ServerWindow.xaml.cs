@@ -42,6 +42,11 @@ namespace RegisterCreditsManageApp.Windows.Server
             MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/StudentPage.xaml", UriKind.Relative));
         }
 
+        private void MainClassManagerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/MainClassPage.xaml", UriKind.Relative));
+        }
+
         private void AccountBtn_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.NavigationService.Navigate(new Uri("Windows/Server/Pages/AccountPage.xaml", UriKind.Relative));
@@ -49,12 +54,14 @@ namespace RegisterCreditsManageApp.Windows.Server
 
         private void NotifyBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+            AlertBox.Show("Chức năng này đang trong quá trình phát triển", "Thông báo", AlertButton.OK, AlertIcon.Information);
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            var alertResult = AlertBox.Show("Bạn có chắc chắn muốn thoát không?", "", AlertButton.YesNo, AlertIcon.Question);
+            if (alertResult == AlertResult.Yes)
+                Application.Current.Shutdown();
         }
     }
 }

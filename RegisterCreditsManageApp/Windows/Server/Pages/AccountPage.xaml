@@ -5,10 +5,132 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      Background="{DynamicResource SecondaryBackgroundColor}"
+      FontFamily="{DynamicResource DefaultFontFamily}"
+      Loaded="Page_Loaded"
+      d:DesignHeight="400" d:DesignWidth="800"
       Title="AccountPage">
 
-    <Grid>
-        <TextBlock>This is AccountPage</TextBlock>
+    <Page.Resources>
+        <Style x:Key="CommomBtn" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="32 0 0 0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+        Padding="{TemplateBinding Padding}"
+        BorderThickness="{TemplateBinding BorderThickness}"
+        CornerRadius="{DynamicResource DefaultSecondaryCornerRadius}"
+        BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LabelTextBlock" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
+            <Setter Property="Margin" Value="0 0 0 12"/>
+        </Style>
+
+        <Style x:Key="CommomTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ThirdForegroundColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource ThirdForegroundColor}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="8 12"/>
+            <Setter Property="CaretBrush" Value="{DynamicResource DefaultCaretBrush}"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"          
+                                CornerRadius="{DynamicResource DefaultSecondaryCornerRadius}"
+                                SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" 
+                                                    FontSize="{TemplateBinding FontSize}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    HorizontalScrollBarVisibility="Hidden" 
+                                                    VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid >
+        <Border Margin="32" Padding="32" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}" Background="{DynamicResource PrimaryBackgroundColor}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <TextBlock Text="Thay đổi mật khẩu">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="#3663fe"/>
+                                <Setter Property="FontSize" Value="20"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0 12">
+                    <StackPanel Width="300" HorizontalAlignment="Left">
+                        <TextBlock Text="Email" Style="{DynamicResource LabelTextBlock}"/>
+                        <TextBox x:Name="textBoxEmail" Style="{DynamicResource CommomTextBox}" IsReadOnly="True"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel Width="300" HorizontalAlignment="Right">
+                        <TextBlock Text="Nhập mật khẩu cũ" Style="{DynamicResource LabelTextBlock}"/>
+                        <TextBox x:Name="textBoxOldPassword" Style="{DynamicResource CommomTextBox}"></TextBox>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="0 12">
+                    <StackPanel Width="300" HorizontalAlignment="Left">
+                        <TextBlock Text="Nhập mật khẩu mới" Style="{DynamicResource LabelTextBlock}"/>
+                        <TextBox x:Name="textBoxNewPassword" Style="{DynamicResource CommomTextBox}"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel Width="300" HorizontalAlignment="Right">
+                        <TextBlock Text="Nhập lại mật khẩu mới" Style="{DynamicResource LabelTextBlock}"/>
+                        <TextBox x:Name="textBoxNewPasswordAgain" Style="{DynamicResource CommomTextBox}"></TextBox>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="3" Margin="0 12">
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="BtnSave" Style="{DynamicResource CommomBtn}" Foreground="#1eff0f" BorderBrush="#1eff0f" Padding="12" Click="BtnSave_Click">Lưu</Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </Page>
