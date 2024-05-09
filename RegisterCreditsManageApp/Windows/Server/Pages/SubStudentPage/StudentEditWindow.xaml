@@ -14,7 +14,7 @@
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="32 0 32 0"/>
+            <Setter Property="Margin" Value="32 0 0 0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -50,7 +50,6 @@
             <Setter Property="Foreground" Value="{DynamicResource ThirdForegroundColor}"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Padding" Value="8 12"/>
-            <Setter Property="Margin" Value="0 16"/>
             <Setter Property="CaretBrush" Value="{DynamicResource DefaultCaretBrush}"/>
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -119,6 +118,7 @@
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Padding" Value="8 12"/>
             <Setter Property="Margin" Value="0 16"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -141,11 +141,17 @@
         <Style x:Key="BtnInPopup" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="{DynamicResource ThirdForegroundColor}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Foreground" Value="{DynamicResource ThirdForegroundColor}"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Padding" Value="8 12"/>
-            <Setter Property="Margin" Value="0 16"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.6"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
 
@@ -158,11 +164,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0 0 0 24">
-            <TextBlock Text="Chỉnh sửa">
+        <Grid Grid.Row="0">
+            <TextBlock Text="Chỉnh sửa sinh viên">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="#3663fe"/>
@@ -173,7 +178,7 @@
             </TextBlock>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0 12">
             <StackPanel Width="300" HorizontalAlignment="Left">
                 <TextBlock Text="Mã sinh viên" Style="{DynamicResource LabelTextBlock}"/>
                 <TextBox x:Name="textBoxIdStudent" Style="{DynamicResource CommomTextBox}" IsReadOnly="True"></TextBox>
@@ -185,17 +190,17 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Margin="0 12">
             <StackPanel Width="300" HorizontalAlignment="Left">
                 <TextBlock Text="Chuyên ngành" Style="{DynamicResource LabelTextBlock}"/>
-                <Button x:Name="btnMajors" Style="{DynamicResource ShowPopupBtn}" Click="btnMajors_Click">
-                    <TextBlock x:Name="texBlockMajors">Chọn chuyên ngành</TextBlock>
+                <Button x:Name="btnMajors" Style="{DynamicResource ShowPopupBtn}" Click="btnMajors_Click" Margin="0">
+                    <TextBlock>Chọn chuyên ngành</TextBlock>
                 </Button>
-                <Popup Name="popupMajor" IsOpen="False" StaysOpen="False" Placement="Right" AllowsTransparency="True">
+                <Popup Name="popupMajor" IsOpen="False" StaysOpen="False" AllowsTransparency="True" Placement="Bottom">
                     <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" Margin="12">
                         <StackPanel x:Name="popupMajorsData" HorizontalAlignment="Left"/>
                         <Border.Effect>
-                            <DropShadowEffect ShadowDepth="0" Direction="90" Opacity="0.4" BlurRadius="18" RenderingBias="Performance" Color="{DynamicResource DefaultColorDropShadowOfPopup}"/>
+                            <DropShadowEffect Direction="0" ShadowDepth="0"  Opacity="0.2" BlurRadius="18" RenderingBias="Quality" Color="{DynamicResource DefaultColorDropShadowOfPopup}"/>
                         </Border.Effect>
                     </Border>
                 </Popup>
@@ -203,11 +208,21 @@
 
             <StackPanel Width="300" HorizontalAlignment="Right">
                 <TextBlock Text="Lớp danh nghĩa" Style="{DynamicResource LabelTextBlock}"/>
-                
+                <Button x:Name="btnMainClass" Style="{DynamicResource ShowPopupBtn}" Click="btnMainClass_Click" Margin="0">
+                    <TextBlock>Chọn lớp danh nghĩa</TextBlock>
+                </Button>
+                <Popup Name="popupMainClass" IsOpen="False" StaysOpen="False" AllowsTransparency="True" Placement="Bottom">
+                    <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" Margin="12">
+                        <StackPanel x:Name="popupMainClassData" HorizontalAlignment="Left"/>
+                        <Border.Effect>
+                            <DropShadowEffect Direction="0" ShadowDepth="0"  Opacity="0.2" BlurRadius="18" RenderingBias="Quality" Color="{DynamicResource DefaultColorDropShadowOfPopup}"/>
+                        </Border.Effect>
+                    </Border>
+                </Popup>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="3" Margin="0 12">
             <StackPanel Width="300" HorizontalAlignment="Left">
                 <TextBlock Text="Ngày sinh" Style="{DynamicResource LabelTextBlock}"/>
                 <Grid>
@@ -222,7 +237,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="4" Margin="0 12">
             <StackPanel Width="300" HorizontalAlignment="Left">
                 <TextBlock Text="Số điện thoại" Style="{DynamicResource LabelTextBlock}"/>
                 <TextBox x:Name="textBoxPhoneNumber" Style="{DynamicResource CommomTextBox}"></TextBox>
@@ -231,13 +246,13 @@
             <StackPanel Width="300" HorizontalAlignment="Right">
                 <TextBlock Text="Giới tính" Style="{DynamicResource LabelTextBlock}"/>
                 <Grid VerticalAlignment="Center">
-                    <RadioButton x:Name="radioButtonGenderMale" Style="{DynamicResource CommomRadioButton}" HorizontalAlignment="Left" IsChecked="True">Nam</RadioButton>
+                    <RadioButton x:Name="radioButtonGenderMale" Style="{DynamicResource CommomRadioButton}" HorizontalAlignment="Left">Nam</RadioButton>
                     <RadioButton x:Name="RadioButtonGenderFemale" Style="{DynamicResource CommomRadioButton}" HorizontalAlignment="Right">Nữ</RadioButton>
                 </Grid>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="5">
+        <Grid Grid.Row="5" Margin="0 12">
             <StackPanel Width="300" HorizontalAlignment="Left">
                 <TextBlock Text="Email" Style="{DynamicResource LabelTextBlock}"/>
                 <TextBox x:Name="textBoxEmail" Style="{DynamicResource CommomTextBox}"></TextBox>
@@ -249,14 +264,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="6">
-            <StackPanel Width="300" HorizontalAlignment="Left">
-                <TextBlock Text="Vai trò" Style="{DynamicResource LabelTextBlock}"/>
-                <TextBox x:Name="textBoxRole" Style="{DynamicResource CommomTextBox}"></TextBox>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Row="7">
+        <Grid Grid.Row="6" Margin="0 12">
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Name="BtnSave" Style="{DynamicResource CommomBtn}" Foreground="#1eff0f" BorderBrush="#1eff0f" Padding="12" Click="BtnSave_Click">Lưu</Button>
                 <Button Name="BtnCancel" Style="{DynamicResource CommomBtn}" Foreground="#f03537" BorderBrush="#f03537" Padding="12" Click="BtnCancel_Click">Hủy</Button>

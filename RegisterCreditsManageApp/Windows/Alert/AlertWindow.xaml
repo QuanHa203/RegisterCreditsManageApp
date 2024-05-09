@@ -11,17 +11,18 @@
         AllowsTransparency="True"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="AlertWindow" Height="200" Width="300">
+        SizeToContent="Height"
+        Title="AlertWindow" Height="200" Width="350">
 
      <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.RowDefinitions>
-            <RowDefinition Height="20" ></RowDefinition>
+            <RowDefinition Height="30" ></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
        
             <Grid Grid.Row="0">
-            <Button Background="Transparent" Height="16" Width="20" HorizontalAlignment="Right" Margin="0,5,7.5,0" BorderThickness="0" Click="xAlertBtn">
+            <Button Background="Transparent" Height="20" Width="20" HorizontalAlignment="Right" Margin="0,5,7.5,0" BorderThickness="0" Click="xAlertBtn">
                 <Viewbox>
                     <Path Style="{DynamicResource XMarkSvg}"></Path>
                 </Viewbox>
@@ -29,24 +30,27 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="1">
+            <Grid Grid.Row="1">
 
-            <Viewbox Width="60" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0">
-                <Path x:Name="alertIcon" ></Path>
-            </Viewbox>
-            <TextBlock x:Name="alertCaption" Margin="75,30,60,92" FontWeight="Bold" FontFamily="Montserra"  Background="Transparent" Foreground="{DynamicResource AlertCaption}" TextWrapping="Wrap" FontSize="16"/>
-                <TextBlock x:Name="Text" Margin="75,68,60,48" FontFamily="Montserra"  Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" TextWrapping="Wrap" FontSize="16"/>
+                <Viewbox Width="60" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,30,0,0">
+                    <Path x:Name="alertIcon" ></Path>
+                </Viewbox>
+                <StackPanel Margin="70 30 20 50" VerticalAlignment="Top" >
+                    <TextBlock x:Name="alertCaption"  FontWeight="Bold" FontFamily="Montserra"  Background="Transparent" Foreground="{DynamicResource AlertCaption}" TextWrapping="Wrap" FontSize="16" Margin="10" />
+                    <TextBlock x:Name="Text"  FontFamily="Montserra"  Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" TextWrapping="Wrap" FontSize="16" Margin="10"/>
+                </StackPanel>
 
 
-            <StackPanel VerticalAlignment="Bottom" Width="auto" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Margin="5" >
-                <Button x:Name="alertBtn1" ></Button>
-                <Button x:Name="alertBtn2" ></Button>
-                <Button x:Name="alertBtn3" ></Button>
-            </StackPanel>
+                <StackPanel VerticalAlignment="Bottom" Width="auto" HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" Margin="5" >
+                    <Button x:Name="alertBtn1" ></Button>
+                    <Button x:Name="alertBtn2" ></Button>
+                    <Button x:Name="alertBtn3" ></Button>
+                </StackPanel>
+            </Grid>
+           
+
+
         </Grid>
-         
-        
-    </Grid>
         
      </Border>   
     

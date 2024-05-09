@@ -56,7 +56,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Subject> Subjects { get; set; }
 
-    public virtual DbSet<Teacher> Teachers { get; set; }
+    public virtual DbSet<Teacher> Teachers { get; set; } 
 
     public virtual DbSet<User> Users { get; set; }    
 

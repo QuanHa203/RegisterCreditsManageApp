@@ -20,7 +20,14 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
 
-            List<Student> studentList = AppDbContext._Context.Students.Include((student) => student.IdMainClassNavigation).ToList();
+            LoadDataGrid();
+        }
+
+        private void LoadDataGrid()
+        {
+            DataGridStudent.ItemsSource = null;
+            List<Student> studentList = null;
+            studentList = AppDbContext._Context.Students.Include((student) => student.IdMainClassNavigation).ToList();
             DataGridStudent.ItemsSource = studentList;
         }
 
@@ -41,12 +48,19 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             popup.IsOpen = true;
         }
 
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            new StudentAddWindow().ShowDialog();
+            LoadDataGrid();
+        }
+
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             var parent = btn.Parent as Panel;
             var idStudentTextBlock = parent.Children[2] as TextBlock;
             new StudentEditWindow(idStudentTextBlock.Text).ShowDialog();
+            LoadDataGrid();
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -54,6 +68,7 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             Button btn = sender as Button;
             var parent = btn.Parent as Panel;
             var idStudentTextBlock = parent.Children[2] as TextBlock;
+            LoadDataGrid();
 
         }
         public class Data
