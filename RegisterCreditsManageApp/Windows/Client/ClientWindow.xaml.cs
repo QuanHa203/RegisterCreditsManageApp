@@ -31,7 +31,7 @@ namespace RegisterCreditsManageApp.Windows.Client
         private void AccountBtn_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/AccountPage.xaml", UriKind.Relative));
-            AlertBox.Show("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",AlertButton.YesNo);
+            
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)

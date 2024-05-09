@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePage">
     <Page.Resources>
-        <Style x:Key="btnClipboard" TargetType="Button">
+        <Style x:Key="btnClipboardStyle" TargetType="Button">
             <!-- Default settings for the button -->
             <Setter Property="Background" Value="{DynamicResource LeftMenuBackground}"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
@@ -42,7 +42,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="btnCalendar" TargetType="Button">
+        <Style x:Key="btnCalendarStyle" TargetType="Button">
             <!-- Default settings for the button -->
             <Setter Property="Background" Value="{DynamicResource LeftMenuBackground}"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
@@ -60,7 +60,7 @@
                                     <Path Name="IconPath" Style="{DynamicResource CalendarSvg}" Fill="{DynamicResource ColorCalendarTimeSvg}" />
                                 </Viewbox>
                                 <TextBlock Name="TopText" Text="0" Style="{DynamicResource Text_center_btn}" />
-                                <TextBlock Name="BottomText" Text="Lịch học hôm nay" Style="{DynamicResource Text_bottom_btn}" />
+                                <TextBlock Name="BottomText" Text="Lịch học tuần này" Style="{DynamicResource Text_bottom_btn}" />
                             </StackPanel>
                         </Border>
                         <!-- Triggers for changing appearance on hover -->
@@ -76,7 +76,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="btnClipboardTime" TargetType="Button">
+        <Style x:Key="btnClipboardTimeStyle" TargetType="Button">
             <!-- Default settings for the button -->
             <Setter Property="Background" Value="{DynamicResource LeftMenuBackground}"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
@@ -94,7 +94,7 @@
                                     <Path Name="IconPath" Style="{DynamicResource ClipboardTimeSvg}" Fill="{DynamicResource ColorClipboardTimeSvg}" />
                                 </Viewbox>
                                 <TextBlock Name="TopText" Text="0" Style="{DynamicResource Text_center_btn}" />
-                                <TextBlock Name="BottomText" Text="Lịch học hôm nay" Style="{DynamicResource Text_bottom_btn}" />
+                                <TextBlock Name="BottomText" Text="Học phần đã dăng ký" Style="{DynamicResource Text_bottom_btn}" />
                             </StackPanel>
                         </Border>
                         <!-- Triggers for changing appearance on hover -->
@@ -110,7 +110,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="btnAddFile" TargetType="Button">
+        <Style x:Key="btnAddFileStyle" TargetType="Button">
             <!-- Default settings for the button -->
             <Setter Property="Background" Value="{DynamicResource LeftMenuBackground}"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
@@ -128,7 +128,7 @@
                                     <Path Name="IconPath" Style="{DynamicResource AddFileSvg}" Fill="{DynamicResource ColorAddFileSvg}" />
                                 </Viewbox>
                                 <TextBlock Name="TopText" Text="0" Style="{DynamicResource Text_center_btn}" />
-                                <TextBlock Name="BottomText" Text="Lịch học hôm nay" Style="{DynamicResource Text_bottom_btn}" />
+                                <TextBlock Name="BottomText" Text="Học phần chưa dăng ký" Style="{DynamicResource Text_bottom_btn}" />
                             </StackPanel>
                         </Border>
                         <!-- Triggers for changing appearance on hover -->
@@ -154,19 +154,26 @@
         </Style>
         <Style TargetType="TextBlock" x:Key="Text_bottom_btn">
             <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"></Setter>
-            
+
             <Setter Property="Margin" Value="2"></Setter>
             <Setter Property="FontSize" Value="12"></Setter>
             <Setter Property="Margin" Value="2 0 2 0"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         </Style>
-
         <Style x:Key="btnpopup" TargetType="Button">
-            <Setter Property="Height" Value="20" ></Setter>
+            <Setter Property="Height" Value="auto" ></Setter>
             <Setter Property="Background" Value="Transparent"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
             <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
-            <Setter Property="Margin" Value="5 2 5 2"></Setter>
+            <Setter Property="Margin" Value="10 2 10 2"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource TriggerBtnTopHomPage}"/>
+                    
+                </Trigger>
+            </Style.Triggers>
+                
         </Style>
         <Style x:Key="btnSectionClasses" TargetType="Button" >
            
@@ -177,11 +184,29 @@
             <Setter Property="Background" Value="Transparent"></Setter>
             <Setter Property="BorderThickness" Value="0"></Setter>
             <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="#3663fe"></Setter>
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}">
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Margin="20 0 10 0" FontSize="16">Lớp học phần</TextBlock>
+                                <Viewbox Width="10">
+                                    <Path Name="IconPath" Style="{DynamicResource ArrowDownSvg}" Fill="{DynamicResource SvgLeftMenuColor}"></Path>
+                                </Viewbox>
+
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter TargetName="IconPath" Property="Fill" Value="{DynamicResource TriggerBtnTopHomPage}" />
+                                <Setter Property="Foreground" Value="{DynamicResource TriggerBtnTopHomPage}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Page.Resources>
     <Grid Background="{DynamicResource SecondaryBackgroundColor}" Margin="20">
@@ -192,13 +217,13 @@
         <Grid Grid.Row="0">
             <Border>
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Button Style="{DynamicResource btnClipboard}">
+                    <Button Style="{DynamicResource btnClipboardStyle}" x:Name="btnClipboard">
                     </Button>
-                    <Button Style="{DynamicResource btnCalendar}">
+                    <Button Style="{DynamicResource btnCalendarStyle}" x:Name="btnCalendar">
                     </Button>
-                    <Button Style="{DynamicResource btnClipboardTime}">
+                    <Button Style="{DynamicResource btnClipboardTimeStyle}" x:Name="btnClipboardTime">
                     </Button>
-                    <Button Style="{DynamicResource btnAddFile}">
+                    <Button Style="{DynamicResource btnAddFileStyle}" x:Name="btnAddFile">
                     </Button>
                 </StackPanel>
             </Border>
@@ -212,22 +237,16 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Button  x:Name="btnShowPopup" Click="btnShowPopup_Click"  Style="{DynamicResource btnSectionClasses}">
-                    <StackPanel Orientation="Horizontal">
-                            <TextBlock VerticalAlignment="Center" Margin="20 0 10 0" FontSize="16">Lớp học phần</TextBlock>
-                            <Viewbox Width="10">
-                            <Path Style="{DynamicResource ArrowDownSvg}"></Path>
-                        </Viewbox>
-                    </StackPanel>
+                        
                     </Button>
                     <Popup x:Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=btnShowPopup}" HorizontalOffset="0" VerticalOffset="20">
-                        <StackPanel Background="{DynamicResource LeftMenuBackground}" x:Name="StackPanelPopup" >
-                            <Button Style="{DynamicResource btnpopup}"  Visibility="Hidden" Height="0">a</Button>
-                        </StackPanel>
+                        <Border  Background="{DynamicResource LeftMenuBackground}" BorderBrush="{DynamicResource SecondaryBackgroundColor}" BorderThickness="1" >
+                            <StackPanel Background="Transparent"  x:Name="StackPanelPopup" Height="auto">
+                                <Button Style="{DynamicResource btnpopup}"  Visibility="Hidden" Height="0">a</Button>
+                            </StackPanel>
+                        </Border>
                     </Popup>
                 </Grid>
-                
-
-
                 <DataGrid Grid.Row="1" x:Name="DataGridSubject" Style="{DynamicResource DefaultDataGrid}" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}" Grid.ColumnSpan="3" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Mã học phần" Binding="{Binding IdClassRoom}" ></DataGridTextColumn>

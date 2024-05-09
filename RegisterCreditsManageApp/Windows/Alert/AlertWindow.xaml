@@ -14,7 +14,17 @@
         SizeToContent="Height"
         Title="AlertWindow" Height="200" Width="350">
 
-     <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}">
+     <Border CornerRadius="10" Background="{DynamicResource PrimaryBackgroundColor}" Margin="12">
+        <Border.Effect>
+            <DropShadowEffect
+                Color="{DynamicResource DefaultColorDropShadowOfPopup}" 
+                Direction="200" 
+                ShadowDepth="5" 
+                Opacity="0.4" 
+                BlurRadius="20">
+
+            </DropShadowEffect>
+        </Border.Effect>
         <Grid>
             <Grid.RowDefinitions>
             <RowDefinition Height="30" ></RowDefinition>

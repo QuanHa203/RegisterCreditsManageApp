@@ -160,7 +160,7 @@ namespace RegisterCreditsManageApp.Windows
                                                                            .Include(student => student.IdMajorsNavigation)
                                                                            .Include(student => student.IdStudentNavigation)
 
-                                                                           .FirstOrDefault(student => student.IdStudent == user.IdUser);
+                                                                           .FirstOrDefault(student => student.IdStudent == user.IdUser)!;
                             ClientWindow cl = new ClientWindow();
                             cl.Show();
                             this.Close();
