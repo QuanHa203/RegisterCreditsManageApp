@@ -15,7 +15,7 @@
     <Window.Resources>
 
         <Style x:Key="HeadForeground" TargetType="Label">
-            <Setter Property="Foreground" Value="#fff"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"></Setter>
             <Setter Property="FontFamily" Value="Montserrat SemiBold"></Setter>
         </Style>
 
@@ -23,15 +23,15 @@
             <Setter Property="FontFamily" Value="Montserrat Medium"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="Margin" Value="35 10 0 5"></Setter>
-            <Setter Property="Foreground" Value="#fff"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"></Setter>
         </Style>
         <!--Text box style-->
         <Style x:Key="LoginTextbox" TargetType="TextBox">
-            <Setter Property="Background" Value="#1c2340"></Setter>
+            <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"></Setter>
             <Setter Property="BorderThickness" Value="0 0 0 0.5"></Setter>
             <Setter Property="FontFamily" Value="Montserrat Medium"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
-            <Setter Property="Foreground" Value="#fff"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Bottom"></Setter>
             <Setter Property="Margin" Value="0 0 15 15"></Setter>
             <Setter Property="Width" Value="255"/>
@@ -88,14 +88,14 @@
         </Style>
         
         <!--Eye toggle btn-->
-        <Style x:Key="EyeToggleBtn" TargetType="ToggleButton">
+        <Style x:Key="EyeToggleBtn" TargetType="Button">
             <Setter Property="Width" Value="40"/>
             <Setter Property="Height" Value="40"/>
             
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ToggleButton">
+                    <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" BorderThickness="0" CornerRadius="5">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
@@ -143,6 +143,7 @@
         <Style x:Key="ExitWindowBtn" TargetType="Button">
             <Setter Property="Width" Value="350"></Setter>
             <Setter Property="Height" Value="58"></Setter>
+            <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
             <Setter Property="BorderThickness" Value="0"></Setter>
             <Setter Property="FontFamily" Value="Montserrat Medium"></Setter>
             <Setter Property="FontSize" Value="30"></Setter>
@@ -160,11 +161,11 @@
                 </Setter.Value>
             </Setter>
 
-            <Setter Property="Background" Value="#1c2340"/>
+            <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
             <Setter Property="Foreground" Value="#3259e0"/>
             <Style.Triggers>
                 <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#FF3B3B87"/>
+                    <Setter Property="Background" Value="{DynamicResource SecondaryBackgroundColor}"/>
                     <Setter Property="Foreground" Value="#fff"/>
                 </Trigger>
             </Style.Triggers>
@@ -175,7 +176,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-        <Border Background="#1c2340" BorderThickness="3" BorderBrush="blue"  CornerRadius="30">
+        <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="3" BorderBrush="blue"  CornerRadius="30">
             <Grid Grid.Row="0" Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="187*"></RowDefinition>
@@ -188,7 +189,7 @@
                             <Path Style="{DynamicResource LogoSvg}" Fill="#3259e0"></Path>
                         </ContentControl>
                     </Viewbox>
-                    <Label Content="Welcome," 
+                    <Label Content="Xin chào," 
                      Style="{DynamicResource HeadForeground}"
                      FontSize="30"
                      VerticalAlignment="Bottom"
@@ -207,7 +208,7 @@
                     <Grid Grid.Row="0">
                         <StackPanel>
                             <!--User section-->
-                            <TextBlock Style="{DynamicResource HeaderTextbox}" Text="Enter Username"/>
+                            <TextBlock Style="{DynamicResource HeaderTextbox}" Text="Email"/>
                             <Grid Style="{DynamicResource GridLoginWindow}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="40*"></ColumnDefinition>
@@ -228,7 +229,7 @@
                             </Grid>
 
                             <!--Password section-->
-                            <TextBlock Style="{DynamicResource HeaderTextbox}" Text="Enter Password"/>
+                            <TextBlock Style="{DynamicResource HeaderTextbox}" Text="Mật khẩu"/>
                             <Grid Style="{DynamicResource GridLoginWindow}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="40*"></ColumnDefinition>
@@ -253,22 +254,22 @@
                                         <TextBox x:Name="PasswordTextbox"
                                    FontFamily="Montserrat Medium"
                                    FontSize="20"
-                                   Foreground="#fff"
+                                   Foreground="{DynamicResource PrimaryForegroundColor}"
                                    VerticalContentAlignment="Bottom"
                                    BorderThickness="0 0 0 0.5"
-                                   Background="#1c2340"
+                                   Background="{DynamicResource PrimaryBackgroundColor}"
                                    Margin="0,0,-90,15" 
                                    TextChanged="PasswordTextbox_TextChanged_1"
-                                                     
+                                    KeyUp="PasswordTextbox_KeyUp"                 
                               />
 
                                         <PasswordBox x:Name="PasswordText"
                                                    FontFamily="Montserrat Medium"
                                                    FontSize="20"
-                                                   Foreground="#fff"
+                                                   Foreground="{DynamicResource PrimaryForegroundColor}"
                                                    VerticalContentAlignment="Bottom"
                                                    BorderThickness="0 0 0 0.5"
-                                                   Background="#1c2340"
+                                                   Background="{DynamicResource PrimaryBackgroundColor}"
                                                    Margin="0,0,-90,15" 
                                                    PasswordChanged="PasswordText_PasswordChanged_1" 
                                                    KeyUp="PasswordText_KeyUp"
@@ -278,7 +279,7 @@
                                     <!--Hide or show password column-->
                                     <!--Hide and show password button-->
                                     <Grid Grid.Column="1" Margin="100,0,0,0">
-                                        <ToggleButton Style="{DynamicResource EyeToggleBtn}" x:Name="ButtonToggle" 
+                                        <Button Style="{DynamicResource EyeToggleBtn}" x:Name="ButtonToggle" 
                                                  BorderThickness="0"
                                                  Width="40"
                                                  Height="40"
@@ -299,7 +300,7 @@
                                                 </Viewbox>
 
                                             </Grid>
-                                        </ToggleButton>
+                                        </Button>
                                     </Grid>
 
                                 </Grid>
@@ -318,23 +319,26 @@
                                 <!--Checkbox for remembering-->
                                 <Grid Grid.Column="0" Height="30">
                                     <CheckBox x:Name="RememberCheckbox" Margin="30 0 0 0"
-                       VerticalAlignment="Center"
-                       FontSize="30" 
-                       Cursor="Hand"
-                       Checked="RememberCheckbox_Checked"/>
-                                    <TextBlock Text="Remember me"
-                        FontSize="15"
-                        FontFamily="Montserrat Medium"
-                        Foreground="#fff"
-                        Margin="55 0 0 0"
-                        VerticalAlignment="Center"/>
+                                           VerticalAlignment="Center"
+                                           FontSize="30" 
+                                           Cursor="Hand"
+                                           Checked="RememberCheckbox_Checked"
+                                           
+                                              />
+                                    <TextBlock Text="Nhớ mật khẩu"
+                                            FontSize="15"
+                                            FontFamily="Montserrat Medium"
+                                            Foreground="{DynamicResource PrimaryForegroundColor}"
+                                            Margin="55 0 0 0"
+                                            VerticalAlignment="Center"
+                                     />
                                 </Grid>
 
                                 <!--forgot password section-->
                                 <Grid Grid.Column="1">
                                     <TextBlock x:Name="ForgotPassWindow" 
                                             Style="{DynamicResource TextblockHover}"
-                                            Text="Forgot password?"
+                                            Text="Quên mật khẩu"
                                             Margin="0 0 2 0" 
                                             Cursor="Hand"
                                             MouseLeftButtonDown="ForgotPassWindow_MouseLeftButtonDown"
@@ -346,7 +350,7 @@
                             <!--Login button-->
                             <Button Name="LoginBtn" 
                                     Style="{DynamicResource LoginWindowBtn}" 
-                                    Content="Login"
+                                    Content="Đăng nhập"
                                     Foreground="#fff" 
                                     IsDefault="True"
                                     Click="LoginBtn_Click"
@@ -358,7 +362,7 @@
                             <!--Exit button-->
                             <Button Name="ExitBtn" 
                                     Style="{DynamicResource ExitWindowBtn}"
-                                    Content="Exit"
+                                    Content="Thoát"
                                     Click="ExitBtn_Click"
                                     KeyUp="ExitBtn_KeyUp"
                                     >

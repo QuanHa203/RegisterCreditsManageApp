@@ -18,6 +18,7 @@ using System.Data;
 using RegisterCreditsManageApp.Windows.Client;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
+using RegisterCreditsManageApp.Windows.Alert;
 
 namespace RegisterCreditsManageApp.Windows
 {
@@ -27,8 +28,13 @@ namespace RegisterCreditsManageApp.Windows
     public partial class LoginWindow : Window
     {
         private List<User> userList;
-        private string password = "";
+
         private string filePath = "";
+        private string checkBoxFilePath = "checkboxStatus.txt";
+        private string userFilePath = "user_account.txt";
+        private string passFilePath = "pass_account.txt";
+        private bool isPassUpdating = false;
+
         private static Student currentStudent = null;
         private static User currentAdmin = null;
         public static Student CurrentStudent
@@ -56,18 +62,46 @@ namespace RegisterCreditsManageApp.Windows
         public LoginWindow()
         {
             InitializeComponent();
+
             RememberCheckbox.Checked += RememberCheckbox_Checked1;
+            RememberCheckbox.Unchecked += RememberCheckbox_Unchecked;
+
+            PasswordText.Visibility = Visibility.Visible;
+            PasswordTextbox.Visibility = Visibility.Collapsed;
         }
+
+     
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             userList = AppDbContext._Context.Users.ToList();
             EyeShowedToggle.Visibility = Visibility.Collapsed;
             UserTextbox.Focus();
+
             LoadUserFromFile();
             LoadPassFromFile();
+
+            if (File.Exists(checkBoxFilePath))
+            {
+                string fileContent = File.ReadAllText(checkBoxFilePath);
+
+                bool isChecked = bool.Parse(fileContent);
+
+                // Đặt trạng thái checkbox
+                RememberCheckbox.IsChecked = isChecked;
+            }
         }
+        private void RememberCheckbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            // Lưu giá trị false vào tệp
+            File.WriteAllText(checkBoxFilePath, "false");
+        }
+
         private void RememberCheckbox_Checked1(object sender, RoutedEventArgs e)
         {
+
+            // Lưu giá trị true vào tệp
+            File.WriteAllText(checkBoxFilePath, "true");
+
             //User and pass file path
             string userFilePath = "user_account.txt";
             string passFilePath = "pass_account.txt";
@@ -115,94 +149,6 @@ namespace RegisterCreditsManageApp.Windows
                 }
             }
         }
-       
-        //Login button
-        private void LoginBtn_Click(object sender, RoutedEventArgs e)
-        {
-            string userInput = UserTextbox.Text;
-            string passwordInput = PasswordText.Password;
-            //Check cac textbox
-            if (userInput.Trim().Length == 0)
-            {
-                MessageBox.Show("Please enter your user name!", "Invalid", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
-            else if (passwordInput.Trim().Length == 0)
-            {
-                MessageBox.Show("Please enter your password!", "Invalid", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
-            //No data
-            else if (userInput.Trim().Length == 0 && passwordInput.Trim().Length == 0)
-            {
-                MessageBox.Show("Please enter your user name and password!", "Invalid", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
-            else
-            {
-                //Khi co du lieu thi check value the textbox co trung voi gia tri dau tien tim thay trong csdl k
-                User user = userList.FirstOrDefault(u =>
-                {
-                    if (u.Email.Trim() == userInput) return true;
-
-                    return false;
-                });
-                //Neu user k co 
-                if (user == null)
-                {
-                    MessageBox.Show("Invalid email",
-                        "Error",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error
-                        );
-                }
-                //neu user co
-                else
-                {
-                    if (user.Password.Trim() == passwordInput.Trim() && user.Email.Trim() == userInput.Trim())
-                    {
-                        if (user.IdRole == 1)
-                        {
-                            currentAdmin = user;
-                            ServerWindow sv = new ServerWindow();
-                            sv.Show();
-                            this.Close();
-                        }
-                        else
-                        {
-                            // Get student login success
-                            currentStudent = AppDbContext._Context.Students.Include(student => student.IdMainClassNavigation)
-                                                                           .Include(student => student.IdMainClassNavigation.IdCurrentRegisterSemesterNavigation)
-                                                                           .Include(student => student.IdMajorsNavigation)
-                                                                           .Include(student => student.IdStudentNavigation)
-
-                                                                           .FirstOrDefault(student => student.IdStudent == user.IdUser)!;
-                            ClientWindow cl = new ClientWindow();
-                            cl.Show();
-                            this.Close();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show(
-                            "Wrong user name or password",
-                            "Login failed",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Information
-                            );
-
-                    }
-                }
-            }
-
-        }
-
-        private void ExitBtn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void ForgotPassWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
 
         private void RememberCheckbox_Checked(object sender, RoutedEventArgs e)
         {
@@ -219,7 +165,7 @@ namespace RegisterCreditsManageApp.Windows
             using (FileStream f = new FileStream(filePath, FileMode.Create))
             {
                 //Create a streamWriter to write data to file
-                using(StreamWriter sw = new StreamWriter(f))
+                using (StreamWriter sw = new StreamWriter(f))
                 {
                     sw.Write($"{user}");
                 }
@@ -242,45 +188,178 @@ namespace RegisterCreditsManageApp.Windows
             }
         }
 
+        //Login button
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string userInput = UserTextbox.Text;
+            string passwordInput = PasswordText.Password;
+            //Check cac textbox
+            if (userInput.Trim().Length == 0)
+            {
+                AlertBox.Show("Vui lòng nhập email!", "Thông báo", AlertButton.OK, AlertIcon.Error);
+            }
+            else if (passwordInput.Trim().Length == 0)
+            {
+                AlertBox.Show("Vui lòng nhập mật khẩu của bạn!", "Thông báo", AlertButton.OK, AlertIcon.Error);
+            }
+            //No data
+            else if (userInput.Trim().Length == 0 && passwordInput.Trim().Length == 0)
+            {
+                AlertBox.Show("Vui lòng nhập email và mật khẩu của bạn!", "Thông báo", AlertButton.OK, AlertIcon.Error);
+            }
+            else
+            {
+                //Khi co du lieu thi check value the textbox co trung voi gia tri dau tien tim thay trong csdl k
+                User user = userList.FirstOrDefault(u =>
+                {
+                    if (u.Email.Trim() == userInput) return true;
+
+                    return false;
+                });
+                //Neu user k co 
+                if (user == null)
+                {
+                    AlertBox.Show("Invalid email",
+                        "Error",
+                        AlertButton.OK,
+                        AlertIcon.Error
+                        );
+                }
+                //neu user co
+                else
+                {
+                    if (user.Password.Trim() == passwordInput.Trim() && user.Email.Trim() == userInput.Trim())
+                    {
+                        if (user.IdRole == 1)
+                        {
+                            checkIfUserValid();
+                            AlertBox.Show("Đăng nhập thành công", "Thông báo", AlertButton.OK, AlertIcon.Success);
+                            currentAdmin = user;
+                            ServerWindow sv = new ServerWindow();
+                            sv.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            checkIfUserValid();
+                            AlertBox.Show("Đăng nhập thành công", "Thông báo", AlertButton.OK, AlertIcon.Success);
+                            // Get student login success
+                            currentStudent = AppDbContext._Context.Students.Include(student => student.IdMainClassNavigation)
+                                                                           .Include(student => student.IdMainClassNavigation.IdCurrentRegisterSemesterNavigation)
+                                                                           .Include(student => student.IdMajorsNavigation)
+                                                                           .Include(student => student.IdStudentNavigation)
+
+                                                                           .FirstOrDefault(student => student.IdStudent == user.IdUser)!;
+                            ClientWindow cl = new ClientWindow();
+                            cl.Show();
+                            this.Close();
+                        }
+                    }
+                    else
+                    {
+                        AlertBox.Show(
+                            "Sai email hoặc mật khẩu",
+                            "Đăng nhập thất bại",
+                            AlertButton.OK,
+                            AlertIcon.Information
+                            );
+
+                    }
+                }
+            }
+            
+        }
+        public void checkIfUserValid()
+        {
+            // Kiểm tra nếu checkBox đc tích
+            if (RememberCheckbox.IsChecked == true)
+            {
+                SavePassToFile();
+                SaveUserToFile();
+                File.WriteAllText(checkBoxFilePath, "true");
+            }
+            else
+            {
+                // Xóa dữ liệu file nếu checkbox không được chọn
+                if (File.Exists(checkBoxFilePath) && File.Exists(userFilePath) && File.Exists(passFilePath))
+                {
+                    File.Delete(checkBoxFilePath);
+                    File.Delete(userFilePath);
+                    File.Delete(passFilePath);
+                }
+            }
+        }
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AlertResult result = AlertBox.Show("Bạn có chắc muốn thoát không?", "Thông báo", AlertButton.YesNo, AlertIcon.Question);
+            if(result == AlertResult.Yes)
+            {
+                this.Close();
+            }    
+        }
+
+        private void ForgotPassWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        
+
         private void ButtonToggle_Click(object sender, RoutedEventArgs e)
         {
-            if(ButtonToggle.IsChecked == true)
+            if(PasswordTextbox.Visibility == Visibility.Collapsed)
             {
+                PasswordTextbox.Text = PasswordText.Password;
+
                 EyeHiddenToggle.Visibility = Visibility.Collapsed;
                 EyeShowedToggle.Visibility = Visibility.Visible;
 
                 PasswordText.Visibility = Visibility.Collapsed ;
                 PasswordTextbox.Visibility = Visibility.Visible;
-
-                PasswordTextbox.Text = PasswordText.Password;
             }
             else
             {
+                PasswordText.Password = PasswordTextbox.Text;
+
                 EyeHiddenToggle.Visibility = Visibility.Visible;
                 EyeShowedToggle.Visibility = Visibility.Collapsed;
 
                 PasswordText.Visibility = Visibility.Visible;
                 PasswordTextbox.Visibility = Visibility.Collapsed;
-
-                PasswordText.Password = PasswordTextbox.Text;
             }
         }
 
         private void PasswordTextbox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-            password = PasswordText.Password;
+            if (!isPassUpdating)
+            {
+                isPassUpdating = true;
+                PasswordText.Password = PasswordTextbox.Text;
+                isPassUpdating = false;
+            }
         }
 
         private void PasswordText_PasswordChanged_1(object sender, RoutedEventArgs e)
         {
-            password = PasswordTextbox.Text;
+            if (!isPassUpdating)
+            {
+                isPassUpdating = true;
+                PasswordTextbox.Text = PasswordText.Password;
+                isPassUpdating = false;
+            }
         }
 
         private void UserTextbox_KeyUp(object sender, KeyEventArgs e)
        {
             if (e.Key == Key.Down)
             {
-                PasswordText.Focus();
+                if(PasswordText.Visibility == Visibility.Visible)
+                {
+                    PasswordText.Focus();
+
+                }
+                else
+                PasswordTextbox.Focus();
             }
             if(e.Key == Key.Up)
             {
@@ -304,7 +383,13 @@ namespace RegisterCreditsManageApp.Windows
         {
             if( e.Key == Key.Up)
             {
-                PasswordText.Focus();
+                if (PasswordText.Visibility == Visibility.Visible)
+                {
+                    PasswordText.Focus();
+
+                }
+                else
+                    PasswordTextbox.Focus();
             }
             if (e.Key == Key.Down)
             {
@@ -319,6 +404,18 @@ namespace RegisterCreditsManageApp.Windows
                 LoginBtn.Focus();
             }
            
+        }
+
+        private void PasswordTextbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up)
+            {
+                UserTextbox.Focus();
+            }
+            if (e.Key == Key.Down)
+            {
+                LoginBtn.Focus();
+            }
         }
     }
 }
