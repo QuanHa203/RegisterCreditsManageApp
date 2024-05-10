@@ -20,4 +20,6 @@ public partial class Subject
     public virtual Major IdMajorsNavigation { get; set; } = null!;
 
     public virtual Semester IdSemesterNavigation { get; set; } = null!;
+
+    public virtual ICollection<RegisterCredit> RegisterCredits { get; set; } = new List<RegisterCredit>();
 }

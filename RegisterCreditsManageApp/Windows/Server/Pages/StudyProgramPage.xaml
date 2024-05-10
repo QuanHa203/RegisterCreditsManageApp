@@ -5,9 +5,156 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ManagementPage">
+      Title="ManagementPage"
+      Background="{DynamicResource SecondaryBackgroundColor}"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+    
 
     <Grid>
-        <TextBlock>This is Management Page</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70*"></RowDefinition>
+            <RowDefinition Height="380*"/>
+        </Grid.RowDefinitions>
+
+        <!--Operation grid-->
+        <Grid Grid.Row="0" Margin="40,10,40,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!--Search section-->
+                <Grid Grid.Column="0" HorizontalAlignment="Left">
+                    <Border Width="270" Height="45" Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" CornerRadius="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"></ColumnDefinition>
+                                <ColumnDefinition Width="210*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Margin="0,0,10,0">
+                                <Viewbox Width="30" Height="30" HorizontalAlignment="Left" Margin="10 0 0 0">
+                                    <ContentControl>
+                                        <Path Style="{DynamicResource SearchSvg}" Fill="{DynamicResource SearchIconFill}"/>
+                                    </ContentControl>
+                                </Viewbox>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <TextBox x:Name="FindMajorTextBox"
+                                     Background="{DynamicResource PrimaryBackgroundColor}" 
+                                     BorderThickness="0" 
+                                     Margin="0 5 15 5" 
+                                     Text="Tìm kiếm tên ngành học"
+                                     FontSize="16"
+                                     FontFamily="Montserrat"
+                                     Foreground="#92a8c2"
+                                     VerticalAlignment="Center"
+                                     GotFocus="FindMajorTextBox_GotFocus"
+                                     LostFocus="FindMajorTextBox_LostFocus"
+                                     >
+                                </TextBox>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <!--add button section-->
+                <Grid Grid.Column="1">
+                    <Button Click="NavigateToAddMajor_Click" x:Name="NavigateToAddMajor" Width="100" Height="40" HorizontalAlignment="Right" Background="{DynamicResource PrimaryBackgroundColor}" Cursor="Hand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"/>
+                                <ColumnDefinition Width="60*"/>
+                            </Grid.ColumnDefinitions>
+                            <!--add svg column-->
+                            <Grid Grid.Column="0">
+                                <Viewbox Width="25" Height="25">
+                                    <ContentControl>
+                                        <Path Style="{DynamicResource AddSvg }" Fill="#3259e0"/>
+                                    </ContentControl>
+                                </Viewbox>
+                            </Grid>
+
+                            <!--Content column-->
+                            <Grid Grid.Column="1">
+                                <TextBlock Text="Thêm" 
+                                       Foreground="#92a8c2" 
+                                       FontSize="16" 
+                                       FontFamily="Montserrat SemiBold" 
+                                       VerticalAlignment="Center" 
+                                       Margin="5 0 0 0"/>
+                            </Grid>
+                        </Grid>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="10">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                                </Border>
+
+                            </ControlTemplate>
+
+                        </Button.Template>
+
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!--List Grid-->
+            <Border Grid.Row="1" Margin="40" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}">
+                <Grid>
+                    <DataGrid Margin="0 25 0 10" 
+                              x:Name="MajorDataGrid" 
+                              Style="{DynamicResource DefaultDataGrid}" 
+                              CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
+
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.Header>Thao tác</DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Popup Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" AllowsTransparency="True" Margin="12">
+                                            <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" Margin="12">
+                                                <StackPanel HorizontalAlignment="Left" Background="{DynamicResource PrimaryBackgroundColor}">
+                                                    <Button x:Name="NavigateToSubject" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="NavigateToSubject_Click">Xem môn học</Button>
+                                                    <Button x:Name="ModifyMajorBtn" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="ModifyMajorBtn_Click">Chỉnh sửa</Button>
+                                                    <Button x:Name="DeleteMajorBtn" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="DeleteMajorBtn_Click">Xóa</Button>
+                                                    <TextBlock Text="{Binding idMajor}"  Height="0"/>
+                                                </StackPanel>
+                                                <Border.Effect>
+                                                    <DropShadowEffect ShadowDepth="0" Direction="90" Opacity="0.4" BlurRadius="18" RenderingBias="Performance" Color="{DynamicResource DefaultColorDropShadowOfPopup}"/>
+                                                </Border.Effect>
+                                            </Border>
+                                        </Popup>
+                                        <Button x:Name="OperationBtn" Background="Transparent" BorderThickness="0" Click="OperationBtn_Click_1">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate>
+                                                                <Border Background="Transparent" BorderThickness="0">
+                                                                    <Viewbox Width="24" Margin="0 0 20 0">
+                                                                        <Path Fill="#3663fe" Style="{DynamicResource MenuSvg}"/>
+                                                                    </Viewbox>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Tên ngành học" Width="*" Binding="{Binding majorName}"/>
+                            <DataGridTextColumn Header="Số lượng môn học" Binding="{Binding subjectNum}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
     </Grid>
 </Page>

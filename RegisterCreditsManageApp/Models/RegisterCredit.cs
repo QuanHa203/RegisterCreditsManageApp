@@ -17,5 +17,9 @@ public partial class RegisterCredit
 
     public bool? IsPass { get; set; }
 
+    public bool IsRegister { get; set; }
+
     public virtual ClassRoom IdClassRoomNavigation { get; set; } = null!;
+
+    public virtual Subject IdSubjectNavigation { get; set; } = null!;
 }

@@ -69,6 +69,7 @@
                                             <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" Margin="12">
                                                 <StackPanel HorizontalAlignment="Left">
                                                     <Button x:Name="BtnEditClassRoom" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnEditClassRoom_Click">Chỉnh sửa lớp học phần</Button>
+                                                    <Button x:Name="BtnDeleteClassRoom" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnDeleteClassRoom_Click">Xóa lớp học phần</Button>
                                                     <TextBlock Text="{Binding IdClassRoom}" Height="0" Visibility="Hidden"/>
                                                 </StackPanel>
                                                 <Border.Effect>

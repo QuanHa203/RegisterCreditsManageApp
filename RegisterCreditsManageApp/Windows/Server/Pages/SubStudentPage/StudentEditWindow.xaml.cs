@@ -220,7 +220,7 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubStudentPage
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            var alertResult = AlertBox.Show("Bạn có chắc chắn muốn thoát không (Tất cả dữ liệu vừa nhập không thay đổi)?", "Cảnh báo", AlertButton.YesNo, AlertIcon.Warning);
+            var alertResult = AlertBox.Show("Bạn có chắc chắn muốn thoát không?", "", AlertButton.YesNo, AlertIcon.Question);
             if (alertResult == AlertResult.Yes)
                 this.Close();
         }

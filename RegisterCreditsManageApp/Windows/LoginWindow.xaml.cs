@@ -30,6 +30,7 @@ namespace RegisterCreditsManageApp.Windows
         private string password = "";
         private string filePath = "";
         private static Student currentStudent = null;
+        private static User currentAdmin = null;
         public static Student CurrentStudent
         {
             get
@@ -39,6 +40,18 @@ namespace RegisterCreditsManageApp.Windows
                 else
                     return currentStudent;
             }
+        }
+
+        public static User CurrentAdmin
+        {
+            get
+            {
+                if (currentAdmin == null)
+                    throw new Exception("Admin only get in ServertWindow");
+                else
+                    return currentAdmin;
+            }
+            set { currentAdmin = value; }
         }
         public LoginWindow()
         {
@@ -108,7 +121,6 @@ namespace RegisterCreditsManageApp.Windows
         {
             string userInput = UserTextbox.Text;
             string passwordInput = PasswordText.Password;
-
             //Check cac textbox
             if (userInput.Trim().Length == 0)
             {
@@ -147,7 +159,8 @@ namespace RegisterCreditsManageApp.Windows
                     if (user.Password.Trim() == passwordInput.Trim() && user.Email.Trim() == userInput.Trim())
                     {
                         if (user.IdRole == 1)
-                        {                            
+                        {
+                            currentAdmin = user;
                             ServerWindow sv = new ServerWindow();
                             sv.Show();
                             this.Close();
@@ -256,13 +269,11 @@ namespace RegisterCreditsManageApp.Windows
         private void PasswordTextbox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
             password = PasswordText.Password;
-
         }
 
         private void PasswordText_PasswordChanged_1(object sender, RoutedEventArgs e)
         {
             password = PasswordTextbox.Text;
-
         }
 
         private void UserTextbox_KeyUp(object sender, KeyEventArgs e)

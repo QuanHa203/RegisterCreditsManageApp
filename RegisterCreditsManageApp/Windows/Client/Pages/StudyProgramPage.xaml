@@ -7,99 +7,150 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StudyProgramPage"
-      Background="#151934">
+      Background="{DynamicResource SecondaryBackgroundColor}"
+      >
 
-    
+    <Page.Resources>
+        <Style x:Key="SemesterToggleBtn" TargetType="ToggleButton">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Transparent" />
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Semester selection button style-->
+        <Style x:Key="SemesterButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="FontFamily" Value="Montserrat"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="0 5 0 5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <!--Clear hover btn-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Content="{TemplateBinding Content}" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70*"></RowDefinition>
-            <RowDefinition Height="380*"/>
+            <RowDefinition Height="97*"/>
+            <RowDefinition Height="353*"/>
         </Grid.RowDefinitions>
 
         <!--Operation grid-->
-        <Grid Grid.Row="0" Background="#151934" Margin="40,10,40,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <!--Search section-->
-                <Grid Grid.Column="0" HorizontalAlignment="Left">
-                    <Border Width="270" Height="45" Background="#1c2340" BorderThickness="0" CornerRadius="10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50*"></ColumnDefinition>
-                                <ColumnDefinition Width="210*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Margin="0,0,10,0">
-                                <Viewbox Width="30" Height="30" HorizontalAlignment="Left" Margin="10 0 0 0">
-                                    <ContentControl>
-                                        <Path Style="{DynamicResource SearchSvg}" Fill="#3259e0"/>
-                                    </ContentControl>
-                                </Viewbox>
-                            </Grid>
+        <StackPanel Grid.Row="0" Margin="40,10,40,0">
+            <Label Content="Học kỳ" 
+                   FontFamily="Montserrat"
+                   FontSize="15"
+                   Foreground="{DynamicResource PrimaryForegroundColor}" 
+                   Height="30"     
+                   Margin="5 0 0 0"
+                   Width="130"
+                   HorizontalAlignment="Left"   
+            />
+            <!--Semester section-->
+            <Border Width="200" Height="35" Margin="10 5 0 0" CornerRadius="10" BorderThickness="1"  BorderBrush="#91a1be" HorizontalAlignment="Left">
+                <StackPanel>
+                    <ToggleButton x:Name="SemesterToggleButton"
+                      Style="{DynamicResource SemesterToggleBtn}"
+                      Click="SemesterToggleButton_Click"
+                    >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="SemesterTitle" 
+                                       Text="-- Chọn học kỳ--"
+                                       Width="150"
+                                       Foreground="#91a1be"
+                                       FontFamily="Montserrat"
+                                       FontSize="15"
+                                       VerticalAlignment="Center"
+                                       Margin="10 0 0 0"
+                            >
 
-                            <Grid Grid.Column="1">
-                                <TextBox x:Name="FindMajorTextBox"
-                                         Background="#1c2340" 
-                                         BorderThickness="0" 
-                                         Margin="0 5 15 5" 
-                                         Text="Tìm kiếm tên ngành học"
-                                         FontSize="16"
-                                         FontFamily="Montserrat"
-                                         Foreground="#92a8c2"
-                                         VerticalAlignment="Center"
-                                         >
-                                </TextBox>
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </Grid>
+                            </TextBlock>
+                            <Viewbox  Width="20" Height="20" Margin="10 0 15 5">
+                                <Path Style="{DynamicResource ArrowDownSvg}" Fill="#d0bdbd"/>
+                            </Viewbox>
+                        </StackPanel>
+                    </ToggleButton>
 
-                <!--add button section-->
-                <Grid Grid.Column="1">
-                    <Button x:Name="NavigateTo" Width="100" Height="40" HorizontalAlignment="Right" Background="#1c2340">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40*"/>
-                                <ColumnDefinition Width="60*"/>
-                            </Grid.ColumnDefinitions>
-                            <!--add svg column-->
-                            <Grid Grid.Column="0">
-                                <Viewbox Width="25" Height="25">
-                                    <ContentControl>
-                                        <Path Style="{DynamicResource AddFileSvg}" Fill="#3259e0"/>
-                                    </ContentControl>
-                                </Viewbox>
-                            </Grid>
-                            
-                            <!--Content column-->
-                            <Grid Grid.Column="1">
-                                <TextBlock Text="Thêm" 
-                                           Foreground="#ccccbc" 
-                                           FontSize="16" 
-                                           FontFamily="Montserrat SemiBold" 
-                                           VerticalAlignment="Center" 
-                                           Margin="5 0 0 0"/>
-                            </Grid>
-                        </Grid>
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="10">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    
-                                </Border>
-                                
-                            </ControlTemplate>
-                            
-                        </Button.Template>
-                        
-                    </Button>
-                </Grid>
-            </Grid>
-        </Grid>
+                    <Popup x:Name="SemesterPopup" 
+                           AllowsTransparency="True"
+                           IsOpen="False" 
+                           StaysOpen="False" 
+                           Placement="{Binding ElementName=SemesterButton}" 
+                           HorizontalOffset="0" 
+                           VerticalOffset="0">
+
+                        <Border CornerRadius="5" Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0">
+                            <StackPanel x:Name="SemesterListPopup"
+                            Background="Transparent"
+                            Width="200" 
+                            Height="auto"
+                >
+
+                            </StackPanel>
+                        </Border>
+
+                    </Popup>
+                </StackPanel>
+
+            </Border>
+        </StackPanel>
 
         <!--List Grid-->
-        <Grid Grid.Row="1" Background="#151934" Margin="40,40,40,40"/>
+        <Border Grid.Row="1" Margin="40,40,40,40" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}">
+            <Grid>
+                <DataGrid Margin="0 25 0 10" 
+                          x:Name="SubjectProgramDataGrid" 
+                          Style="{DynamicResource DefaultDataGrid}" 
+                          CellStyle="{DynamicResource DefaultDataGridCell}" 
+                          RowStyle="{DynamicResource DefaultDataGridRow}" 
+                          ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="STT" Width="100" Binding="{Binding stt}"/>
+                        <DataGridTextColumn Header="Môn học/ học phần" Binding="{Binding subjectName}" Width="*"/>
+                        <DataGridTextColumn Header="Mã học phần" Binding="{Binding idClassroom}" Width="*"/>
+                        <DataGridTextColumn Header="Số tín chỉ" Binding="{Binding creditNum}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

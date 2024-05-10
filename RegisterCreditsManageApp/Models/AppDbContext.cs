@@ -56,9 +56,9 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Subject> Subjects { get; set; }
 
-    public virtual DbSet<Teacher> Teachers { get; set; } 
+    public virtual DbSet<Teacher> Teachers { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }    
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -119,8 +119,12 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.IdClassRoomNavigation).WithMany(p => p.RegisterCredits)
                 .HasForeignKey(d => d.IdClassRoom)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RegisterCredits_ClassRoom");
+
+            entity.HasOne(d => d.IdSubjectNavigation).WithMany(p => p.RegisterCredits)
+                .HasForeignKey(d => d.IdSubject)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RegisterCredits_Subject");
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -160,7 +164,6 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.IdMainClassNavigation).WithMany(p => p.Students)
                 .HasForeignKey(d => d.IdMainClass)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Student_ClassName");
 
             entity.HasOne(d => d.IdMajorsNavigation).WithMany(p => p.Students)
