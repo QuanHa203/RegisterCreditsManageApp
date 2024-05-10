@@ -42,7 +42,7 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages.IteamAccountPage
             textBoxPhoneNumber.Text = student.PhoneNumber;
             textBoxEmail.Text = student.IdStudentNavigation.Email;
             textBoxDateOfBirth.Text = student.DateOfBirth.ToString();
-            if (student.Gender)
+            if (student.Gender == false)
             {
                 RadioButtonGenderFemale.IsChecked = true;
             }
