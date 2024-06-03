@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Commom -->
+    <SolidColorBrush x:Key="DefaultBlue" Color="#3663fe"/>
     <SolidColorBrush x:Key="PrimaryForegroundColor">#333333</SolidColorBrush>
     <SolidColorBrush x:Key="SecondForegroundColor">#beccdb</SolidColorBrush>
     <SolidColorBrush x:Key="ThirdForegroundColor">#99acc2</SolidColorBrush>
@@ -13,7 +14,6 @@
     <FontFamily x:Key="DefaultFontFamily">Montserrat</FontFamily>
     <CornerRadius x:Key="DefaultPrimaryCornerRadius">12</CornerRadius>
     <CornerRadius x:Key="DefaultSecondaryCornerRadius">6</CornerRadius>
-    <SolidColorBrush x:Key="DefaultFocusForeground" Color="#3663fe"/>
     <SolidColorBrush x:Key="DefaultBackgroundDataGridColumnHeader" Color="#e6e6e6"/>
     <SolidColorBrush x:Key="DefaultBackgroundDataGridRowHover" Color="#f0f0f0"/>
     <SolidColorBrush x:Key="DefaultCaretBrush" Color="Black"/>
@@ -22,7 +22,7 @@
 
     <!-- MainWindow -->
     <Style x:Key="IconThemeMode" TargetType="Path">
-        <Setter Property="Fill" Value="#3663fe"/>
+        <Setter Property="Fill" Value="{StaticResource DefaultBlue}"/>
         <Setter Property="Data">
             <Setter.Value>
                 M249.4,0.3c15.7-1.9,25.6,4.6,29.9,19.6c0.7,18.1,0.7,36.3,0,54.4c-5.7,18-17.5,23.6-35.4,16.9 c-6.4-3.8-10.2-9.5-11.4-16.9c-0.7-18.1-0.7-36.3,0-54.4C234.6,10.1,240.2,3.6,249.4,0.3z
@@ -43,8 +43,8 @@
         <GradientStop Color="#f1f1f1" Offset="0"/>
         <GradientStop Color="#fff" Offset="1"/>
     </LinearGradientBrush>
-    <Color x:Key="LeftMenuBtnGradientStop0">#993867FF</Color>
-    <Color x:Key="LeftMenuBtnGradientStop1">#fff</Color>
+    <Color x:Key="LeftMenuRadioButtonGradientStop0">#993867FF</Color>
+    <Color x:Key="LeftMenuRadioButtonGradientStop1">#fff</Color>
     <!-- End MainWindow -->
     
     <!--AlertWindow-->
@@ -54,7 +54,6 @@
     <SolidColorBrush x:Key="AlertCaption">#333333</SolidColorBrush>
     <SolidColorBrush x:Key="xAlertBtn">#d0dbe8</SolidColorBrush>
     <Style x:Key="AlertBtnOK" TargetType="Button">
-        
         <Setter Property="Content" Value="OK"/>
         <Setter Property="FontFamily" Value="Montserrat"/>
         <Setter Property="Foreground" Value="#fff" />
@@ -386,6 +385,7 @@
         </Setter>
     </Style>
     <!--End AlertWindow-->
+    
     <!--HomePage-->
     <SolidColorBrush x:Key="TriggerBtnTopHomPage">#3663fd</SolidColorBrush>
     <SolidColorBrush x:Key="TriggerTextblockTopHomPage">#ffffff</SolidColorBrush>

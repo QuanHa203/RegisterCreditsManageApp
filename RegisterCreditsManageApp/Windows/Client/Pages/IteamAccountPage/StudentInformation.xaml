@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="346" d:DesignWidth="740"
       Loaded="Page_Loaded"
-      FontFamily="{DynamicResource DefaultFontFamily}"
+      FontFamily="{StaticResource DefaultFontFamily}"
       Title="StudentInformation">
     <Page.Resources>
         <Style x:Key="LabelTextBlock" TargetType="TextBlock">

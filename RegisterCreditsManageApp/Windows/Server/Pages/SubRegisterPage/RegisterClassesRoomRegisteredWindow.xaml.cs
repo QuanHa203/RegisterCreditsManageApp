@@ -1,20 +1,9 @@
 ﻿using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Alert;
 using RegisterCreditsManageApp.Windows.Server.Pages.SubRegisterPage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RegisterCreditsManageApp.Windows.Server.Pages
 {
@@ -93,32 +82,36 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             popup.IsOpen = true;
         }
 
-        private void BtnEditClassRoom_Click(object sender, RoutedEventArgs e)
+        private void RadioBtnEditClassRoom_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            var parent = btn.Parent as Panel;
-            var idClassRoomTextBlock = parent.Children[2] as TextBlock;
+            RadioButton radioButton = (sender as RadioButton)!;
+            var parent = (radioButton.Parent as Panel)!;
+            var idClassRoomTextBlock = (parent.Children[2] as TextBlock)!;
 
             string idClassRoom = idClassRoomTextBlock.Text;
             new RegisterEditClassRoomWindow(idClassRoom).ShowDialog();
             GetDataGrid(idSemester, idMajors, idMainClass);
+
+            e.Handled = true;
         }
 
-        private void BtnDeleteClassRoom_Click(object sender, RoutedEventArgs e)
+        private void RadioBtnDeleteClassRoom_Click(object sender, RoutedEventArgs e)
         {
             var alertResult = AlertBox.Show($"Bạn có muốn xóa lớp học phần này không?)", "Cảnh báo", AlertButton.YesNo, AlertIcon.Warning);
-            if(alertResult == AlertResult.Yes)
+            if (alertResult == AlertResult.Yes)
             {
-                Button btn = sender as Button;
-                var parent = btn.Parent as Panel;
-                var idClassRoomTextBlock = parent.Children[2] as TextBlock;
+                RadioButton radioButton = (sender as RadioButton)!;
+                var parent = (radioButton.Parent as Panel)!;
+                var idClassRoomTextBlock = (parent.Children[2] as TextBlock)!;
                 string idClassRoom = idClassRoomTextBlock.Text;
-            
+
                 var classRoom = AppDbContext._Context.ClassRooms.FirstOrDefault(classRoom => classRoom.IdClassRoom == idClassRoom);
                 AppDbContext._Context.ClassRooms.Remove(classRoom);
                 AppDbContext._Context.SaveChanges();
                 AlertBox.Show($"Đã xóa lớp học phần thành công", "Thành công", AlertButton.OK, AlertIcon.Success);
                 GetDataGrid(idSemester, idMajors, idMainClass);
+
+                e.Handled = true;
             }
         }
 
@@ -134,6 +127,5 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             public int NumberOfCredits { get; set; }
             public string MainClassName { get; set; }
         }
-
     }
 }

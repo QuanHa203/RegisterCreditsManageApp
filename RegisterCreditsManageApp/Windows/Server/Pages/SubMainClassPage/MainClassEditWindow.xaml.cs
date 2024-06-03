@@ -34,35 +34,32 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubMainClassPage
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDataToWindow();
-            Style btnInPopupStyle = this.Resources["BtnInPopup"] as Style;
             AppDbContext._Context.Majors.ToList().ForEach(major =>
             {
-                Button btn = new Button();
-                btn.Content = major.Name;
-                btn.Style = btnInPopupStyle;
-                btn.Width = btnMajors.ActualWidth;
-                btn.Click += (s, e) =>
+                RadioButton rb = new RadioButton();
+                rb.Content = major.Name;
+                rb.Style = customComboboxMajor.CustomComboboxStyleChildren;
+                rb.Click += (s, e) =>
                 {
                     idMajor = major.IdMajors;
-                    btnMajors.Content = major.Name;
-                    popupMajor.IsOpen = false;
+                    customComboboxMajor._Text = major.Name;
+                    customComboboxMajor._IsOpen = false;
                 };
-                popupMajorsData.Children.Add(btn);
+                customComboboxMajor.CustomComboboxChildren.Add(rb);
             });
 
             AppDbContext._Context.Semesters.ToList().ForEach(semester =>
             {
-                Button btn = new Button();
-                btn.Content = semester.Name;
-                btn.Style = btnInPopupStyle;
-                btn.Width = btnMajors.ActualWidth;
-                btn.Click += (s, e) =>
+                RadioButton rb = new RadioButton();
+                rb.Content = semester.Name;
+                rb.Style = customComboboxCurrentSemester.CustomComboboxStyleChildren;
+                rb.Click += (s, e) =>
                 {
                     idCurrentSemester = semester.IdSemester;
-                    btnCurrentSemester.Content = semester.Name;
-                    popupCurrentSemester.IsOpen = false;
+                    customComboboxCurrentSemester._Text = semester.Name;
+                    customComboboxCurrentSemester._IsOpen = false;
                 };
-                popupCurrentSemesterData.Children.Add(btn);
+                customComboboxCurrentSemester.CustomComboboxChildren.Add(rb);
             });
         }
 
@@ -76,19 +73,9 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubMainClassPage
             idMajor = mainClass.IdMajors;
             idCurrentSemester = mainClass.IdCurrentRegisterSemester;
 
-            btnCurrentSemester.Content = mainClass.IdCurrentRegisterSemesterNavigation.Name;
-            btnMajors.Content = mainClass.IdMajorsNavigation.Name;
+            customComboboxCurrentSemester._Text = mainClass.IdCurrentRegisterSemesterNavigation.Name;
+            customComboboxMajor._Text = mainClass.IdMajorsNavigation.Name;
             AppDbContext._Context.MainClasses.Entry(mainClass).State = EntityState.Detached;
-        }
-
-        private void btnMajors_Click(object sender, RoutedEventArgs e)
-        {
-            popupMajor.IsOpen = true;
-        }
-
-        private void btnCurrentSemester_Click(object sender, RoutedEventArgs e)
-        {
-            popupCurrentSemester.IsOpen = true;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)

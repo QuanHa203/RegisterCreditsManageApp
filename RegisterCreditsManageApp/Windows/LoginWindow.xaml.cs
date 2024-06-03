@@ -1,23 +1,11 @@
-﻿using RegisterCreditsManageApp.Windows.Server;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using RegisterCreditsManageApp.Models;
+using RegisterCreditsManageApp.Windows.Client;
+using RegisterCreditsManageApp.Windows.Server;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
-using RegisterCreditsManageApp.Models;
-using System.Data;
-using RegisterCreditsManageApp.Windows.Client;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
 
 namespace RegisterCreditsManageApp.Windows
 {
@@ -51,7 +39,6 @@ namespace RegisterCreditsManageApp.Windows
                 else
                     return currentAdmin;
             }
-            set { currentAdmin = value; }
         }
         public LoginWindow()
         {
@@ -168,12 +155,12 @@ namespace RegisterCreditsManageApp.Windows
                         else
                         {
                             // Get student login success
-                            currentStudent = AppDbContext._Context.Students.Include(student => student.IdMainClassNavigation)
-                                                                           .Include(student => student.IdMainClassNavigation.IdCurrentRegisterSemesterNavigation)
-                                                                           .Include(student => student.IdMajorsNavigation)
-                                                                           .Include(student => student.IdStudentNavigation)
-
-                                                                           .FirstOrDefault(student => student.IdStudent == user.IdUser)!;
+                            currentStudent = AppDbContext._Context.Students
+                                            .Include(student => student.IdMainClassNavigation)
+                                            .Include(student => student.IdMainClassNavigation.IdCurrentRegisterSemesterNavigation)
+                                            .Include(student => student.IdMajorsNavigation)
+                                            .Include(student => student.IdStudentNavigation)
+                                            .FirstOrDefault(student => student.IdStudent == user.IdUser)!;
                             ClientWindow cl = new ClientWindow();
                             cl.Show();
                             this.Close();

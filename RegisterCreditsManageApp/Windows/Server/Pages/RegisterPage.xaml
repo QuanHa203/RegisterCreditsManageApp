@@ -3,52 +3,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:uc="clr-namespace:RegisterCreditsManageApp.UC"
       mc:Ignorable="d" 
-      Background="{DynamicResource SecondaryBackgroundColor}"
-      FontFamily="{DynamicResource DefaultFontFamily}"
+      FontFamily="{StaticResource DefaultFontFamily}"
+      Background="{DynamicResource SecondaryBackgroundColor}"      
       d:DesignHeight="450" d:DesignWidth="800"
       Loaded="Page_Loaded"
       Title="AnalysisPage">
-    
+
     <Page.Resources>
-        <Style x:Key="SearchBorder" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
-            <Setter Property="MinHeight" Value="60"/>
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="CornerRadius" Value="{DynamicResource DefaultPrimaryCornerRadius}"/>
-        </Style>
-
-        <Style x:Key="SearchBtn" TargetType="Button">
-            <Setter Property="Width" Value="40"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Cursor" Value="Hand"/>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Grid Background="Transparent">
-                            <Viewbox HorizontalAlignment="Left" Margin="4">
-                                <Path Style="{DynamicResource SearchSvg}" Fill="{DynamicResource SearchIconFill}"/>
-                            </Viewbox>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="SearchTextBox" TargetType="TextBox">
-            <Setter Property="Foreground" Value="{DynamicResource ThirdForegroundColor}"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Margin" Value="12 0 12 0"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="Transparent"/>
-        </Style>
-
         <Style x:Key="RedirectRadioButton" TargetType="RadioButton">
             <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -62,7 +25,7 @@
                     <ControlTemplate TargetType="RadioButton">
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Foreground" Value="{DynamicResource DefaultFocusForeground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource DefaultBlue}"/>
                             </Trigger>
 
                             <Trigger Property="IsChecked" Value="False">
@@ -74,9 +37,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Red"/>
-
     </Page.Resources>
 
     <Grid Margin="32">
@@ -85,15 +45,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Border Style="{DynamicResource SearchBorder}">
-                <StackPanel Margin="12 0 12 0" Orientation="Horizontal">
-                    <Button Style="{DynamicResource SearchBtn}"/>
-                    <Grid>
-                        <TextBox x:Name="SearchPlaceHolder" Style="{DynamicResource SearchTextBox}">Tìm kiếm tên lớp học</TextBox>
-                        <TextBox x:Name="SearchTextBox" Style="{DynamicResource SearchTextBox}" Width="{Binding ActualWidth, ElementName=SearchPlaceHolder}" CaretBrush="{DynamicResource DefaultCaretBrush}" TextChanged="SearchTextBox_TextChanged"></TextBox>
-                    </Grid>
-                </StackPanel>
-            </Border>
+            <uc:SearchTextBox x:Name="searchTextBox" _PlaceHolder="Tìm kiếm tên lớp học" Click="searchTextBox_Click"/>
         </Grid>
 
 
@@ -104,11 +56,11 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="24">
-                    <RadioButton x:Name="RadioButtonClassNotRegistered" Style="{DynamicResource RedirectRadioButton}" IsChecked="{x:Null}" Checked="RadioButtonClassNotRegistered_CheckedAndUnchecked" Unchecked="RadioButtonClassNotRegistered_CheckedAndUnchecked">Lớp học chưa đăng ký tín chỉ</RadioButton>
-                    <RadioButton Style="{DynamicResource RedirectRadioButton}">Lớp học đã đăng ký tín chỉ</RadioButton>
+                    <RadioButton x:Name="RadioButtonClassNotRegistered" Style="{StaticResource RedirectRadioButton}" IsChecked="{x:Null}" Checked="RadioButtonClassNotRegistered_CheckedAndUnchecked" Unchecked="RadioButtonClassNotRegistered_CheckedAndUnchecked">Lớp học chưa đăng ký tín chỉ</RadioButton>
+                    <RadioButton Style="{StaticResource RedirectRadioButton}">Lớp học đã đăng ký tín chỉ</RadioButton>
                 </StackPanel>
 
-                <DataGrid Style="{DynamicResource DefaultDataGrid}"  Grid.Row="1" Margin="0 0 0 24" x:Name="DataGridRegister" CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
+                <DataGrid Style="{StaticResource DefaultDataGrid}"  Grid.Row="1" Margin="0 0 0 24" x:Name="DataGridRegister" CellStyle="{StaticResource DefaultDataGridCell}" RowStyle="{StaticResource DefaultDataGridRow}" ColumnHeaderStyle="{StaticResource DefaultDataGridColumnHeader}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>Thao tác</DataGridTemplateColumn.Header>
@@ -118,7 +70,7 @@
                                         <Popup Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" AllowsTransparency="True" Margin="12">
                                             <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" Margin="12">
                                                 <StackPanel HorizontalAlignment="Left" Background="{DynamicResource PrimaryBackgroundColor}">
-                                                    <Button x:Name="BtnRegister" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnRegister_Click">Đăng ký lớp học phần</Button>
+                                                    <RadioButton x:Name="RadioButtonRegister" Style="{StaticResource RadioButtonInPopup}"  Click="BtnRegister_Click">Đăng ký lớp học phần</RadioButton>
                                                     <TextBlock Text="{Binding IdSemester}"  Height="0"/>
                                                     <TextBlock Text="{Binding IdMajors}"  Height="0"/>
                                                     <TextBlock Text="{Binding IdMainClass}"  Height="0"/>
@@ -136,7 +88,7 @@
                                                             <ControlTemplate>
                                                                 <Border Background="Transparent" BorderThickness="0">
                                                                     <Viewbox Width="24" Margin="0 0 20 0">
-                                                                        <Path Fill="#3663fe" Style="{DynamicResource MenuSvg}"/>
+                                                                        <Path Fill="{StaticResource DefaultBlue}" Style="{DynamicResource MenuSvg}"/>
                                                                     </Viewbox>
                                                                 </Border>
                                                             </ControlTemplate>

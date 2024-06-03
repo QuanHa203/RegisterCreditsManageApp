@@ -44,15 +44,6 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             DataGridMainClass.ItemsSource = mainClassList;
         }
 
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (SearchTextBox.Text.Length > 0)
-                SearchPlaceHolder.Visibility = Visibility.Hidden;
-
-            else
-                SearchPlaceHolder.Visibility = Visibility.Visible;
-        }
-
         private void BtnShowPopup_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
@@ -67,21 +58,23 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             LoadDataGrid();
         }
 
-        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        private void RadioBtnEdit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Button btn = sender as Button;
-            StackPanel sp = btn.Parent as StackPanel;
+            RadioButton radioButton = sender as RadioButton;
+            StackPanel sp = radioButton.Parent as StackPanel;
             TextBlock textBlockIdMainClass = sp.Children[2] as TextBlock;
             int idMainClass = Convert.ToInt32(textBlockIdMainClass.Text);
 
             new MainClassEditWindow(idMainClass).ShowDialog();
             LoadDataGrid();
+
+            e.Handled = true;
         }
 
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        private void RadioBtnDelete_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Button btn = sender as Button;
-            StackPanel sp = btn.Parent as StackPanel;
+            RadioButton radioButton = sender as RadioButton;
+            StackPanel sp = radioButton.Parent as StackPanel;
             TextBlock textBlockIdMainClass = sp.Children[2] as TextBlock;
             int idMainClass = Convert.ToInt32(textBlockIdMainClass.Text);
 
@@ -101,6 +94,8 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                     AlertBox.Show($"Lỗi, xóa lớp danh nghĩa thất bại.\nLỗi: {ex.Message}", "Lỗi", AlertButton.OK, AlertIcon.Error);
                 }
             }
+
+            e.Handled = true;
         }
     }
 }

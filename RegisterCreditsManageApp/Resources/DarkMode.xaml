@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--Commom -->
+    <SolidColorBrush x:Key="DefaultBlue" Color="#3663fe"/>
     <SolidColorBrush x:Key="PrimaryForegroundColor">#99acc2</SolidColorBrush>
     <SolidColorBrush x:Key="SecondForegroundColor">#ccd7e3</SolidColorBrush>
     <SolidColorBrush x:Key="ThirdForegroundColor">#99acc2</SolidColorBrush>
@@ -13,7 +14,6 @@
     <FontFamily x:Key="DefaultFontFamily">Montserrat</FontFamily>
     <CornerRadius x:Key="DefaultPrimaryCornerRadius">12</CornerRadius>
     <CornerRadius x:Key="DefaultSecondaryCornerRadius">6</CornerRadius>
-    <SolidColorBrush x:Key="DefaultFocusForeground" Color="#3663fe"/>
     <SolidColorBrush x:Key="DefaultBackgroundDataGridColumnHeader" Color="#2f3756"/>
     <SolidColorBrush x:Key="DefaultBackgroundDataGridRowHover" Color="#252d4c"/>
     <SolidColorBrush x:Key="DefaultCaretBrush" Color="White"/>
@@ -32,8 +32,8 @@
     <SolidColorBrush x:Key="SvgLeftMenuColor">#ffae00</SolidColorBrush>
     <SolidColorBrush x:Key="SvgLeftMenuColorHover" Color="#3663fe"/>
     <SolidColorBrush x:Key="LeftMenuBackground" Color="#1c2340"/>
-    <Color x:Key="LeftMenuBtnGradientStop0">#FF3867FF</Color>
-    <Color x:Key="LeftMenuBtnGradientStop1">#FF1C2340</Color>
+    <Color x:Key="LeftMenuRadioButtonGradientStop0">#FF3867FF</Color>
+    <Color x:Key="LeftMenuRadioButtonGradientStop1">#FF1C2340</Color>
     <!-- End MainWindow -->
 
     <!--AlertWindow-->

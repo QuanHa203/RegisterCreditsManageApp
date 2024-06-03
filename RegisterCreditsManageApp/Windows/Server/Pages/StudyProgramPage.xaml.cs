@@ -54,29 +54,13 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             public string majorName {  get; set; }
             public int subjectNum {  get; set; }
         }
-    private void FindMajorTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (FindMajorTextBox.Text != null && FindMajorTextBox.Text == "Tìm kiếm tên ngành học")
-            {
-                // Xóa placeholder text
-                FindMajorTextBox.Text = string.Empty;
-            }
-        }
-
-        private void FindMajorTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            // Nếu TextBox rỗng, khôi phục placeholder text
-            if (FindMajorTextBox.Text != null && string.IsNullOrWhiteSpace(FindMajorTextBox.Text))
-            {
-                FindMajorTextBox.Text = "Tìm kiếm tên ngành học";
-            }
-        }
+    
         private void NavigateToAddMajor_Click(object sender, RoutedEventArgs e)
         {
             new AddMajor().ShowDialog();
         }
 
-        private void OperationBtn_Click_1(object sender, RoutedEventArgs e)
+        private void OperationBtn_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             StackPanel st = btn.Parent as StackPanel;
@@ -86,8 +70,8 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
 
         private void ModifyMajorBtn_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            StackPanel st = btn.Parent as StackPanel;
+            RadioButton radioButton = sender as RadioButton;
+            StackPanel st = radioButton.Parent as StackPanel;
             TextBlock tb = st.Children[3] as TextBlock;
 
             int idMajor = int.Parse(tb.Text);
@@ -95,10 +79,10 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             LoadMajorData();
         }
 
-        private void DeleteMajorBtn_Click(object sender, RoutedEventArgs e)
+        private void DeleteMajorBtn_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Button btn = sender as Button;
-            StackPanel st = btn.Parent as StackPanel;
+            RadioButton radioButton = sender as RadioButton;
+            StackPanel st = radioButton.Parent as StackPanel;
             TextBlock tb = st.Children[3] as TextBlock;
 
             int idMajor = int.Parse(tb.Text);
@@ -112,12 +96,14 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                 AppDbContext._Context.Majors.Entry(major).State = EntityState.Detached;
                 LoadMajorData();
             }
+
+            e.Handled = true;
         }
 
         private void NavigateToSubject_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            StackPanel st = btn.Parent as StackPanel;
+            RadioButton radioButton = sender as RadioButton;
+            StackPanel st = radioButton.Parent as StackPanel;
             TextBlock tb = st.Children[3] as TextBlock;
 
             new SubjectsWindow(int.Parse(tb.Text)).ShowDialog();

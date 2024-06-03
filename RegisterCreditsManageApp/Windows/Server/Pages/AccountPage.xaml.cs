@@ -66,20 +66,10 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                 return;
             }
 
-            // Change password
-            User user = new User
-            {
-                IdUser = userAdmin.IdUser,
-                IdRole = 1,     // IdRole = 1 is Admin
-                Email = userAdmin.Email,
-                Password = newPassword,                
-            };
-            AppDbContext._Context.Entry(userAdmin).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-
-            AppDbContext._Context.Update(user);
+            // Update password
+            userAdmin.Password = newPassword;
             AppDbContext._Context.SaveChanges();
-            AppDbContext._Context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-            LoginWindow.CurrentAdmin = user;
+            
             AlertBox.Show("Đã thay đổi mật khẩu thành công", "", AlertButton.OK, AlertIcon.Success);
             textBoxOldPassword.Text = "";
             textBoxNewPassword.Text = "";

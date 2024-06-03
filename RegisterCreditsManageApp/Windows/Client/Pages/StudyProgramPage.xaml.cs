@@ -28,7 +28,6 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         {
             InitializeComponent();
             DisplaySemester();
-
         }
         public void LoadData()
         {
@@ -36,11 +35,11 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
                 .Where((ClassRoom c) => c.IdSemester == idCurrentSemester)
                 .Where((c) => c.IdMainClass == LoginWindow.CurrentStudent.IdMainClass).ToList();
             var list = new List<Data>();
-            for (int i = 0; i<classRoomList.Count; i++)
+            for (int i = 0; i < classRoomList.Count; i++)
             {
                 Data data = new Data()
                 {
-                    stt = i+1,
+                    stt = i + 1,
                     subjectName = classRoomList[i].IdSubjectNavigation.Name,
                     idClassroom = classRoomList[i].IdClassRoom,
                     creditNum = classRoomList[i].IdSubjectNavigation.NumberOfCredits,
@@ -52,17 +51,17 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         public class Data
         {
             public int stt { set; get; }
-            public string idClassroom {  set; get; }
-            public int creditNum {  set; get; }
-            public string subjectName {  get; set; }
+            public string idClassroom { set; get; }
+            public int creditNum { set; get; }
+            public string subjectName { get; set; }
         }
         public void DisplaySemester()
         {
             idCurrentSemester = LoginWindow.CurrentStudent.IdMainClassNavigation.IdCurrentRegisterSemester;
 
             var btnStyle = this.Resources["SemesterButton"] as Style;
-           
-            for (int i=1; i<=idCurrentSemester; i++)
+
+            for (int i = 1; i <= idCurrentSemester; i++)
             {
                 Button btn = new Button()
                 {

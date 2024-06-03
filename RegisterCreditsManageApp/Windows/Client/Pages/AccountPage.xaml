@@ -4,8 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Client.Pages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"       
       d:DesignHeight="450" d:DesignWidth="800"
+      FontFamily="{StaticResource DefaultFontFamily}"
       Title="AccountPage">
     <Page.Resources>
         <Style x:Key="TextRadioButtonStyle" TargetType="RadioButton">
@@ -18,10 +19,10 @@
                         <TextBlock Text="{TemplateBinding Content}"/>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Foreground" Value="#3663fe"></Setter>
+                                <Setter Property="Foreground" Value="{StaticResource DefaultBlue}"></Setter>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" Value="#3663fe"></Setter>
+                                <Setter Property="Foreground" Value="{StaticResource DefaultBlue}"></Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -108,7 +109,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <Border BorderThickness="0 0 0 2" BorderBrush="#f1f1f1">
+                    <Border BorderThickness="0 0 0 2" BorderBrush="#f1f1f1" Margin="0 12 0 0">
                         <StackPanel Orientation="Horizontal">
                             <RadioButton x:Name="rdbStudentInformation" Content="Thông tin sinh viên" GroupName="AccountPage" Style="{DynamicResource TextRadioButtonStyle}"  Checked="rdbStudentInformation_Checked"></RadioButton>
                             <RadioButton x:Name="rdbEducationInformation" Content="Thông tin học vấn" GroupName="AccountPage" Style="{DynamicResource TextRadioButtonStyle}" Checked="rdbEducationInformation_Checked"></RadioButton>
@@ -116,10 +117,7 @@
                         </StackPanel>
                     </Border>
                 </Grid>
-
                 <Frame x:Name="AccFrame" NavigationUIVisibility="Hidden" Grid.Row="1" Background="Transparent"></Frame>
-                
-
             </Grid>
         </Border>
             

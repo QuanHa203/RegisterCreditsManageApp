@@ -10,9 +10,9 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
     /// </summary>
     public partial class RegisterPage : Page
     {
-        private int idSemester = 1;
         private List<Data> dataGridRegisterList = new List<Data>();
         private Student currentStudent = LoginWindow.CurrentStudent;
+        private int idSemesterChoose;
 
         public RegisterPage()
         {
@@ -22,36 +22,40 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             RadioButtonClassWaitRegister.IsChecked = true;
+            idSemesterChoose = currentStudent.IdMainClassNavigation.IdCurrentRegisterSemester;
+            customComboboxChooseSemester._Text = currentStudent.IdMainClassNavigation.IdCurrentRegisterSemesterNavigation.Name;
             LoadDataPopupChooseSemester();
         }
 
         private void LoadDataPopupChooseSemester()
         {
-            Style btnInPopupStyle = this.Resources["BtnInPopup"] as Style;
             int currentSemester = currentStudent.IdMainClassNavigation.IdCurrentRegisterSemester;
             for (int i = 1; i <= currentSemester; i++)
             {
-                Button btn = new Button();
-                btn.Content = "Học kỳ " + i;
-                btn.Style = btnInPopupStyle;
-                btn.Width = btnChooseSemester.ActualWidth;
-                btn.Click += (s, e) =>
+                RadioButton rb = new RadioButton();
+                rb.Content = "Học kỳ " + i;                
+                rb.Style = customComboboxChooseSemester.CustomComboboxStyleChildren;                
+                int index = i;
+                rb.Click += (s, e) =>
                 {
-                    idSemester = i;
-                    btnChooseSemester.Content = btn.Content;
-                    popupChooseSemester.IsOpen = false;
-                    GetDataGridClassWaitRegister();
+                    idSemesterChoose = index;
+                    customComboboxChooseSemester._Text = $"Học kỳ {index}";
+                    customComboboxChooseSemester._IsOpen = false;
+
+                    if (RadioButtonClassWaitRegister.IsChecked!.Value == true)
+                        GetDataGridClassWaitRegister();
                 };
-                popupChooseSemesterData.Children.Add(btn);
+                customComboboxChooseSemester.CustomComboboxChildren.Add(rb);
             }
         }
 
         private void GetDataGridClassWaitRegister()
         {
-            var classWaitRegisterList = AppDbContext._Context.RegisterCredits.Include(registerCredit => registerCredit.IdSubjectNavigation)
-                                                                             .Where(registerCredit => registerCredit.IsRegister == false)
-                                                                             .Where(registerCredit => registerCredit.IdStudent == currentStudent.IdStudent)
-                                                                             .ToList();
+            var classWaitRegisterList = AppDbContext._Context.RegisterCredits
+                                        .Include(registerCredit => registerCredit.IdSubjectNavigation)
+                                        .Where(registerCredit => registerCredit.IdStudent == currentStudent.IdStudent)
+                                        .Where(registerCredit => registerCredit.IsRegister == false)
+                                        .ToList();
 
             dataGridRegisterList.Clear();
             DataGridRegister.ItemsSource = null;
@@ -72,11 +76,12 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
 
         private void GetDataGridClassRegistered()
         {
-            var classWaitRegisterList = AppDbContext._Context.RegisterCredits.Include(registerCredit => registerCredit.IdClassRoomNavigation)
-                                                                             .Include(registerCredit => registerCredit.IdSubjectNavigation)
-                                                                             .Where(registerCredit => registerCredit.IsRegister == true)
-                                                                             .Where(registerCredit => registerCredit.IdStudent == currentStudent.IdStudent)
-                                                                             .Where(registerCredit => registerCredit.IdClassRoomNavigation.IdSemester == idSemester).ToList();
+            var classWaitRegisterList = AppDbContext._Context.RegisterCredits
+                                        .Include(registerCredit => registerCredit.IdSubjectNavigation)
+                                        .Where(registerCredit => registerCredit.IdStudent == currentStudent.IdStudent)
+                                        .Where(registerCredit => registerCredit.IsRegister == true)
+                                        .Where(registerCredit => registerCredit.IdSubjectNavigation.IdSemester == idSemesterChoose)
+                                        .ToList();
 
             dataGridRegisterList.Clear();
             DataGridRegister.ItemsSource = null;
@@ -97,7 +102,7 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
 
         private void RadioButtonClassNotRegistered_CheckedAndUnchecked(object sender, RoutedEventArgs e)
         {
-            if (RadioButtonClassWaitRegister.IsChecked.Value)
+            if (RadioButtonClassWaitRegister.IsChecked!.Value)
             {
                 GetDataGridClassWaitRegister();
             }
@@ -110,15 +115,16 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         public class Data
         {
             public int NumericalOrder { get; set; }
-            public string IdClassRoom { get; set; }
-            public string SubjectName { get; set; }
+            public string IdClassRoom { get; set; } = null!;
+            public string SubjectName { get; set; } = null!;
             public int NumberOfCredit { get; set; }
 
         }
 
-        private void btnChooseSemester_Click(object sender, RoutedEventArgs e)
+        private void DataGridRow_Selected(object sender, RoutedEventArgs e)
         {
-            popupChooseSemester.IsOpen = true;
+            DataGridRow dataGridRow = (sender as DataGridRow)!;
+
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegisterCreditsManageApp.Models;
+using RegisterCreditsManageApp.UC;
+using RegisterCreditsManageApp.Windows.Alert;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -12,10 +14,12 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
     /// </summary>
     public partial class RegisterPage : Page
     {
-        private List<Data> dataGridRegisterList = new List<Data>();        
+        private List<Data> dataGridRegisterList = new List<Data>();   
+        
         public RegisterPage()
         {            
             InitializeComponent();
+            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -90,19 +94,10 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             DataGridRegister.ItemsSource = dataGridRegisterList;
         }
 
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (SearchTextBox.Text.Length > 0)
-                SearchPlaceHolder.Visibility = Visibility.Hidden;
-
-            else
-                SearchPlaceHolder.Visibility = Visibility.Visible;
-        }
-
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            var parent = btn.Parent as Panel;
+            RadioButton rb = sender as RadioButton;
+            var parent = rb.Parent as Panel;
             var idSemesterTextBlock = parent.Children[1] as TextBlock;
             var idMajorsTextBlock = parent.Children[2] as TextBlock;
             var idClassNameTextBlock = parent.Children[3] as TextBlock;
@@ -124,17 +119,17 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         }
 
         private void BtnShowPopup_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             Button btn = sender as Button;
             var parent = btn.Parent as Panel;
             var popup = parent.Children[0] as Popup;
-            var stackPanelInPopup = (popup.Child as Border).Child as StackPanel;
-            var btnInPopup = stackPanelInPopup.Children[0] as Button;
+            var stackPanelInPopup = ((popup.Child as Border)!.Child as StackPanel)!;
+            RadioButton rbInPopup = (stackPanelInPopup.Children[0] as RadioButton)!;
 
-            if(RadioButtonClassNotRegistered.IsChecked.Value)
-                btnInPopup.Content = "Đăng ký lớp học phần";
+            if(RadioButtonClassNotRegistered.IsChecked!.Value)
+                rbInPopup.Content = "Đăng ký lớp học phần";
             else
-                btnInPopup.Content = "Chỉnh sửa lớp học phần";
+                rbInPopup.Content = "Chỉnh sửa lớp học phần";
             popup.IsOpen = true;            
         }
 
@@ -159,6 +154,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             public string MajorsName { get; set; }
             public string SemesterName { get; set; }
             public int CourseYear { get; set; }
+        }
+
+        private void searchTextBox_Click(object sender, RoutedEventArgs e)
+        {            
+            
         }
     }
 }

@@ -18,7 +18,7 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             InitializeComponent();
             this.idSubject = idSubject;
             mainClass = AppDbContext._Context.MainClasses.Include(mainClass => mainClass.Students).FirstOrDefault(mainClass => mainClass.IdMainClass == idMainClass);
-
+            AppDbContext._Context.MainClasses.Entry(mainClass).State = EntityState.Detached;
             TextBoxClassRoomName.Text = mainClass.Name;
             TextBoxNumberOfCurrent.Text = mainClass.Students.Count.ToString();
         }
@@ -27,8 +27,8 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         {
             string idClassRoom = TextBoxIdClassRoom.Text;
             string numberOfCapacity = TextBoxNumberOfCapacity.Text;
-            string startRegisterDate = TextBoxStartRegisterDate.Text;
-            string endRegisterDate = TextBoxEndRegisterDate.Text;
+            string startRegisterDate = textBoxStartRegisterDate._Text;
+            string endRegisterDate = TextBoxEndRegisterDate._Text;
             string schedule = TextBoxSchedule.Text;
             if (idClassRoom.Length == 0 || numberOfCapacity.Length == 0 || startRegisterDate.Length == 0 || endRegisterDate.Length == 0 || schedule.Length == 0)
             {
@@ -52,10 +52,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                     Capacity = Convert.ToInt32(numberOfCapacity),
                     CurrentStudent = mainClass.Students.Count,
                     StartRegisterDate = startRegister,
-                    EndRegisterDate = endRegister,
+                    EndRegisterDate = endRegister,                    
                 };
                 AppDbContext._Context.Add(addClassRoom);
                 AppDbContext._Context.SaveChanges();
+                AppDbContext._Context.Entry(addClassRoom).State = EntityState.Detached;
 
                 List<RegisterCredit> registerCreditList = new List<RegisterCredit>();
                 foreach (var student in mainClass.Students)
@@ -65,10 +66,11 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                         IdStudent = student.IdStudent,
                         IdClassRoom = idClassRoom,
                         IdSubject = idSubject,
+                        IsRegister = true,
                     };
                     registerCreditList.Add(registerCredit);
                 }
-                    AppDbContext._Context.AddRange(registerCreditList);                    
+                    AppDbContext._Context.AddRange(registerCreditList);
                     AppDbContext._Context.SaveChanges();
                 AlertBox.Show($"Đã tạo lớp học phần thành công", "Thành công", AlertButton.OK, AlertIcon.Success);
                 this.Close();
@@ -83,22 +85,6 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void TextBoxStartRegisterDate_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (TextBoxStartRegisterDate.Text.Length > 0)
-                TextBoxStartRegisterDatePlaceHolder.Visibility = Visibility.Hidden;
-            else
-                TextBoxStartRegisterDatePlaceHolder.Visibility = Visibility.Visible;
-        }
-
-        private void TextBoxEndRegisterDate_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (TextBoxEndRegisterDate.Text.Length > 0)
-                TextBoxEndRegisterDatePlaceHolder.Visibility = Visibility.Hidden;
-            else
-                TextBoxEndRegisterDatePlaceHolder.Visibility = Visibility.Visible;
-        }
+        }        
     }
 }

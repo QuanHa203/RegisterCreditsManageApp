@@ -30,16 +30,7 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             List<Student> studentList = null;
             studentList = AppDbContext._Context.Students.Include((student) => student.IdMainClassNavigation).ToList();
             DataGridStudent.ItemsSource = studentList;
-        }
-
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (SearchTextBox.Text.Length > 0)
-                SearchPlaceHolder.Visibility = Visibility.Hidden;
-
-            else
-                SearchPlaceHolder.Visibility = Visibility.Visible;
-        }
+        }        
 
         private void BtnShowPopup_Click(object sender, RoutedEventArgs e)
         {
@@ -49,29 +40,31 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             popup.IsOpen = true;
         }
 
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        private void RadioBtnRegisterCredit_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            new StudentAddWindow().ShowDialog();
-            LoadDataGrid();
+
+            e.Handled = true;
         }
 
-        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        private void RadioBtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            var parent = btn.Parent as Panel;
-            var idStudentTextBlock = parent.Children[2] as TextBlock;
+            RadioButton radioButton = sender as RadioButton;
+            var parent = radioButton.Parent as Panel;
+            var idStudentTextBlock = parent.Children[3] as TextBlock;
             new StudentEditWindow(idStudentTextBlock.Text).ShowDialog();
             LoadDataGrid();
+
+            e.Handled = true;
         }
 
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        private void RadioBtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            var parent = btn.Parent as Panel;
-            var idStudentTextBlock = parent.Children[2] as TextBlock;
+            RadioButton radioButton = sender as RadioButton;
+            var parent = radioButton.Parent as Panel;
+            var idStudentTextBlock = parent.Children[3] as TextBlock;
             string idStudent = idStudentTextBlock.Text;
             AlertResult alertResult = AlertBox.Show("Bạn có chắc muốn xóa sinh viên này không?", "Thông báo", AlertButton.YesNo, AlertIcon.Question);
-            if(alertResult == AlertResult.Yes)
+            if (alertResult == AlertResult.Yes)
             {
                 try
                 {
@@ -86,9 +79,15 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
                     AlertBox.Show($"Lỗi, xóa sinh viên thất bại.\nLỗi: {ex.Message}", "Lỗi", AlertButton.OK, AlertIcon.Error);
                 }
             }
-
-
+            e.Handled = true;
         }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            new StudentAddWindow().ShowDialog();
+            LoadDataGrid();
+        }
+
         public class Data
         {
             public string MajorName { get; set;}

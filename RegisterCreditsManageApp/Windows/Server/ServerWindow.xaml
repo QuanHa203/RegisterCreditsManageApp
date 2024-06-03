@@ -4,9 +4,9 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                   xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows"
-                    
-        Loaded="MainWindow_Loaded"                  
-        Title="ServerWindow" Width="1200" Height="600">
+                  FontFamily="{StaticResource DefaultFontFamily}"
+                  Loaded="MainWindow_Loaded"                  
+                  Title="ServerWindow" Width="1200" Height="600">
 
     <Window.Resources>
         <!-- Navigation -->
@@ -53,7 +53,7 @@
         <!-- End Navigation -->
 
         <!-- Left Menu -->
-        <Style x:Key="LeftMenuBtn" TargetType="Button">
+        <Style x:Key="LeftMenuRadioButton" TargetType="RadioButton">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -62,7 +62,7 @@
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="RadioButton">
 
                         <ContentPresenter/>
                     </ControlTemplate>
@@ -119,20 +119,22 @@
             <Grid Grid.Column="0" Background="{DynamicResource LeftMenuBackground}">
                 <Grid>
                     <StackPanel x:Name="LeftMenuStackPanel" Margin="0 48 0 48" >
-                        <Button x:Name="StudyProgramBtn" 
-                                Click="StudyProgramBtn_Click"
-                                MouseEnter="LeftMenuBtn_MouseEnter"
-                                MouseLeave="LeftMenuBtn_MouseLeave"
-                                Style="{DynamicResource LeftMenuBtn}" 
+                        <RadioButton x:Name="StudyProgramRadioButton"
+                                Click="StudyProgramRadioButton_Click"
+                                MouseEnter="LeftMenuRadioButton_MouseEnter"
+                                MouseLeave="LeftMenuRadioButton_MouseLeave"
+                                Checked="LeftMenuRadioButton_Checked"
+                                Unchecked="LeftMenuRadioButton_UnChecked"                                
+                                Style="{StaticResource LeftMenuRadioButton}" 
                                 Width="{Binding ActualWidth, ElementName=LeftMenuStackPanel}">
-                            <Border BorderThickness="2 0 0 0">
+                            <Border BorderThickness="2 0 0 0" >
                                 <Border.BorderBrush>
                                     <SolidColorBrush Color="#FF3663FE" Opacity="0"/>
                                 </Border.BorderBrush>
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="1,0" StartPoint="-1.6,0">
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop0}"/>
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop1}" Offset="0"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop0}"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop1}" Offset="0"/>
                                     </LinearGradientBrush>
                                 </Border.Background>
 
@@ -143,13 +145,15 @@
                                     <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Chương trình học</TextBlock>
                                 </StackPanel>
                             </Border>
-                        </Button>
+                        </RadioButton>
 
-                        <Button x:Name="RegisterBtn" 
-                                Click="RegisterBtn_Click"
-                                MouseEnter="LeftMenuBtn_MouseEnter"
-                                MouseLeave="LeftMenuBtn_MouseLeave"
-                                Style="{DynamicResource LeftMenuBtn}" 
+                        <RadioButton x:Name="RegisterRadioButton" 
+                                Click="RegisterRadioButton_Click"
+                                MouseEnter="LeftMenuRadioButton_MouseEnter"
+                                MouseLeave="LeftMenuRadioButton_MouseLeave"
+                                Checked="LeftMenuRadioButton_Checked"
+                                Unchecked="LeftMenuRadioButton_UnChecked"
+                                Style="{StaticResource LeftMenuRadioButton}" 
                                 Width="{Binding ActualWidth, ElementName=LeftMenuStackPanel}">
                             <Border BorderThickness="2 0 0 0">
                                 <Border.BorderBrush>
@@ -157,8 +161,8 @@
                                 </Border.BorderBrush>
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="1,0" StartPoint="-1.6,0">
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop0}"/>
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop1}" Offset="0"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop0}"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop1}" Offset="0"/>
                                     </LinearGradientBrush>
                                 </Border.Background>
 
@@ -169,22 +173,24 @@
                                     <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Đăng ký tín chỉ</TextBlock>
                                 </StackPanel>
                             </Border>
-                        </Button>
+                        </RadioButton>
 
-                        <Button x:Name="StudentManagerBtn" 
-        Click="StudentManagerBtn_Click"
-        MouseEnter="LeftMenuBtn_MouseEnter"
-        MouseLeave="LeftMenuBtn_MouseLeave"
-        Style="{DynamicResource LeftMenuBtn}" 
-        Width="{Binding ActualWidth, ElementName=LeftMenuStackPanel}">
+                        <RadioButton x:Name="StudentManagerRadioButton" 
+                                Click="StudentManagerRadioButton_Click"
+                                MouseEnter="LeftMenuRadioButton_MouseEnter"
+                                MouseLeave="LeftMenuRadioButton_MouseLeave"
+                                Checked="LeftMenuRadioButton_Checked"
+                                Unchecked="LeftMenuRadioButton_UnChecked"
+                                Style="{StaticResource LeftMenuRadioButton}" 
+                                Width="{Binding ActualWidth, ElementName=LeftMenuStackPanel}">
                             <Border BorderThickness="2 0 0 0">
                                 <Border.BorderBrush>
                                     <SolidColorBrush Color="#FF3663FE" Opacity="0"/>
                                 </Border.BorderBrush>
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="1,0" StartPoint="-1.6,0">
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop0}"/>
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop1}" Offset="0"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop0}"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop1}" Offset="0"/>
                                     </LinearGradientBrush>
                                 </Border.Background>
 
@@ -195,13 +201,15 @@
                                     <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Quản lý sinh viên</TextBlock>
                                 </StackPanel>
                             </Border>
-                        </Button>
+                        </RadioButton>
 
-                        <Button x:Name="MainClassManagerBtn" 
-                                    Click="MainClassManagerBtn_Click"
-                                    MouseEnter="LeftMenuBtn_MouseEnter"
-                                    MouseLeave="LeftMenuBtn_MouseLeave"
-                                    Style="{DynamicResource LeftMenuBtn}" 
+                        <RadioButton x:Name="MainClassManagerRadioButton" 
+                                    Click="MainClassManagerRadioButton_Click"
+                                    MouseEnter="LeftMenuRadioButton_MouseEnter"
+                                    MouseLeave="LeftMenuRadioButton_MouseLeave"
+                                    Checked="LeftMenuRadioButton_Checked"
+                                    Unchecked="LeftMenuRadioButton_UnChecked"
+                                    Style="{StaticResource LeftMenuRadioButton}" 
                                     Width="{Binding ActualWidth, ElementName=LeftMenuStackPanel}">
                             <Border BorderThickness="2 0 0 0">
                                 <Border.BorderBrush>
@@ -209,8 +217,8 @@
                                 </Border.BorderBrush>
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="1,0" StartPoint="-1.6,0">
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop0}"/>
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop1}" Offset="0"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop0}"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop1}" Offset="0"/>
                                     </LinearGradientBrush>
                                 </Border.Background>
 
@@ -221,13 +229,15 @@
                                     <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Quản lý Lớp học</TextBlock>
                                 </StackPanel>
                             </Border>
-                        </Button>
+                        </RadioButton>
 
-                        <Button x:Name="AccountBtn" 
-                                Click="AccountBtn_Click"
-                                MouseEnter="LeftMenuBtn_MouseEnter"
-                                MouseLeave="LeftMenuBtn_MouseLeave"
-                                Style="{DynamicResource LeftMenuBtn}" 
+                        <RadioButton x:Name="AccountRadioButton" 
+                                Click="AccountRadioButton_Click"
+                                MouseEnter="LeftMenuRadioButton_MouseEnter"
+                                MouseLeave="LeftMenuRadioButton_MouseLeave"
+                                Checked="LeftMenuRadioButton_Checked"
+                                Unchecked="LeftMenuRadioButton_UnChecked"
+                                Style="{StaticResource LeftMenuRadioButton}" 
                                 Width="{Binding ActualWidth, ElementName=LeftMenuStackPanel}">
                             <Border BorderThickness="2 0 0 0">
                                 <Border.BorderBrush>
@@ -235,8 +245,8 @@
                                 </Border.BorderBrush>
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="1,0" StartPoint="-1.6,0">
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop0}"/>
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop1}" Offset="0"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop0}"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop1}" Offset="0"/>
                                     </LinearGradientBrush>
                                 </Border.Background>
 
@@ -247,13 +257,13 @@
                                     <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Tài khoản</TextBlock>
                                 </StackPanel>
                             </Border>
-                        </Button>
+                        </RadioButton>
 
-                        <Button x:Name="ExitBtn" 
-                                Click="ExitBtn_Click"
-                                MouseEnter="LeftMenuBtn_MouseEnter"
-                                MouseLeave="LeftMenuBtn_MouseLeave"
-                                Style="{DynamicResource LeftMenuBtn}" 
+                        <RadioButton x:Name="ExitRadioButton" 
+                                PreviewMouseLeftButtonDown="ExitRadioButton_PreviewMouseLeftButtonDown"
+                                MouseEnter="LeftMenuRadioButton_MouseEnter"
+                                MouseLeave="LeftMenuRadioButton_MouseLeave"                                
+                                Style="{StaticResource LeftMenuRadioButton}" 
                                 Width="{Binding ActualWidth, ElementName=LeftMenuStackPanel}">
                             <Border BorderThickness="2 0 0 0">
                                 <Border.BorderBrush>
@@ -261,8 +271,8 @@
                                 </Border.BorderBrush>
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="1,0" StartPoint="-1.6,0">
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop0}"/>
-                                        <GradientStop Color="{DynamicResource LeftMenuBtnGradientStop1}" Offset="0"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop0}"/>
+                                        <GradientStop Color="{DynamicResource LeftMenuRadioButtonGradientStop1}" Offset="0"/>
                                     </LinearGradientBrush>
                                 </Border.Background>
 
@@ -273,7 +283,7 @@
                                     <TextBlock Style="{DynamicResource LeftMenuTextBlock}">Thoát</TextBlock>
                                 </StackPanel>
                             </Border>
-                        </Button>
+                        </RadioButton>
                     </StackPanel>
                 </Grid>
             </Grid>

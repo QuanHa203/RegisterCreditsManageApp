@@ -11,24 +11,30 @@ namespace RegisterCreditsManageApp.Windows.Client
         public ClientWindow()
         {
             InitializeComponent();
-        }        
+        }
 
-        private void HomeBtn_Click(object sender, RoutedEventArgs e)
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            HomeRadioButton_Click(sender, e);
+            HomeRadioButton.IsChecked = true;
+        }
+
+        private void HomeRadioButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/HomePage.xaml", UriKind.Relative));
         }
 
-        private void StudyProgramBtn_Click(object sender, RoutedEventArgs e)
+        private void StudyProgramRadioButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/StudyProgramPage.xaml", UriKind.Relative));
         }
 
-        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
+        private void RegisterRadioButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/RegisterPage.xaml", UriKind.Relative));
         }
 
-        private void AccountBtn_Click(object sender, RoutedEventArgs e)
+        private void AccountRadioButton_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.NavigationService.Navigate(new Uri("Windows/Client/Pages/AccountPage.xaml", UriKind.Relative));            
         }
@@ -38,12 +44,14 @@ namespace RegisterCreditsManageApp.Windows.Client
             AlertBox.Show("Chức năng này đang trong quá trình phát triển", "Thông báo", AlertButton.OK, AlertIcon.Information);
         }
 
-        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        private void ExitRadioButton_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var alertResult = AlertBox.Show("Bạn có chắc chắn muốn thoát không?", "", AlertButton.YesNo, AlertIcon.Question);
-            if (alertResult == AlertResult.Yes)                
+            if (alertResult == AlertResult.Yes)
                 Application.Current.Shutdown();
-        }
 
+            // Ngăn không cho RadioButton thay đổi trạng thái khi được nhấp vào
+            e.Handled = true;
+        }
     }
 }

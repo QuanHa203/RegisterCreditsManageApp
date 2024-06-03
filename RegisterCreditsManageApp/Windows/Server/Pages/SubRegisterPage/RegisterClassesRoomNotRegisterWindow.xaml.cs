@@ -75,12 +75,12 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             popup.IsOpen = true;
         }
 
-        private void BtnAddClassRoom_Click(object sender, RoutedEventArgs e)
+        private void RadioBtnAddClassRoom_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            var parent = btn.Parent as Panel;
-            var idSubjectTextBlock = parent.Children[1] as TextBlock;
-            var idMainClassTextBlock = parent.Children[2] as TextBlock;
+            RadioButton radioButton = (sender as RadioButton)!;
+            var parent = radioButton.Parent as Panel;
+            var idSubjectTextBlock = (parent.Children[1] as TextBlock)!;
+            var idMainClassTextBlock = (parent.Children[2] as TextBlock)!;
 
             int idSubject = Convert.ToInt32(idSubjectTextBlock.Text);
             int idMainClass = Convert.ToInt32(idMainClassTextBlock.Text);

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages.SubStudyProgramPage"
         mc:Ignorable="d"
+        FontFamily="{StaticResource DefaultFontFamily}"
         Title="SubjectsWindow"  Height="500"
          Width="700"
          WindowStartupLocation="CenterOwner"
@@ -45,7 +46,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70*"/>
                     <RowDefinition Height="240*"/>
-                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <!--Add major label-->
@@ -54,9 +55,9 @@
                         <Label x:Name="MajorTitle" Content="Môn học ngành " 
                            FontFamily="Montserrat Bold"
                            FontSize="20"
-                           Foreground="#3663fe" Height="42"            
+                           Foreground="{StaticResource DefaultBlue}" Height="42"            
                    />
-                        
+
                     </StackPanel>
                 </Grid>
 
@@ -96,7 +97,7 @@
                                                                     <ControlTemplate>
                                                                         <Border Background="Transparent" BorderThickness="0">
                                                                             <Viewbox Width="24" Margin="0 0 20 0">
-                                                                                <Path Fill="#3663fe" Style="{DynamicResource MenuSvg}"/>
+                                                                                <Path Fill="{StaticResource DefaultBlue}" Style="{DynamicResource MenuSvg}"/>
                                                                             </Viewbox>
                                                                         </Border>
                                                                     </ControlTemplate>
@@ -108,12 +109,12 @@
                                             </StackPanel>
 
                                         </DataTemplate>
-                                        
+
                                     </DataGridTemplateColumn.CellTemplate>
-                                 <DataGridTemplateColumn.Header>Thao tác</DataGridTemplateColumn.Header>
+                                    <DataGridTemplateColumn.Header>Thao tác</DataGridTemplateColumn.Header>
 
                                 </DataGridTemplateColumn>
-                               
+
                             </DataGrid.Columns>
                         </DataGrid>
                         <Button x:Name="AddSubjectBtn" Click="AddSubjectBtn_Click" Style="{DynamicResource AddSubjectBtn}">
@@ -128,22 +129,9 @@
                 </Border>
 
                 <!--Button section-->
-                <Grid Grid.Row="2" HorizontalAlignment="Left" Margin="360,13,0,0" Width="300">
-                    
-                    <Border Margin="100 0 0 0" Width="100" Height="50" BorderBrush="#932d3b" BorderThickness="1" CornerRadius="10">
-                        <Button x:Name="ExitSubjectsWindow" Click="ExitSubjectsWindow_Click" Content="Thoát" Cursor="Hand" FontFamily="Montserrat" FontSize="15" BorderThickness="0" Foreground="#932d3b" Background="Transparent">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" />
-                                        </Border>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                    </Border>
-                </Grid>
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 24 0 0">
+                    <Button x:Name="ExitSubjectsWindow" Style="{StaticResource DefaultButtonSubmitError}" Content="Hủy" Click="ExitSubjectsWindow_Click"/>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>

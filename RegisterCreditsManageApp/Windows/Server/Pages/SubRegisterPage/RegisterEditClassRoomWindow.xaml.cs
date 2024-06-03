@@ -26,32 +26,31 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubRegisterPage
         public RegisterEditClassRoomWindow(string idClassRoom)
         {
             this.idClassRoom = idClassRoom;
+            classRoom = AppDbContext._Context.ClassRooms.FirstOrDefault(classRoom => classRoom.IdClassRoom == idClassRoom)!;
             InitializeComponent();
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            classRoom = AppDbContext._Context.ClassRooms.FirstOrDefault(classRoom => classRoom.IdClassRoom == idClassRoom);
-            TextBoxIdClassRoom.Text = classRoom.IdClassRoom;
-            TextBoxClassRoomName.Text = classRoom.Name;
-            TextBoxNumberOfCapacity.Text = classRoom.Capacity.ToString();
-            TextBoxNumberOfCurrent.Text = classRoom.CurrentStudent.ToString();
-            TextBoxSchedule.Text = classRoom.Schedule.ToString();
-            TextBoxStartRegisterDate.Text = classRoom.StartRegisterDate.ToString();
-            TextBoxEndRegisterDate.Text = classRoom.EndRegisterDate.ToString();
+            textBoxIdClassRoom.Text = classRoom.IdClassRoom;
+            textBoxClassRoomName.Text = classRoom.Name;
+            textBoxNumberOfCapacity.Text = classRoom.Capacity.ToString();
+            textBoxNumberOfCurrent.Text = classRoom.CurrentStudent.ToString();
+            textBoxSchedule.Text = classRoom.Schedule.ToString();
+            textBoxStartRegisterDate._Text = classRoom.StartRegisterDate.ToString();
+            textBoxEndRegisterDate._Text = classRoom.EndRegisterDate.ToString();
             if (classRoom.Status)
-                RadioButtonStatusOpen.IsChecked = true;
+                radioButtonStatusOpen.IsChecked = true;
             else
-                RadioButtonStatusClose.IsChecked = true;
+                radioButtonStatusClose.IsChecked = true;
         }
 
-        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            string numberOfCapacity = TextBoxNumberOfCapacity.Text;
-            string startRegisterDate = TextBoxStartRegisterDate.Text;
-            string endRegisterDate = TextBoxEndRegisterDate.Text;
-            string schedule = TextBoxSchedule.Text;
+            string numberOfCapacity = textBoxNumberOfCapacity.Text;
+            string startRegisterDate = textBoxStartRegisterDate._Text;
+            string endRegisterDate = textBoxEndRegisterDate._Text;
+            string schedule = textBoxSchedule.Text;
             if (numberOfCapacity.Length == 0 || startRegisterDate.Length == 0 || endRegisterDate.Length == 0 || schedule.Length == 0)
             {
                 AlertBox.Show("Vui lòng nhập đầy đủ dữ liệu", "Cảnh báo", AlertButton.OK, AlertIcon.Warning);
@@ -70,7 +69,7 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubRegisterPage
                     IdSemester = classRoom.IdSemester,
                     Name = classRoom.Name,
                     Schedule = schedule,
-                    Status = RadioButtonStatusOpen.IsChecked.Value,
+                    Status = radioButtonStatusOpen.IsChecked!.Value,
                     Capacity = Convert.ToInt32(numberOfCapacity),
                     CurrentStudent = classRoom.CurrentStudent,
                     StartRegisterDate = startRegister,
@@ -90,25 +89,9 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubRegisterPage
             }
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void TextBoxStartRegisterDate_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (TextBoxStartRegisterDate.Text.Length > 0)
-                TextBoxStartRegisterDatePlaceHolder.Visibility = Visibility.Hidden;
-            else
-                TextBoxStartRegisterDatePlaceHolder.Visibility = Visibility.Visible;
-        }
-
-        private void TextBoxEndRegisterDate_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (TextBoxEndRegisterDate.Text.Length > 0)
-                TextBoxEndRegisterDatePlaceHolder.Visibility = Visibility.Hidden;
-            else
-                TextBoxEndRegisterDatePlaceHolder.Visibility = Visibility.Visible;
         }
     }
 }

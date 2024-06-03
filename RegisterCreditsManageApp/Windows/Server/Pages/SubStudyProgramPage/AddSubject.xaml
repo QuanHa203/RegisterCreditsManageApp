@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages.SubWindow"
         mc:Ignorable="d"
         Title="AddSubject"
-        Height="450"
+        Height="340"
         Width="650"
+        FontFamily="{StaticResource DefaultFontFamily}"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         ResizeMode="NoResize"
@@ -74,9 +75,9 @@
         <Border Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="20">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="18*"/>
-                    <RowDefinition Height="7*" />
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
                 <!--Add major label-->
@@ -85,7 +86,7 @@
                         <Label Content="Thêm môn học" 
                             FontFamily="Montserrat Bold"
                             FontSize="20"
-                            Foreground="#3663fe" Height="34" Width="606"            
+                            Foreground="{StaticResource DefaultBlue}" Height="34" Width="606"            
                     />
                         <Label>
                             <TextBlock Margin="2 0 0 0">
@@ -216,34 +217,10 @@
 
 
                 <!--Button section-->
-                <Grid Grid.Row="2" HorizontalAlignment="Left" Margin="360,13,0,-10" Width="300">
-                    <Border Margin="0 0 120 0" Width="100" Height="50" BorderBrush="#1ef118" BorderThickness="1" CornerRadius="10">
-                        <Button x:Name="AddSubjectBtn" Click="AddSubjectBtn_Click" Content="Thêm" Cursor="Hand" FontFamily="Montserrat" FontSize="15" BorderThickness="0" Foreground="#1ef118" Background="Transparent">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" />
-                                        </Border>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                    </Border>
-                    <Border Margin="100 0 0 0" Width="100" Height="50" BorderBrush="#932d3b" BorderThickness="1" CornerRadius="10">
-                        <Button x:Name="CancelAddingSubjectBtn" Click="CancelAddingSubjectBtn_Click" Content="Hủy" Cursor="Hand" FontFamily="Montserrat" FontSize="15" BorderThickness="0" Foreground="#932d3b" Background="Transparent">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" />
-                                        </Border>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                    </Border>
-                </Grid>
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 24 0 0">
+                    <Button x:Name="AddSubjectBtn" Style="{StaticResource DefaultButtonSubmitSuccess}" Content="Thêm" Click="AddSubjectBtn_Click" Margin="0 0 24 0"/>
+                    <Button x:Name="CancelAddingSubjectBtn" Style="{StaticResource DefaultButtonSubmitError}" Content="Hủy" Click="CancelAddingSubjectBtn_Click"/>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>

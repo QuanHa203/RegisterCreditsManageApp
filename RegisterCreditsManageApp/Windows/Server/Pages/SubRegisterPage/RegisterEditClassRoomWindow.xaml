@@ -4,114 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages.SubRegisterPage"
+        xmlns:uc="clr-namespace:RegisterCreditsManageApp.UC"
         mc:Ignorable="d"
         Background="{DynamicResource PrimaryBackgroundColor}"        
-        FontFamily="{DynamicResource DefaultFontFamily}"
+        FontFamily="{StaticResource DefaultFontFamily}"
         Loaded="Window_Loaded"
-        Title="RegisterEditClassRoomWindow" Height="auto" Width="800">
-
-    <Window.Resources>
-        <Style x:Key="CommomBtn" TargetType="Button">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="32 0 32 0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                    Padding="{TemplateBinding Padding}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="{DynamicResource DefaultSecondaryCornerRadius}"
-                    BorderBrush="{TemplateBinding BorderBrush}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Opacity" Value="0.6"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="LabelTextBlock" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontWeight" Value="Medium"/>
-            <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"/>
-            <Setter Property="Margin" Value="0 0 0 12"/>
-        </Style>
-
-        <Style x:Key="CommomTextBox" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ThirdForegroundColor}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Foreground" Value="{DynamicResource ThirdForegroundColor}"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="8 12"/>
-            <Setter Property="Margin" Value="0 16"/>
-            <Setter Property="CaretBrush" Value="{DynamicResource DefaultCaretBrush}"/>
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="AllowDrop" Value="true"/>
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" 
-                                            BorderBrush="{TemplateBinding BorderBrush}" 
-                                            BorderThickness="{TemplateBinding BorderThickness}"          
-                                            CornerRadius="{DynamicResource DefaultSecondaryCornerRadius}"
-                                            SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" 
-                                                                FontSize="{TemplateBinding FontSize}"
-                                                                Padding="{TemplateBinding Padding}"
-                                                                HorizontalScrollBarVisibility="Hidden" 
-                                                                VerticalScrollBarVisibility="Hidden"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="CommomRadioButton" TargetType="{x:Type RadioButton}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource ThirdForegroundColor}"/>
-            <Setter Property="Foreground" Value="{DynamicResource ThirdForegroundColor}"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="12"/>
-            <Setter Property="Margin" Value="0 16"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Border x:Name="radioButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                <Grid x:Name="markGrid" Margin="4">
-                                    <Ellipse x:Name="optionMark" Fill="#3663fd" MinWidth="14" MinHeight="14" Opacity="0"/>
-                                </Grid>
-                            </Border>
-                            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
+        Title="RegisterEditClassRoomWindow" Height="auto" MinWidth="800" MaxWidth="800">
 
     <Grid Margin="32">
         <Grid.RowDefinitions>
@@ -127,7 +25,7 @@
             <TextBlock Text="Lớp học phần cần chỉnh sửa">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
-                        <Setter Property="Foreground" Value="#3663fe"/>
+                        <Setter Property="Foreground" Value="{StaticResource DefaultBlue}"/>
                         <Setter Property="FontSize" Value="20"/>
                         <Setter Property="FontWeight" Value="Bold"/>
                     </Style>
@@ -135,67 +33,61 @@
             </TextBlock>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0 12">
             <StackPanel Width="300" HorizontalAlignment="Left">
-                <TextBlock Text="Mã lớp học phần" Style="{DynamicResource LabelTextBlock}"/>
-                <TextBox x:Name="TextBoxIdClassRoom" Style="{DynamicResource CommomTextBox}" IsReadOnly="True"></TextBox>
+                <TextBlock Text="Mã lớp học phần" Style="{StaticResource DefaultLabelTextBlock}"/>
+                <TextBox x:Name="textBoxIdClassRoom" Style="{StaticResource DefaultTextBox}" IsReadOnly="True"></TextBox>
             </StackPanel>
 
             <StackPanel Width="300" HorizontalAlignment="Right">
-                <TextBlock Text="Tên lớp học phần" Style="{DynamicResource LabelTextBlock}"/>
-                <TextBox x:Name="TextBoxClassRoomName" Style="{DynamicResource CommomTextBox}" IsReadOnly="True"></TextBox>
+                <TextBlock Text="Tên lớp học phần" Style="{StaticResource DefaultLabelTextBlock}"/>
+                <TextBox x:Name="textBoxClassRoomName" Style="{StaticResource DefaultTextBox}" IsReadOnly="True"></TextBox>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Margin="0 12">
             <StackPanel Width="300" HorizontalAlignment="Left">
-                <TextBlock Text="Sĩ số hiện tại" Style="{DynamicResource LabelTextBlock}"/>
-                <TextBox x:Name="TextBoxNumberOfCurrent" Style="{DynamicResource CommomTextBox}" IsReadOnly="True"></TextBox>
+                <TextBlock Text="Sĩ số hiện tại" Style="{StaticResource DefaultLabelTextBlock}"/>
+                <TextBox x:Name="textBoxNumberOfCurrent" Style="{StaticResource DefaultTextBox}" IsReadOnly="True"></TextBox>
             </StackPanel>
 
             <StackPanel Width="300" HorizontalAlignment="Right">
-                <TextBlock Text="Sĩ số tối đa" Style="{DynamicResource LabelTextBlock}"/>
-                <TextBox x:Name="TextBoxNumberOfCapacity"  Style="{DynamicResource CommomTextBox}"></TextBox>
+                <TextBlock Text="Sĩ số tối đa" Style="{StaticResource DefaultLabelTextBlock}"/>
+                <TextBox x:Name="textBoxNumberOfCapacity"  Style="{StaticResource DefaultTextBox}"></TextBox>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="3" Margin="0 12">
             <StackPanel Width="300" HorizontalAlignment="Left">
-                <TextBlock Text="Ngày bắt đầu đăng ký" Style="{DynamicResource LabelTextBlock}"/>
-                <Grid>
-                    <TextBox x:Name="TextBoxStartRegisterDatePlaceHolder" Style="{DynamicResource CommomTextBox}">dd/MM/yyyy</TextBox>
-                    <TextBox x:Name="TextBoxStartRegisterDate" Style="{DynamicResource CommomTextBox}" TextChanged="TextBoxStartRegisterDate_TextChanged"></TextBox>
-                </Grid>
+                <TextBlock Text="Ngày bắt đầu đăng ký" Style="{StaticResource DefaultLabelTextBlock}"/>
+                <uc:TextBoxPlaceHolder x:Name="textBoxStartRegisterDate" _PlaceHolder="dd/MM/yyyy"/>
             </StackPanel>
 
             <StackPanel Width="300" HorizontalAlignment="Right">
-                <TextBlock Text="Ngày kết thúc đăng ký" Style="{DynamicResource LabelTextBlock}"/>
-                <Grid>
-                    <TextBox x:Name="TextBoxEndRegisterDatePlaceHolder" Style="{DynamicResource CommomTextBox}">dd/MM/yyyy</TextBox>
-                    <TextBox x:Name="TextBoxEndRegisterDate" Style="{DynamicResource CommomTextBox}" TextChanged="TextBoxEndRegisterDate_TextChanged"></TextBox>
-                </Grid>
+                <TextBlock Text="Ngày kết thúc đăng ký" Style="{StaticResource DefaultLabelTextBlock}"/>
+                <uc:TextBoxPlaceHolder x:Name="textBoxEndRegisterDate" _PlaceHolder="dd/MM/yyyy"/>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="4" Margin="0 12">
             <StackPanel Width="300" HorizontalAlignment="Left">
-                <TextBlock Text="Lịch học" Style="{DynamicResource LabelTextBlock}"/>
-                <TextBox x:Name="TextBoxSchedule" Style="{DynamicResource CommomTextBox}" AcceptsReturn="True"></TextBox>
+                <TextBlock Text="Lịch học" Style="{StaticResource DefaultLabelTextBlock}"/>
+                <TextBox x:Name="textBoxSchedule" Style="{StaticResource DefaultTextBox}" AcceptsReturn="True"></TextBox>
             </StackPanel>
 
             <StackPanel Width="300" HorizontalAlignment="Right">
-                <TextBlock Text="Trạng thái lớp" Style="{DynamicResource LabelTextBlock}"/>
+                <TextBlock Text="Trạng thái lớp" Style="{StaticResource DefaultLabelTextBlock}"/>
                 <Grid VerticalAlignment="Center">
-                    <RadioButton x:Name="RadioButtonStatusOpen" Style="{DynamicResource CommomRadioButton}" HorizontalAlignment="Left" IsChecked="True">Mở</RadioButton>
-                    <RadioButton x:Name="RadioButtonStatusClose" Style="{DynamicResource CommomRadioButton}" HorizontalAlignment="Right">Đóng</RadioButton>
+                    <RadioButton x:Name="radioButtonStatusOpen" Style="{StaticResource DefaultRadioButton}" HorizontalAlignment="Left" IsChecked="True">Mở</RadioButton>
+                    <RadioButton x:Name="radioButtonStatusClose" Style="{StaticResource DefaultRadioButton}" HorizontalAlignment="Right">Đóng</RadioButton>
                 </Grid>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="5">
+        <Grid Grid.Row="5" Margin="0 12">
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="BtnEdit" Style="{DynamicResource CommomBtn}" Foreground="#1eff0f" BorderBrush="#1eff0f" Padding="12" Click="BtnEdit_Click">Chỉnh sửa</Button>
-                <Button Name="BtnCancel" Style="{DynamicResource CommomBtn}" Foreground="#f03537" BorderBrush="#f03537" Padding="12" Click="BtnCancel_Click">Hủy</Button>
+                <Button Name="btnEdit" Style="{StaticResource DefaultButtonSubmitSuccess}" Margin="0 0 24 0" Click="btnEdit_Click">Sửa</Button>
+                <Button Name="btnCancel" Style="{StaticResource DefaultButtonSubmitError}" Click="btnCancel_Click">Hủy</Button>
             </StackPanel>
         </Grid>
     </Grid>

@@ -6,37 +6,10 @@
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages"
         mc:Ignorable="d"
         Background="{DynamicResource PrimaryBackgroundColor}"        
-        FontFamily="{DynamicResource DefaultFontFamily}"
+        FontFamily="{StaticResource DefaultFontFamily}"
         Loaded="Window_Loaded"
         Title="RegisterClassesRoomRegisteredWindow" Height="450" Width="800">
-    <Window.Resources>
-        <Style x:Key="BtnExit" TargetType="Button">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Margin" Value="32 0 32 32"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                            Padding="{TemplateBinding Padding}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{DynamicResource DefaultSecondaryCornerRadius}"
-                            BorderBrush="{TemplateBinding BorderBrush}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Opacity" Value="0.6"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -48,7 +21,7 @@
             <TextBlock Text="Lớp học phần đã đăng ký">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
-                        <Setter Property="Foreground" Value="#3663fe"/>
+                        <Setter Property="Foreground" Value="{StaticResource DefaultBlue}"/>
                         <Setter Property="FontSize" Value="20"/>
                         <Setter Property="FontWeight" Value="Bold"/>
                     </Style>
@@ -68,8 +41,8 @@
                                         <Popup Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" AllowsTransparency="True">
                                             <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" Margin="12">
                                                 <StackPanel HorizontalAlignment="Left">
-                                                    <Button x:Name="BtnEditClassRoom" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnEditClassRoom_Click">Chỉnh sửa lớp học phần</Button>
-                                                    <Button x:Name="BtnDeleteClassRoom" Background="Transparent" Foreground="{DynamicResource PrimaryForegroundColor}" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="8 12 8 12" Cursor="Hand" Click="BtnDeleteClassRoom_Click">Xóa lớp học phần</Button>
+                                                    <RadioButton x:Name="RadioBtnEditClassRoom" Style="{StaticResource RadioButtonInPopup}" PreviewMouseDown="RadioBtnEditClassRoom_Click">Chỉnh sửa lớp học phần</RadioButton>
+                                                    <RadioButton x:Name="RadioBtnDeleteClassRoom" Style="{StaticResource RadioButtonInPopup}" PreviewMouseDown="RadioBtnDeleteClassRoom_Click">Xóa lớp học phần</RadioButton>
                                                     <TextBlock Text="{Binding IdClassRoom}" Height="0" Visibility="Hidden"/>
                                                 </StackPanel>
                                                 <Border.Effect>
@@ -85,7 +58,7 @@
                                                             <ControlTemplate>
                                                                 <Border Background="Transparent" BorderThickness="0">
                                                                     <Viewbox Width="24" Margin="0 0 20 0">
-                                                                        <Path Fill="#3663fe" Style="{DynamicResource MenuSvg}"/>
+                                                                        <Path Fill="{StaticResource DefaultBlue}" Style="{DynamicResource MenuSvg}"/>
                                                                     </Viewbox>
                                                                 </Border>
                                                             </ControlTemplate>
@@ -106,8 +79,8 @@
             </Grid>
         </Border>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="BtnExit" Style="{DynamicResource BtnExit}" Foreground="#f03537" BorderBrush="#f03537" Padding="12" Click="BtnExit_Click">Thoát</Button>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 32 32">
+            <Button Name="BtnExit" Style="{StaticResource DefaultButtonSubmitError}" Click="BtnExit_Click">Thoát</Button>
         </StackPanel>
     </Grid>
 </Window>

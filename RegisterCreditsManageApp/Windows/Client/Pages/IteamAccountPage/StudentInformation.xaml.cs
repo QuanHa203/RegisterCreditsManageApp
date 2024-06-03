@@ -44,11 +44,11 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages.IteamAccountPage
             textBoxDateOfBirth.Text = student.DateOfBirth.ToString();
             if (student.Gender)
             {
-                RadioButtonGenderFemale.IsChecked = true;
+                radioButtonGenderMale.IsChecked = true;
             }
             else
             {
-                radioButtonGenderMale.IsChecked = true;
+                RadioButtonGenderFemale.IsChecked = true;
             }    
 
 
