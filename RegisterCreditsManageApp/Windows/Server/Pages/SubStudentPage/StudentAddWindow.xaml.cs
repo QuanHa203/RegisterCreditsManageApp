@@ -1,4 +1,5 @@
-﻿using RegisterCreditsManageApp.Models;
+﻿using Microsoft.Data.SqlClient;
+using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Alert;
 using System.Windows;
 using System.Windows.Controls;
@@ -140,9 +141,14 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages.SubStudentPage
                 AlertBox.Show("Đã thêm sinh viên thành công", "Thông báo", AlertButton.OK, AlertIcon.Success);
                 this.Close();
             }
+
             catch (Exception ex)
             {
-                AlertBox.Show($"Thêm sinh viên thất bại.\n{ex.Message}", "Lỗi", AlertButton.OK, AlertIcon.Error);
+                var innerException = ex.InnerException;
+                if(innerException != null )
+                    AlertBox.Show($"Thêm sinh viên thất bại.\n{ex.InnerException.Message}", "Lỗi", AlertButton.OK, AlertIcon.Error);
+                else
+                    AlertBox.Show($"Thêm sinh viên thất bại.\n{ex.Message}", "Lỗi", AlertButton.OK, AlertIcon.Error);
             }
             finally
             {

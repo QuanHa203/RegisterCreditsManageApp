@@ -68,8 +68,12 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             {
                 try
                 {
-                    var student = AppDbContext._Context.Students.FirstOrDefault(student => student.IdStudent == idStudent);
-                    AppDbContext._Context.Remove(student);
+                    var student = AppDbContext._Context.Students.FirstOrDefault(s => s.IdStudent == idStudent);
+                    AppDbContext._Context.Students.Remove(student);                    
+
+                    var user = AppDbContext._Context.Users.FirstOrDefault(u => u.IdUser == idStudent);
+                    AppDbContext._Context.Users.Remove(user);
+
                     AppDbContext._Context.SaveChanges();
                     AlertBox.Show("Đã xóa sinh viên thành công!", "Thành công", AlertButton.OK, AlertIcon.Success);
                     LoadDataGrid();
