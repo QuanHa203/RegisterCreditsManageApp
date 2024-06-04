@@ -233,14 +233,15 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <Button  x:Name="btnShowPopup" Click="btnShowPopup_Click"  Style="{DynamicResource btnSectionClasses}">
-                        
-                    </Button>
-                    <Popup x:Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=btnShowPopup}" HorizontalOffset="0" VerticalOffset="20">
-                        <Border  Background="{DynamicResource LeftMenuBackground}" BorderBrush="{DynamicResource SecondaryBackgroundColor}" BorderThickness="1" >
-                            <StackPanel Background="Transparent"  x:Name="StackPanelPopup" Height="auto">
-                                <Button Style="{DynamicResource btnpopup}"  Visibility="Hidden" Height="0">a</Button>
+                    <Button  x:Name="btnShowPopup" Click="btnShowPopup_Click"  Style="{DynamicResource btnSectionClasses}"/>
+                    <Popup x:Name="popup" IsOpen="False" StaysOpen="False" AllowsTransparency="True" Placement="Right" PlacementTarget="{Binding ElementName=btnShowPopup}" HorizontalOffset="-10" VerticalOffset="28" Margin="12">
+                        <Border  Background="{DynamicResource LeftMenuBackground}" BorderBrush="{DynamicResource SecondaryBackgroundColor}" BorderThickness="0" Margin="12">
+                            <StackPanel x:Name="StackPanelPopup" Background="Transparent" Height="auto">
+                                <!--<Button Style="{DynamicResource btnpopup}"  Visibility="Hidden" Height="0">a</Button>-->
                             </StackPanel>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" Direction="90" Opacity="0.4" BlurRadius="18" RenderingBias="Performance" Color="{DynamicResource DefaultColorDropShadowOfPopup}"/>
+                            </Border.Effect>
                         </Border>
                     </Popup>
                 </Grid>
@@ -252,12 +253,6 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-
-
-
-
         </Border>
-
-
     </Grid>
 </Page>

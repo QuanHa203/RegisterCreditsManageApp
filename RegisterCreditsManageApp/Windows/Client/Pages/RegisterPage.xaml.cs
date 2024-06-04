@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegisterCreditsManageApp.Models;
+using RegisterCreditsManageApp.Windows.Alert;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,7 +17,7 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
 
         public RegisterPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -119,11 +120,15 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
             public string SubjectName { get; set; } = null!;
             public int NumberOfCredit { get; set; }
 
+        }                
+
+        private void DataGridRow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            
         }
 
-        private void DataGridRow_Selected(object sender, RoutedEventArgs e)
+        private void DataGridRegister_Loaded(object sender, RoutedEventArgs e)
         {
-            DataGridRow dataGridRow = (sender as DataGridRow)!;
 
         }
     }

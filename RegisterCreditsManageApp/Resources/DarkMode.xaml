@@ -359,6 +359,7 @@
         </Setter>
     </Style>
     <!--End AlertWindow-->
+    
     <!--HomePage-->
     <SolidColorBrush x:Key="TriggerBtnTopHomPage">#3663fe</SolidColorBrush>
     <SolidColorBrush x:Key="TriggerTextblockTopHomPage">#ffffff</SolidColorBrush>

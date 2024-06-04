@@ -80,7 +80,7 @@
                                                 </Border.Effect>
                                             </Border>
                                         </Popup>
-                                        <Button x:Name="BtnShowPopup" Background="Transparent" BorderThickness="0" Click="BtnShowPopup_Click">
+                                        <Button x:Name="BtnShowPopup" Cursor="Hand" Background="Transparent" BorderThickness="0" Click="BtnShowPopup_Click">
                                             <Button.Style>
                                                 <Style TargetType="Button">
                                                     <Setter Property="Template">

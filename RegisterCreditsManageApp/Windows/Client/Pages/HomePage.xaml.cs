@@ -30,23 +30,24 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         {
 
             InitializeComponent();
-            Style btnStyle = this.Resources["btnpopup"] as Style;
+            Style btnStyle = (App.Current.Resources["RadioButtonInPopup"] as Style)!;
             RenderDataGrid();
             
             
             for (int i = 1; i <= student.IdMainClassNavigation.IdCurrentRegisterSemester; i++)
             {
                 Semester semester = AppDbContext._Context.Semesters.FirstOrDefault(semester => semester.IdSemester == i);
-                Button btn = new Button();
-                btn.Content = semester.Name;
-                btn.Style = btnStyle;
-                btn.Click += (object sender, RoutedEventArgs e) =>
+                RadioButton radioButton = new RadioButton();
+                radioButton.Content = semester.Name;
+                radioButton.Style = btnStyle;
+                radioButton.PreviewMouseDown += (object sender, MouseButtonEventArgs e) =>
                 {
                     idsemester = semester.IdSemester;
                     RenderDataGrid();
+                    popup.IsOpen = false;
+                    e.Handled = true;
                 };
-                StackPanelPopup.Children.Add(btn);
-
+                StackPanelPopup.Children.Add(radioButton);
             }
             
         }
@@ -63,7 +64,6 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
             public int Id { get; set; }
             public string Subject { get; set; }
             public int NumberOfCredits { get; set; }
-
         }
 
         private void btnShowPopup_Click(object sender, RoutedEventArgs e)
