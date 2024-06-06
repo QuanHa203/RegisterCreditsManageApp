@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages.SubWindow"
         mc:Ignorable="d"
-        Title="AddSubject"
+        Title="Thêm môn học"
         Height="340"
         Width="650"
         FontFamily="{StaticResource DefaultFontFamily}"
@@ -13,7 +13,6 @@
         Background="Transparent"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        WindowStyle="None"
         >
     <Window.Resources>
         <Style x:Key="SemesterToggleBtn" TargetType="ToggleButton">
