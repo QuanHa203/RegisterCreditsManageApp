@@ -1,17 +1,12 @@
-﻿<Page x:Class="RegisterCreditsManageApp.Windows.Client.Pages.RegisterPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:uc="clr-namespace:RegisterCreditsManageApp.UC"
-      Background="{DynamicResource SecondaryBackgroundColor}"   
-      FontFamily="{StaticResource DefaultFontFamily}"
-      mc:Ignorable="d" 
-      Loaded="Page_Loaded"
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="RegisterPage">
-
-    <Page.Resources>
+﻿<Window x:Class="RegisterCreditsManageApp.Windows.Client.Pages.ClassPendingRegisterPage.ClassPendingRegister"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Client.Pages.ClassPendingRegisterPage"
+        mc:Ignorable="d"
+        Title="ClassPendingRegister" Height="500" Width="1050">
+    <Window.Resources>
         <Style x:Key="SearchBorder" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
             <Setter Property="HorizontalAlignment" Value="Left" />
@@ -44,37 +39,33 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Page.Resources>
+    </Window.Resources>
 
     <Grid Margin="32">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Border Style="{DynamicResource SearchBorder}">
-                <Grid Width="240">
-                    <uc:CustomCombobox x:Name="customComboboxChooseSemester" _Text="Chọn đợt đăng ký" _BorderThickness="0" _Padding="12 18"/>
-                </Grid>
-            </Border>
-        </Grid>
 
-        <Border Grid.Row="1" Margin="0 24 0 0" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}" Height="auto">
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Lớp học phần chờ đăng ký" 
+                       Style="{DynamicResource DefaultLabelTextBlock}"
+                       Foreground="Blue"
+                       FontSize="20"
+                       />
+        </StackPanel>
+        <Border Grid.Row="1" Margin="0,24,0,51" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}" Height="auto" Grid.RowSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="24">
-                    <RadioButton x:Name="RadioButtonClassWaitRegister" Style="{DynamicResource RedirectRadioButton}" IsChecked="{x:Null}" Checked="RadioButtonClassNotRegistered_CheckedAndUnchecked" Unchecked="RadioButtonClassNotRegistered_CheckedAndUnchecked">Học phần chờ đăng ký</RadioButton>
-                    <RadioButton Style="{DynamicResource RedirectRadioButton}">Học phần đã đăng ký trong kỳ này</RadioButton>
-                </StackPanel>
 
-                <DataGrid x:Name="DataGridRegister" Grid.Row="1" RowHeaderWidth="50" Style="{StaticResource DefaultDataGrid}" Margin="0 0 0 24" ColumnHeaderStyle="{StaticResource DefaultDataGridColumnHeader}">
+                <DataGrid x:Name="DataGridClassPendingRegister" Style="{DynamicResource DefaultDataGrid}"  Grid.Row="0" Margin="0 0 0 24" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell" BasedOn="{StaticResource DefaultDataGridCell}">
                             <Setter Property="IsEnabled" Value="False"/>
-                        </Style>                        
+                        </Style>
                     </DataGrid.CellStyle>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow" BasedOn="{StaticResource DefaultDataGridRow}">
@@ -84,17 +75,25 @@
                                     <Setter Property="Cursor" Value="Hand"/>
                                 </Trigger>
                             </Style.Triggers>
+
                         </Style>
                     </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="STT" Width="auto" Binding="{Binding NumericalOrder}" />
-                        <DataGridTextColumn Header="Mã học phần" Width="auto" Binding="{Binding IdClassRoom}"/>
+                        <DataGridTextColumn Header="Mã lớp học phần" Width="auto" Binding="{Binding IdClassRoom}"/>
+                        <DataGridTextColumn Header="Tên lớp học phần" Width="auto" Binding="{Binding ClassroomName}"/>
                         <DataGridTextColumn Header="Môn học/ học phần" Width="auto" Binding="{Binding SubjectName}"/>
-                        <DataGridTextColumn Header="Số tín chỉ" Width="auto" Binding="{Binding NumberOfCredit}"/>
-                        <DataGridTextColumn Visibility="Hidden" Binding="{Binding IdSubject}"/>
+                        <DataGridTextColumn Header="Đã đăng ký" Width="auto" Binding="{Binding RegisteredCurrentNumber}"/>
+                        <DataGridTextColumn Header="Sĩ số tối đa" Width="auto" Binding="{Binding ClassCapacity}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </Border>
+
+        <!--Button section-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 24 0 0">
+            <Button x:Name="RegisterBtn" Style="{StaticResource DefaultButtonSubmitSuccess}" Click="RegisterBtn_Click" Content="Đăng ký" Margin="0 0 24 0"/>
+            <Button x:Name="CancelRegisterBtn" Style="{StaticResource DefaultButtonSubmitError}" Click="CancelRegisterBtn_Click_1" Content="Hủy"/>
+        </StackPanel>
     </Grid>
-</Page>
+</Window>
