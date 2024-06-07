@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace RegisterCreditsManageApp
 {
@@ -13,6 +14,12 @@ namespace RegisterCreditsManageApp
         {
 
             base.OnExit(e);
+        }
+
+        private void DataGridRow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            DataGridRow dataGridRow = (sender as DataGridRow)!;
+            dataGridRow.IsSelected = true;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         private int idSemesterChoose;
         public RegisterPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -123,7 +123,7 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
             public string SubjectName { get; set; } = null!;
             public int NumberOfCredit { get; set; }
 
-        }
+        }                
 
 
         private void DataGridRow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

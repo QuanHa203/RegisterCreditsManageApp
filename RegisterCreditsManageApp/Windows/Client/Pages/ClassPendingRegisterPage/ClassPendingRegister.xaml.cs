@@ -80,13 +80,21 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages.ClassPendingRegisterPage
             else
             {
                 RegisterCredit registerCredit = AppDbContext._Context.RegisterCredits.Where(r => r.IdSubject == idSubject).Where(r => r.IdStudent == currentStudent.IdStudent).FirstOrDefault();
-                registerCredit.IdClassRoom = idClassRoom;
-                registerCredit.IdClassRoomNavigation.CurrentStudent += 1;
-                registerCredit.IsRegister = true;
-                AppDbContext._Context.Update(registerCredit);
-                AppDbContext._Context.SaveChanges();
-                AlertBox.Show("Đăng ký môn học thành công", "Thông báo", AlertButton.OK, AlertIcon.Success);
-                this.Close();
+               
+                if(registerCredit.IdClassRoomNavigation.CurrentStudent == registerCredit.IdClassRoomNavigation.Capacity)
+                {
+                    AlertBox.Show("Lớp học phần này đã đủ sĩ số", "Thông báo", AlertButton.OK, AlertIcon.Information);
+                }
+                else
+                {
+                    registerCredit.IdClassRoom = idClassRoom;
+                    registerCredit.IdClassRoomNavigation.CurrentStudent += 1;
+                    registerCredit.IsRegister = true;
+                    AppDbContext._Context.Update(registerCredit);
+                    AppDbContext._Context.SaveChanges();
+                    AlertBox.Show("Đăng ký môn học thành công", "Thông báo", AlertButton.OK, AlertIcon.Success);
+                    this.Close();
+                }
             }
         }
 

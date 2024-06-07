@@ -70,7 +70,12 @@
                     <RadioButton Style="{DynamicResource RedirectRadioButton}">Học phần đã đăng ký trong kỳ này</RadioButton>
                 </StackPanel>
 
-                <DataGrid x:Name="DataGridRegister" Style="{DynamicResource DefaultDataGrid}"  Grid.Row="1" Margin="0 0 0 24" CellStyle="{DynamicResource DefaultDataGridCell}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
+                <DataGrid x:Name="DataGridRegister" Grid.Row="1" RowHeaderWidth="50" Style="{StaticResource DefaultDataGrid}" Margin="0 0 0 24" ColumnHeaderStyle="{StaticResource DefaultDataGridColumnHeader}">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource DefaultDataGridCell}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </Style>                        
+                    </DataGrid.CellStyle>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow" BasedOn="{StaticResource DefaultDataGridRow}">
                             <EventSetter Event="MouseDown" Handler="DataGridRow_MouseDown"/>
@@ -79,7 +84,6 @@
                                     <Setter Property="Cursor" Value="Hand"/>
                                 </Trigger>
                             </Style.Triggers>
-
                         </Style>
                     </DataGrid.RowStyle>
                     <DataGrid.Columns>

@@ -61,7 +61,12 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <DataGrid x:Name="DataGridClassPendingRegister" Style="{DynamicResource DefaultDataGrid}"  Grid.Row="0" Margin="0 0 0 24" CellStyle="{DynamicResource DefaultDataGridCell}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
+                <DataGrid x:Name="DataGridClassPendingRegister" Style="{DynamicResource DefaultDataGrid}"  Grid.Row="0" Margin="0 0 0 24" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource DefaultDataGridCell}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </Style>
+                    </DataGrid.CellStyle>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow" BasedOn="{StaticResource DefaultDataGridRow}">
                             <EventSetter Event="MouseDown" Handler="DataGridRow_MouseDown"/>
