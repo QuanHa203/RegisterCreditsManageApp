@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Alert;
+using RegisterCreditsManageApp.Windows.Client.Pages.ClassPendingRegisterPage;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,7 +15,6 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         private List<Data> dataGridRegisterList = new List<Data>();
         private Student currentStudent = LoginWindow.CurrentStudent;
         private int idSemesterChoose;
-
         public RegisterPage()
         {
             InitializeComponent();            
@@ -65,6 +65,7 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
                 Data data = new Data
                 {
                     NumericalOrder = i + 1,
+                    IdSubject = classWaitRegisterList[i].IdSubjectNavigation.IdSubject,
                     IdClassRoom = classWaitRegisterList[i].IdClassRoom,
                     NumberOfCredit = classWaitRegisterList[i].IdSubjectNavigation.NumberOfCredits,
                     SubjectName = classWaitRegisterList[i].IdSubjectNavigation.Name
@@ -91,6 +92,7 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
                 Data data = new Data
                 {
                     NumericalOrder = i + 1,
+                    IdSubject = classWaitRegisterList[i].IdSubjectNavigation.IdSubject,
                     IdClassRoom = classWaitRegisterList[i].IdClassRoom,
                     NumberOfCredit = classWaitRegisterList[i].IdSubjectNavigation.NumberOfCredits,
                     SubjectName = classWaitRegisterList[i].IdSubjectNavigation.Name
@@ -115,6 +117,7 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
 
         public class Data
         {
+            public int IdSubject { get; set; }
             public int NumericalOrder { get; set; }
             public string IdClassRoom { get; set; } = null!;
             public string SubjectName { get; set; } = null!;
@@ -122,14 +125,20 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
 
         }                
 
+
         private void DataGridRow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            
-        }
+            DataGridRow dataGridRow = (sender as DataGridRow)!;
+            var data = dataGridRow.Item as Data;
 
-        private void DataGridRegister_Loaded(object sender, RoutedEventArgs e)
-        {
+            var idSubject = data.IdSubject;
 
+            //Lớp học phần chờ đăng ký
+            if (RadioButtonClassWaitRegister.IsChecked == true)
+            {
+                new ClassPendingRegister(idSubject).ShowDialog();
+                GetDataGridClassWaitRegister();
+            }
         }
     }
 }

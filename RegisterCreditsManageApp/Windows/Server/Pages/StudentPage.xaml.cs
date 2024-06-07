@@ -43,6 +43,10 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
 
         private void RadioBtnRegisterCredit_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            RadioButton radioButton = sender as RadioButton;
+            var parent = radioButton.Parent as Panel;
+            var idStudentTextBlock = parent.Children[3] as TextBlock;
+            new StudentCurrentRegisterCreditsWindow(idStudentTextBlock.Text).ShowDialog();
 
             e.Handled = true;
         }

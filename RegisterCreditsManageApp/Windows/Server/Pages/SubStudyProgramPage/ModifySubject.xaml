@@ -5,15 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages.SubWindow"
         mc:Ignorable="d"
-        Title="ModifySubject"
+        Title="Chỉnh sửa môn học"
          Height="400"
          Width="650"
         FontFamily="{StaticResource DefaultFontFamily}"
          WindowStartupLocation="CenterScreen"
          Background="Transparent"
          ResizeMode="NoResize"
-         AllowsTransparency="True"
-         WindowStyle="None"
         >
 
     <Window.Resources>
@@ -73,7 +71,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Border Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="20">
+        <Border Background="{DynamicResource PrimaryBackgroundColor}">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"/>
