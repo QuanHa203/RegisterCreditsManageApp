@@ -1,10 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using RegisterCreditsManageApp.Models;
-using RegisterCreditsManageApp.Windows.Alert;
-using RegisterCreditsManageApp.Windows.Server.Pages;
-using System.Net.Security;
+﻿using RegisterCreditsManageApp.Windows.Alert;
 using System.Windows;
 
 

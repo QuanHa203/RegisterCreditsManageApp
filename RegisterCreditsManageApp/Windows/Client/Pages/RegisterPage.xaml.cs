@@ -35,7 +35,7 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
             {
                 RadioButton rb = new RadioButton();
                 rb.Content = "Học kỳ " + i;                
-                rb.Style = customComboboxChooseSemester.CustomComboboxStyleChildren;                
+                rb.Style = customComboboxChooseSemester.CustomComboboxStyleChildren;
                 int index = i;
                 rb.Click += (s, e) =>
                 {

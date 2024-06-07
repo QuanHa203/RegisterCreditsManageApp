@@ -13,7 +13,6 @@
         Background="Transparent"
         >
     <Window.Resources>
-
         <Style x:Key="HeadForeground" TargetType="Label">
             <Setter Property="Foreground" Value="{DynamicResource PrimaryForegroundColor}"></Setter>
             <Setter Property="FontFamily" Value="Montserrat SemiBold"></Setter>

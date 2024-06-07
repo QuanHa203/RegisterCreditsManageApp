@@ -1,22 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Alert;
 using RegisterCreditsManageApp.Windows.Server.Pages.SubMainClassPage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RegisterCreditsManageApp.Windows.Server.Pages
 {
@@ -96,6 +86,26 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
             }
 
             e.Handled = true;
+        }
+
+        private void searchTextBox_Click(object sender, RoutedEventArgs e)
+        {
+            string searchInput = searchTextBox._Text;
+            if (searchInput.IsNullOrEmpty())
+            {
+                AlertBox.Show("Vui lòng nhập đầy đủ văn bản", "Thông báo", AlertButton.OK, AlertIcon.Warning);
+                return;
+            }
+
+            var mainClass = AppDbContext._Context.MainClasses.Include(mainClass => mainClass.IdMajorsNavigation)
+                                                             .Include(mainClass => mainClass.IdCurrentRegisterSemesterNavigation)
+                                                             .Where(mainClass => mainClass.Name.Contains(searchInput)).ToList();
+            if (mainClass.Count == 0)
+            {
+                AlertBox.Show($"Không có tên lớp học '{searchInput}' cần tìm", "Thông báo", AlertButton.OK, AlertIcon.Information);
+                return;
+            }            
+            DataGridMainClass.ItemsSource = mainClass;
         }
     }
 }

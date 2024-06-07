@@ -12,7 +12,7 @@
       Title="RegisterPage">
 
     <Page.Resources>
-        <Style x:Key="SearchBorder" TargetType="Border">
+        <Style x:Key="ChooseSemesterBorder" TargetType="Border">
             <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
@@ -52,7 +52,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Border Style="{DynamicResource SearchBorder}">
+            <Border Style="{DynamicResource ChooseSemesterBorder}">
                 <Grid Width="240">
                     <uc:CustomCombobox x:Name="customComboboxChooseSemester" _Text="Chọn đợt đăng ký" _BorderThickness="0" _Padding="12 18"/>
                 </Grid>

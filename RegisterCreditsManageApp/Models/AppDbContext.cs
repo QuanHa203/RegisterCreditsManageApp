@@ -25,7 +25,7 @@ public partial class AppDbContext : DbContext
     private AppDbContext()
     {
         ConfigurationBuilder builder = new ConfigurationBuilder();
-        builder.AddJsonFile($"{Directory.GetCurrentDirectory()}/appsettings.json");
+        builder.AddJsonFile($"{Directory.GetCurrentDirectory()}{System.IO.Path.DirectorySeparatorChar}appsettings.json");
         _configuration = builder.Build();
     }
 

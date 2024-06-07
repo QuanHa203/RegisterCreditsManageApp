@@ -1,24 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Alert;
 using RegisterCreditsManageApp.Windows.Server.Pages.SubStudyProgramPage;
 using RegisterCreditsManageApp.Windows.Server.Pages.SubWindow;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace RegisterCreditsManageApp.Windows.Server.Pages
 {
@@ -108,6 +97,37 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
 
             new SubjectsWindow(int.Parse(tb.Text)).ShowDialog();
             LoadMajorData();
+        }
+
+        private void searchTextBox_Click(object sender, RoutedEventArgs e)
+        {
+            string searchInput = searchTextBox._Text;
+            if (searchInput.IsNullOrEmpty())
+            {
+                AlertBox.Show("Vui lòng nhập đầy đủ văn bản", "Thông báo", AlertButton.OK, AlertIcon.Warning);
+                return;
+            }
+
+            var majorList = AppDbContext._Context.Majors.Include((major) => major.Subjects).Where(major => major.Name.Contains(searchInput)).ToList();
+            if(majorList.Count == 0)
+            {
+                AlertBox.Show($"Không có tên ngành học '{searchInput}' cần tìm", "Thông báo", AlertButton.OK, AlertIcon.Information);
+                return;
+            }
+
+            List<MajorData> list = new List<MajorData>();
+            foreach(var major in majorList)
+            {
+                MajorData data = new MajorData
+                {
+                    idMajor = major.IdMajors,
+                    majorName = major.Name,
+                    subjectNum = major.Subjects.Count,
+                };
+                list.Add(data);
+            }
+
+            MajorDataGrid.ItemsSource = list;
         }
     }
 }

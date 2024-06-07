@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.UC;
 using RegisterCreditsManageApp.Windows.Alert;
@@ -157,8 +158,8 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         }
 
         private void searchTextBox_Click(object sender, RoutedEventArgs e)
-        {            
-            
+        {
+            AlertBox.Show("Chức năng đang bảo trì!", "Thông báo", AlertButton.OK, AlertIcon.Warning);            
         }
     }
 }

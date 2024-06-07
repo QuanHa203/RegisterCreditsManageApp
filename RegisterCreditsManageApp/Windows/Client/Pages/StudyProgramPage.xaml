@@ -3,6 +3,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:uc="clr-namespace:RegisterCreditsManageApp.UC"
       mc:Ignorable="d"      
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StudyProgramPage"
@@ -10,6 +11,12 @@
       Background="{DynamicResource SecondaryBackgroundColor}">
 
     <Page.Resources>
+        <Style x:Key="ChooseSemester" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="CornerRadius" Value="{DynamicResource DefaultPrimaryCornerRadius}"/>
+        </Style>
         <Style x:Key="SemesterToggleBtn" TargetType="ToggleButton">
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="35"/>
@@ -66,74 +73,23 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid Margin="32">
         <Grid.RowDefinitions>
-            <RowDefinition Height="97*"/>
-            <RowDefinition Height="353*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!--Operation grid-->
-        <StackPanel Grid.Row="0" Margin="40,10,40,0">
-            <Label Content="Học kỳ" 
-                   FontFamily="Montserrat"
-                   FontSize="15"
-                   Foreground="{DynamicResource PrimaryForegroundColor}" 
-                   Height="30"     
-                   Margin="5 0 0 0"
-                   Width="130"
-                   HorizontalAlignment="Left"   
-            />
-            <!--Semester section-->
-            <Border Width="200" Height="35" Margin="10 5 0 0" CornerRadius="10" BorderThickness="1"  BorderBrush="#91a1be" HorizontalAlignment="Left">
-                <StackPanel>
-                    <ToggleButton x:Name="SemesterToggleButton"
-                      Style="{DynamicResource SemesterToggleBtn}"
-                      Click="SemesterToggleButton_Click"
-                    >
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="SemesterTitle" 
-                                       Text="-- Chọn học kỳ--"
-                                       Width="150"
-                                       Foreground="#91a1be"
-                                       FontFamily="Montserrat"
-                                       FontSize="15"
-                                       VerticalAlignment="Center"
-                                       Margin="10 0 0 0"
-                            >
-
-                            </TextBlock>
-                            <Viewbox  Width="20" Height="20" Margin="10 0 15 5">
-                                <Path Style="{DynamicResource ArrowDownSvg}" Fill="#d0bdbd"/>
-                            </Viewbox>
-                        </StackPanel>
-                    </ToggleButton>
-
-                    <Popup x:Name="SemesterPopup" 
-                           AllowsTransparency="True"
-                           IsOpen="False" 
-                           StaysOpen="False" 
-                           Placement="{Binding ElementName=SemesterButton}" 
-                           HorizontalOffset="0" 
-                           VerticalOffset="0">
-
-                        <Border CornerRadius="5" Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0">
-                            <StackPanel x:Name="SemesterListPopup"
-                            Background="Transparent"
-                            Width="200" 
-                            Height="auto"
-                >
-
-                            </StackPanel>
-                        </Border>
-
-                    </Popup>
-                </StackPanel>
-
+        <StackPanel Grid.Row="0">
+            <Border Style="{DynamicResource ChooseSemester}" HorizontalAlignment="Left">
+                <Grid Width="240">
+                    <uc:CustomCombobox  x:Name="customComboboxChooseSemester" _Text="Chọn học kỳ" _BorderThickness="0" _Padding="12 18"/>
+                </Grid>
             </Border>
         </StackPanel>
 
         <!--List Grid-->
-        <Border Grid.Row="1" Margin="40,40,40,40" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}">
+        <Border Grid.Row="1" Margin="0 24 0 0" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}">
             <Grid>
                 <DataGrid Margin="0 25 0 10" 
                           x:Name="SubjectProgramDataGrid" 
@@ -144,9 +100,9 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="STT" Width="100" Binding="{Binding stt}"/>
-                        <DataGridTextColumn Header="Môn học/ học phần" Binding="{Binding subjectName}" Width="*"/>
-                        <DataGridTextColumn Header="Mã học phần" Binding="{Binding idClassroom}" Width="*"/>
-                        <DataGridTextColumn Header="Số tín chỉ" Binding="{Binding creditNum}" Width="*"/>
+                        <DataGridTextColumn Header="Môn học/ học phần" Binding="{Binding subjectName}"/>
+                        <DataGridTextColumn Header="Mã học phần" Binding="{Binding idClassroom}"/>
+                        <DataGridTextColumn Header="Số tín chỉ" Binding="{Binding creditNum}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

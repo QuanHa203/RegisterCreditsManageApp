@@ -58,36 +58,24 @@ namespace RegisterCreditsManageApp.Windows.Client.Pages
         public void DisplaySemester()
         {
             idCurrentSemester = LoginWindow.CurrentStudent.IdMainClassNavigation.IdCurrentRegisterSemester;
-
-            var btnStyle = this.Resources["SemesterButton"] as Style;
-
+            
             for (int i = 1; i <= idCurrentSemester; i++)
             {
-                Button btn = new Button()
+                RadioButton radioBtn = new RadioButton()
                 {
-                    Style = btnStyle,
+                    Style = customComboboxChooseSemester.CustomComboboxStyleChildren,
                     Content = $"Học kỳ {i}",
                 };
                 int index = i;
-                btn.Click += (s, e) =>
+                radioBtn.Click += (s, e) =>
                 {
                     idCurrentSemester = index;
-                    SemesterTitle.Text = $"Học kỳ {index}";
-                    SemesterPopup.IsOpen = false;
+                    customComboboxChooseSemester._Text = $"Học kỳ {index}";
+                    customComboboxChooseSemester._IsOpen = false;
                     LoadData();
                 };
-                SemesterListPopup.Children.Add(btn);
-            }
-        }
-        private void SemesterToggleButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (SemesterToggleButton.IsChecked == true)
-            {
-                SemesterPopup.IsOpen = true;
-            }
-            else
-            {
-                SemesterPopup.IsOpen = false;
+                customComboboxChooseSemester.CustomComboboxChildren.Add(radioBtn);
+                
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Alert;
 using RegisterCreditsManageApp.Windows.Server.Pages.SubStudentPage;
@@ -96,6 +97,25 @@ namespace RegisterCreditsManageApp.Windows.Server.Pages
         {
             public string MajorName { get; set;}
             public int NumberOfSubject { get; set;}
+        }
+
+        private void searchTextBox_Click(object sender, RoutedEventArgs e)
+        {
+            string searchInput = searchTextBox._Text;
+            if (searchInput.IsNullOrEmpty())
+            {
+                AlertBox.Show("Vui lòng nhập đầy đủ văn bản", "Thông báo", AlertButton.OK, AlertIcon.Warning);
+                return;
+            }
+
+            var studentList = AppDbContext._Context.Students.Where(student => student.IdStudent.Contains(searchInput)).ToList();
+            if (studentList.Count == 0)
+            {
+                AlertBox.Show($"Không có mã sinh viên '{searchInput}' cần tìm", "Thông báo", AlertButton.OK, AlertIcon.Information);
+                return;
+            }
+
+            DataGridStudent.ItemsSource = studentList;
         }
     }
 }

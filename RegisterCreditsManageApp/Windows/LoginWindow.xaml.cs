@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using RegisterCreditsManageApp.Models;
 using RegisterCreditsManageApp.Windows.Alert;
 using RegisterCreditsManageApp.Windows.Client;
@@ -21,8 +22,7 @@ namespace RegisterCreditsManageApp.Windows
         private string checkBoxFilePath = "checkboxStatus.txt";
         private string userFilePath = "user_account.txt";
         private string passFilePath = "pass_account.txt";
-        private bool isPassUpdating = false;
-
+        private bool isPassUpdating = false;        
         private static Student currentStudent = null;
         private static User currentAdmin = null;
         public static Student CurrentStudent
@@ -46,6 +46,7 @@ namespace RegisterCreditsManageApp.Windows
                     return currentAdmin;
             }
         }
+
         public LoginWindow()
         {
             var t = AppDbContext._Context.Students;            
@@ -282,17 +283,10 @@ namespace RegisterCreditsManageApp.Windows
             AlertResult result = AlertBox.Show("Bạn có chắc muốn thoát không?", "Thông báo", AlertButton.YesNo, AlertIcon.Question);
             if(result == AlertResult.Yes)
             {
-                this.Close();
+                Application.Current.Shutdown();
             }    
         }
-
-        private void ForgotPassWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
         
-
         private void ButtonToggle_Click(object sender, RoutedEventArgs e)
         {
             if(PasswordTextbox.Visibility == Visibility.Collapsed)
@@ -404,6 +398,11 @@ namespace RegisterCreditsManageApp.Windows
             {
                 LoginBtn.Focus();
             }
+        }
+
+        private void ForgotPassWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new FogotPasswordWindow().Show();
         }
     }
 }

@@ -20,7 +20,7 @@
 
         <!--Operation grid-->
         <Grid Grid.Row="0" >
-            <uc:SearchTextBox x:Name="searchTextBox" _PlaceHolder="Tìm kiếm tên ngành học học" />
+            <uc:SearchTextBox x:Name="searchTextBox" _PlaceHolder="Tìm kiếm tên ngành học học" Click="searchTextBox_Click"/>
             <Button x:Name="NavigateToAddMajor" HorizontalAlignment="Right" Click="NavigateToAddMajor_Click">
                 <Button.Style>
                     <Style TargetType="Button">

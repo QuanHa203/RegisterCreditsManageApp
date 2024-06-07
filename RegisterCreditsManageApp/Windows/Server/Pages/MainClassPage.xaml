@@ -18,7 +18,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <uc:SearchTextBox x:Name="searchTextBox" _PlaceHolder="Tìm kiếm tên lớp học" />
+            <uc:SearchTextBox x:Name="searchTextBox" _PlaceHolder="Tìm kiếm tên lớp học" Click="searchTextBox_Click"/>
             <Button x:Name="BtnAdd" HorizontalAlignment="Right" Click="BtnAdd_Click">
                 <Button.Style>
                     <Style TargetType="Button">

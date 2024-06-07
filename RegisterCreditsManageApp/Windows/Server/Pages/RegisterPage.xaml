@@ -48,7 +48,6 @@
             <uc:SearchTextBox x:Name="searchTextBox" _PlaceHolder="Tìm kiếm tên lớp học" Click="searchTextBox_Click"/>
         </Grid>
 
-
         <Border Grid.Row="1" Margin="0 24 0 0" Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}" Height="auto">
             <Grid>
                 <Grid.RowDefinitions>
