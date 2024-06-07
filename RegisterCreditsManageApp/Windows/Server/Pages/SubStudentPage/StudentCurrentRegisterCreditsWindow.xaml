@@ -7,8 +7,89 @@
         mc:Ignorable="d"
         FontFamily="{StaticResource DefaultFontFamily}"
         Background="{DynamicResource SecondaryBackgroundColor}"
-        Title="StudentCurrentRegisterCreditsWindow" Height="450" Width="800">
+        Title="StudentCurrentRegisterCreditsWindow" Height="600" MinWidth="800" MaxWidth="800"
+        Loaded="Window_Loaded"
+        >
+    <Window.Resources>
+        <Style x:Key="TextRadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource SecondForegroundColor}"></Setter>
+            <Setter Property="Margin" Value="20 10 50 10"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <TextBlock Text="{TemplateBinding Content}"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource DefaultBlue}"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource DefaultBlue}"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Border BorderThickness="0 0 0 0" BorderBrush="#f1f1f1" Margin="0 12 0 0" Background="{DynamicResource LeftMenuBackground }">
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="rdbCreditsRegistered" Content="Tín chỉ đã đăng ký" GroupName="StudentCurrentRegisterCreditsWindow" Style="{DynamicResource TextRadioButtonStyle}" Checked="rdbCreditsRegistered_Checked"></RadioButton>
+                    <RadioButton x:Name="rdbUnregisteredCredits" Content="Tín chỉ chưa đăng ký" GroupName="StudentCurrentRegisterCreditsWindow" Style="{DynamicResource TextRadioButtonStyle}" Checked="rdbUnregisteredCredits_Checked" ></RadioButton>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <DataGrid Style="{StaticResource DefaultDataGrid}"  Grid.Row="1" Margin="0 0 0 24" x:Name="DataGridRegister" CellStyle="{StaticResource DefaultDataGridCell}" RowStyle="{StaticResource DefaultDataGridRow}" ColumnHeaderStyle="{StaticResource DefaultDataGridColumnHeader}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>Thao tác</DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="Grid">
+                            <StackPanel Orientation="Horizontal">
+                                <Popup Name="popup" IsOpen="False" StaysOpen="False" Placement="Right" AllowsTransparency="True" Margin="12">
+                                    <Border Background="{DynamicResource PrimaryBackgroundColor}" BorderThickness="0" Margin="12">
+                                        <StackPanel HorizontalAlignment="Left" Background="{DynamicResource PrimaryBackgroundColor}">
+                                            <RadioButton x:Name="RadioButtonRegister" Style="{StaticResource RadioButtonInPopup}"  Click="RadioButtonRegister_Click">Đăng ký lớp học phần</RadioButton>
+                                            <TextBlock Text="{Binding IdRegisterCredits}" Visibility="Hidden" Height="0"/>
+                                        </StackPanel>
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="0" Direction="90" Opacity="0.4" BlurRadius="18" RenderingBias="Performance" Color="{DynamicResource DefaultColorDropShadowOfPopup}"/>
+                                        </Border.Effect>
+                                    </Border>
+                                </Popup>
+                                <Button x:Name="BtnShowPopup" Background="Transparent" BorderThickness="0" Click="BtnShowPopup_Click">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate>
+                                                        <Border Background="Transparent" BorderThickness="0">
+                                                            <Viewbox Width="24" Margin="0 0 20 0">
+                                                                <Path Fill="{StaticResource DefaultBlue}" Style="{DynamicResource MenuSvg}"/>
+                                                            </Viewbox>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="Mã học phần" Width="auto" Binding="{Binding IdClassRoom }"/>
+                <DataGridTextColumn Header="Tên môn học" Width="auto" Binding="{Binding IdSubjectNavigation.Name}"/>
+                <DataGridTextColumn Header="Số tín chỉ" Width="auto" Binding="{Binding  IdSubjectNavigation.NumberOfCredits}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
