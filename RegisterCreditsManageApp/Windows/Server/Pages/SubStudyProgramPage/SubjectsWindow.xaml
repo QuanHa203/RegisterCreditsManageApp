@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages.SubStudyProgramPage"
         mc:Ignorable="d"
         FontFamily="{StaticResource DefaultFontFamily}"
-        Title="SubjectsWindow"  Height="500"
-         Width="700"
+        Title="Các môn học"  Height="500"
+         Width="800"
          WindowStartupLocation="CenterOwner"
          Background="Transparent"
          ResizeMode="NoResize"
-         AllowsTransparency="True"
          >
     <Window.Resources>
         <Style x:Key="AddSubjectBtn" TargetType="Button">
@@ -19,7 +18,7 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Width" Value="20"/>
             <Setter Property="Height" Value="20"/>
-            <Setter Property="Margin" Value="0 180 0 0"/>
+            <Setter Property="Margin" Value="0 220 0 3"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -41,11 +40,11 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Border Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="20">
+        <Border Background="{DynamicResource PrimaryBackgroundColor}">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70*"/>
-                    <RowDefinition Height="240*"/>
+                    <RowDefinition Height="280*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
@@ -62,9 +61,9 @@
                 </Grid>
 
                 <!--subject data grid-->
-                <Border Grid.Row="1" Margin="40" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}">
+                <Border Grid.Row="1" Margin="20" Background="{DynamicResource SecondaryBackgroundColor}" CornerRadius="{DynamicResource DefaultPrimaryCornerRadius}">
                     <Grid>
-                        <DataGrid Margin="0,25,0,30" 
+                        <DataGrid Margin="0,25,0,24" 
                                x:Name="SubjectDataGrid" 
                                Style="{DynamicResource DefaultDataGrid}" 
                                CellStyle="{DynamicResource DefaultDataGridCell}" RowStyle="{DynamicResource DefaultDataGridRow}" ColumnHeaderStyle="{DynamicResource DefaultDataGridColumnHeader}">
