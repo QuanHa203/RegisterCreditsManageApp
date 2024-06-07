@@ -12,7 +12,7 @@
          Background="Transparent"
          ResizeMode="NoResize"
          AllowsTransparency="True"
-         WindowStyle="None">
+         >
     <Window.Resources>
         <Style x:Key="AddSubjectBtn" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
