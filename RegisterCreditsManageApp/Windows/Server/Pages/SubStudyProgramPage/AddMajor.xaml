@@ -6,13 +6,12 @@
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages.SubWindow"
         mc:Ignorable="d"
         Title="Thêm ngành học" 
-        Height="500"
+        Height="530"
         Width="700"
         FontFamily="{StaticResource DefaultFontFamily}"
         WindowStartupLocation="CenterOwner"
         Background="Transparent"
         ResizeMode="NoResize"
-        AllowsTransparency="True"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
         <Style x:Key="AddSubjectBtn" TargetType="Button">
@@ -39,7 +38,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Border Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="20">
+        <Border Background="{DynamicResource PrimaryBackgroundColor}">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70*"/>

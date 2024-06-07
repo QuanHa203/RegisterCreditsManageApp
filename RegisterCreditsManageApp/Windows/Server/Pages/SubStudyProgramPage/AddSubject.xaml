@@ -6,13 +6,12 @@
         xmlns:local="clr-namespace:RegisterCreditsManageApp.Windows.Server.Pages.SubWindow"
         mc:Ignorable="d"
         Title="Thêm môn học"
-        Height="340"
+        Height="350"
         Width="650"
         FontFamily="{StaticResource DefaultFontFamily}"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         ResizeMode="NoResize"
-        AllowsTransparency="True"
         >
     <Window.Resources>
         <Style x:Key="SemesterToggleBtn" TargetType="ToggleButton">
@@ -71,7 +70,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Border Background="{DynamicResource PrimaryBackgroundColor}" CornerRadius="20">
+        <Border Background="{DynamicResource PrimaryBackgroundColor}">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
